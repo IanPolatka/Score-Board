@@ -130,17 +130,19 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status == 1)
+
+                                    @if(isset($game->away_team_final_score) && isset($game->home_team_final_score))
+
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
-                                        @elseif ($game->away_team_final_score === $game->home_team_final_score)
+                                        @else ($game->away_team_final_score === $game->home_team_final_score)
                                             {{$game->home_team_final_score}} - {{$game->away_team_final_score}}
-                                        @else
-                                            {{$game->game_time->time}}
                                         @endif
+
                                     @endif
+
                                 </div>
 
                             @else
@@ -164,17 +166,19 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status == 1)
+
+                                    @if(isset($game->away_team_final_score) && isset($game->home_team_final_score))
+
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
-                                        @elseif ($game->away_team_final_score == $game->home_team_final_score)
+                                        @else ($game->away_team_final_score === $game->home_team_final_score)
                                             {{$game->home_team_final_score}} - {{$game->away_team_final_score}}
-                                        @else
-                                            {{$game->game_time->time}}
                                         @endif
+
                                     @endif
+
                                 </div>
 
                             @endif
@@ -225,17 +229,19 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status == 1)
+
+                                    @if(isset($game->away_team_final_score) && isset($game->home_team_final_score))
+
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
-                                        @elseif ($game->away_team_final_score == $game->home_team_final_score)
+                                        @else ($game->away_team_final_score === $game->home_team_final_score)
                                             {{$game->home_team_final_score}} - {{$game->away_team_final_score}}
-                                        @else
-                                            {{$game->game_time->time}}
                                         @endif
+
                                     @endif
+                                    
                                 </div>
 
                             @else

@@ -447,6 +447,10 @@
 
     var qrt = "<?php echo $match->game_status; ?>";
 
+    var losingTeam = "<?php echo $match->losing_team; ?>";
+
+    $('#losing_team').val(losingTeam);
+
     if (qrt != 1) {
         $('.game-summary-details').hide();
     } else {

@@ -85,7 +85,7 @@
                                 @endif
                             </div>
                             <div class="col-3 text-right">
-                                @if($game->away_team_final_score)
+                                @if(isset($game->away_team_final_score))
                                     @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
                                         <strong>{{$game->away_team_final_score}}</strong>
                                     @else
@@ -110,7 +110,7 @@
                                 @endif
                             </div>
                             <div class="col-3 text-right">
-                                @if($game->home_team_final_score)
+                                @if(isset($game->home_team_final_score))
                                     @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
                                         <strong>{{$game->home_team_final_score}}</strong>
                                     @else
@@ -129,9 +129,54 @@
             <div class="list-group">
                 @forelse ($tomorrowsGames as $game)
                     <a href="/boys-soccer/{{$game->id}}" class="list-group-item list-group-item-action">
-                        <strong>{{ Carbon\Carbon::parse($game->date)->format('l') }} {{ Carbon\Carbon::parse($game->date)->format('M j, o') }}</strong><br />
-                        <img class="school-logo mr-3 mb-2" src="/images/team-logos/{{ $game->away_team->logo }}" />{{$game->away_team->school_name}}<br />
-                        <img class="school-logo mr-3" src="/images/team-logos/{{ $game->home_team->logo }}" />{{$game->home_team->school_name}}
+                        <div class="row align-items-center mb-3">
+                            <div class="col-9">
+                                <div class="school-logo mr-3">
+                                    @if($game->away_team->logo)
+                                        <img src="/images/team-logos/{{ $game->away_team->logo }}" />
+                                    @endif
+                                </div>
+                                @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
+                                <strong>{{$game->away_team->school_name}}</strong>
+                                @else
+                                    {{$game->away_team->school_name}}
+                                @endif
+                            </div>
+                            <div class="col-3 text-right">
+                                @if(isset($game->away_team_final_score))
+                                    @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
+                                        <strong>{{$game->away_team_final_score}}</strong>
+                                    @else
+                                        {{$game->away_team_final_score}}
+                                    @endif
+                                @else
+                                    {{$game->game_time->time}}
+                                @endif 
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-9">
+                                <div class="school-logo mr-3">
+                                    @if($game->home_team->logo)
+                                        <img src="/images/team-logos/{{ $game->home_team->logo }}" />
+                                    @endif
+                                </div>
+                                @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
+                                    <span><strong>{{$game->home_team->school_name}} ({{$game->home_team->state}})</strong></span>
+                                @else
+                                    <span>{{$game->home_team->school_name}} ({{$game->home_team->state}})<br />
+                                @endif
+                            </div>
+                            <div class="col-3 text-right">
+                                @if(isset($game->home_team_final_score))
+                                    @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
+                                        <strong>{{$game->home_team_final_score}}</strong>
+                                    @else
+                                        {{$game->home_team_final_score}}
+                                    @endif
+                                @endif 
+                            </div>
+                        </div>
                     </a>
                 @empty
                     <a href="#" class="list-group-item list-group-item-action">No Games Listed</a>
