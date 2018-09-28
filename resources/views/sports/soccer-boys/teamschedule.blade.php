@@ -130,7 +130,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
@@ -164,7 +164,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
@@ -225,7 +225,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
@@ -259,7 +259,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
@@ -320,7 +320,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
@@ -354,7 +354,7 @@
                                     @else
                                         {{$game->game_time->time}}
                                     @endif
-                                    @if ($game->game_status === 1)
+                                    @if ($game->game_status == 1)
                                         @if ($game->away_team_final_score > $game->home_team_final_score)
                                             {{$game->away_team_final_score}} - {{$game->home_team_final_score}}
                                         @elseif ($game->home_team_final_score < $game->away_team_final_score)
