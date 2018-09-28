@@ -47,7 +47,7 @@
                             @endif
                         </div>
                         <div class="col-3 text-right">
-                            @if($game->away_team_final_score)
+                            @if(isset($game->away_team_final_score))
                                 @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
                                     <strong>{{$game->away_team_final_score}}</strong>
                                 @else
@@ -72,7 +72,7 @@
                             @endif
                         </div>
                         <div class="col-3 text-right">
-                            @if($game->home_team_final_score)
+                            @if(isset($game->home_team_final_score))
                                 @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
                                     <strong>{{$game->home_team_final_score}}</strong>
                                 @else
