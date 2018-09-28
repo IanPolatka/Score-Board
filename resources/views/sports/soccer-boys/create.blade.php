@@ -106,6 +106,38 @@
                             @endif
                         </div>
 
+                        <hr>
+
+                        <label>Is this match at a neutral location</label>
+
+                        <div class="form-group form-inline">
+
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                              <label class="btn btn-small btn-outline-primary active">
+                                <input type="radio" name="location" id="no" value="no" autocomplete="off" checked> No
+                              </label>
+                              <label class="btn btn-small btn-outline-primary">
+                                <input type="radio" name="location" id="yes" value="yes" autocomplete="off"> Yes
+                              </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group location">
+
+                            <label for="away_team_id">Match Location</label>
+                            <input type="text" class="form-control" name="location">
+
+                            @if ($errors->has('away_team_id'))
+                                <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                    <strong>{{ $errors->first('away_team_id') }}</strong>
+                                </span>
+                            @endif
+
+                        </div>
+
+                        <hr>
+
                         <div class="form-group">
                             <label for="away_team_id">Away Team</label>
                             <select class="form-control" id="" name="away_team_id" @if ($errors->has('away_team_id')) style="border-color: #dc3545;" @endif>
@@ -137,6 +169,7 @@
                                 </span>
                             @endif
                         </div>
+
 
                         <div class="form-group">
                             <label for="time_id">Game Time</label>
@@ -174,37 +207,31 @@
 @endsection
 
 @section('javascript')
-<!-- <script>
+<script>
 
-$('.tournament_name').hide();
-$('#tournament_title').hide();
+    $('.location').hide();
+
+    // $( "#neutral" ).on( "click", function() {
+    //     var selectedValue = $(this).val();
+    //     if(selectedValue == 'No') {
+    //         console.log(selectedValue);
+    //     } else {
+    //         console.log(selectedValue);
+    //     }
+    // });
 
 $(document).ready(function(){
-    $("#year_id").change(function(){
-        var selectedYear = $("#year_id option:selected").val();
-        if (selectedYear != '') {
-            $('.tournament_name').slideDown();
-        } else {
-            $('.tournament_name').slideUp();
-        }
-        console.log(selectedYear);
-        $.ajax({
-          url: '/api/tournaments/'+selectedYear,
-          type: 'GET',
-          success: function(data) {
-            console.log(data);
-          },
-        });
-    });
-    $('#is_in_tournament').change(function(){
-        var isMatchInTournament = $("#is_in_tournament option:selected").val();
-        console.log(isMatchInTournament);
-        if (isMatchInTournament === 'Yes') {
-            $('#tournament_title').slideDown();
-        }
-    });
-});
-    
 
-</script> -->
+    $('input:radio[name=location]').change(function() {
+        if (this.value == 'no') {
+            $('.location').slideToggle();
+        }
+        else if (this.value == 'yes') {
+            $('.location').slideToggle();
+        }
+    });
+
+});
+
+</script>
 @stop

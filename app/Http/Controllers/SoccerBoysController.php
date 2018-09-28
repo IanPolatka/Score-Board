@@ -92,6 +92,7 @@ class SoccerBoysController extends Controller
             'home_team_id'  => request('home_team_id'),
             'time_id'       => request('time_id'),
             'district_game' => request('district_game'),
+            'location'      => request('location'),
             'created_by'    => $user_id
         ]);
 
@@ -185,6 +186,7 @@ class SoccerBoysController extends Controller
         $game->home_team_id = request('home_team_id');
         $game->time_id = request('time_id');
         $game->district_game = request('district_game');
+        $game->location     = request('location');
         $game->modified_by   = $user_id;
 
         $game->update();

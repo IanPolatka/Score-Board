@@ -103,6 +103,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="location">Is this game at a nuetral location?  If so, what is the name of the location?</label>
+                            <input type="text" name="location" class="form-control" id="location" value="{{$match->location}}">
+                        </div>
+
+                        <div class="form-group">
                             <label for="away_team_id">Away Team</label>
                             <select class="form-control" id="" name="away_team_id" @if ($errors->has('away_team_id')) style="border-color: #dc3545;" @endif>
                                 <option value="" @if ($match->away_team_id == '') selected @endif>Select A Team</option>
