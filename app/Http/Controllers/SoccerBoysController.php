@@ -219,6 +219,15 @@ class SoccerBoysController extends Controller
                                 ->get();
         $away_wins = $away_team_wins_loop->count();
 
+        $away_team_ties = SoccerBoys::where(function ($query) use ($away_team_id) {
+                            $query->where('away_team_id', '=' , $away_team_id)
+                            ->orWhere('home_team_id', '=', $away_team_id);
+                        })
+                        ->where('game_status', '=', 1)
+                        ->whereRaw('away_team_final_score = home_team_final_score')
+                        ->count();
+
+
         //  Get Home Team Wins And Losses
         $home_team_id = SoccerBoys::where('id', $id)->pluck('home_team_id');
 
@@ -232,6 +241,14 @@ class SoccerBoysController extends Controller
                                 ->get();
         $home_wins = $home_team_wins_loop->count();
 
+        $home_team_ties = SoccerBoys::where(function ($query) use ($home_team_id) {
+                            $query->where('away_team_id', '=' , $home_team_id)
+                            ->orWhere('home_team_id', '=', $home_team_id);
+                        })
+                        ->where('game_status', '=', 1)
+                        ->whereRaw('away_team_final_score = home_team_final_score')
+                        ->count();
+
         //  Get Scores from each half
         $scores = SoccerBoysScore::where('match_id', $id)->get();
 
@@ -244,7 +261,7 @@ class SoccerBoysController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.soccer-boys.edit-score', compact('away_losses', 'away_wins', 'home_losses', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
+        return view('sports.soccer-boys.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
     }
 
     public function gameUpdate(Request $request, $id)
@@ -296,6 +313,8 @@ class SoccerBoysController extends Controller
 
         $losses = SoccerBoys::where('losing_team', $id)->count();
 
+        $matchTies = SoccerBoys::where('game_status', '=', 1)->whereRaw('away_team_final_score = home_team_final_score')->count();
+
         $teams = Team::orderBy('school_name')->get();
 
         $varsity = SoccerBoys::with('away_team')
@@ -328,7 +347,7 @@ class SoccerBoysController extends Controller
                                ->orderBy('date')
                                ->get();
 
-        return view('sports.soccer-boys.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses'));
+        return view('sports.soccer-boys.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses', 'matchTies'));
 
     }
 

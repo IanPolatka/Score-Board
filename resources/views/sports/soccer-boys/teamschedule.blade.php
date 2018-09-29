@@ -77,7 +77,7 @@
 
                             <p class="mb-0 text-muted">Overall Record</p>
 
-                            <h3>{{$wins}} - {{$losses}}</h3>
+                            <h3>{{$wins}} - {{$losses}} @if ($matchTies > 0) - {{$matchTies}} @endif</h3>
 
                         </div>
 
