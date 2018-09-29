@@ -43,7 +43,7 @@
                             <select class="form-control" id="year_id" name="year_id" @if ($errors->has('year_id')) style="border-color: #dc3545;" @endif>
                                 <option value="">Select A Year</option>
                                 @foreach($years as $year)
-                                    <option value="{{$year->id}}" @if (old('year_id') === $year->id) selected @endif>{{$year->year}}</option>
+                                    <option value="{{$year->id}}" @if (old('year_id') == $year->id) selected @endif>{{$year->year}}</option>
                                 @endforeach
                             </select>
 
@@ -58,9 +58,9 @@
                             <label for="team_level">Team Level</label>
                             <select class="form-control" id="team_level" name="team_level" @if ($errors->has('team_level')) style="border-color: #dc3545;" @endif>
                                 <option value="">Select A Team Level</option>
-                                <option value="1" @if (old('team_level') === '1') selected @endif>Varsity</option>
-                                <option value="2" @if (old('team_level') === '2') selected @endif>Junior Varsity</option>
-                                <option value="3" @if (old('team_level') === '3') selected @endif>Freshman</option>
+                                <option value="1" @if (old('team_level') == '1') selected @endif>Varsity</option>
+                                <option value="2" @if (old('team_level') == '2') selected @endif>Junior Varsity</option>
+                                <option value="3" @if (old('team_level') == '3') selected @endif>Freshman</option>
                             </select>
 
                             @if ($errors->has('team_level'))
@@ -84,8 +84,8 @@
                         <div class="form-group">
                             <label for="scrimmage">Is this match a scrimmage?</label>
                             <select class="form-control" id="" name="scrimmage">
-                                <option value="0" @if (old('scrimmage') === '0') selected @endif>No</option>
-                                <option value="1" @if (old('scrimmage') === '1') selected @endif>Yes</option>
+                                <option value="0" @if (old('scrimmage') == '0') selected @endif>No</option>
+                                <option value="1" @if (old('scrimmage') == '1') selected @endif>Yes</option>
                             </select>
 
                             @if ($errors->has('scrimmage'))
@@ -97,11 +97,11 @@
 
                         <div class="form-group">
                             <label for="tournament_name">Is this match part of a tournament?  If so, what is the tournament name?</label>
-                            <input type="text" class="form-control" id="tournament_name" name="tournament_name">
+                            <input type="text" class="form-control" id="tournament_name" name="tournament_name" value="{{ old('tournament_name') }}">
 
-                            @if ($errors->has('is_in_tournament'))
+                            @if ($errors->has('tournament_name'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('is_in_tournament') }}</strong>
+                                    <strong>{{ $errors->first('tournament_name') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -126,11 +126,11 @@
                         <div class="form-group location">
 
                             <label for="away_team_id">Match Location</label>
-                            <input type="text" class="form-control" name="location">
+                            <input type="text" class="form-control" name="location" value="{{ old('location') }}">
 
-                            @if ($errors->has('away_team_id'))
+                            @if ($errors->has('location'))
                                 <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
-                                    <strong>{{ $errors->first('away_team_id') }}</strong>
+                                    <strong>{{ $errors->first('location') }}</strong>
                                 </span>
                             @endif
 
@@ -143,7 +143,7 @@
                             <select class="form-control" id="" name="away_team_id" @if ($errors->has('away_team_id')) style="border-color: #dc3545;" @endif>
                                 <option value="">Select A Team</option>
                                 @foreach($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->school_name}} ({{$team->state}})</option>
+                                    <option value="{{$team->id}}" @if (old('away_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
                                 @endforeach
                             </select>
 
@@ -159,7 +159,7 @@
                             <select class="form-control" id="" name="home_team_id" @if ($errors->has('home_team_id')) style="border-color: #dc3545;" @endif>
                                 <option value="">Select A Team</option>
                                 @foreach($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->school_name}} ({{$team->state}})</option>
+                                    <option value="{{$team->id}}" @if (old('home_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
                                 @endforeach
                             </select>
 
@@ -176,7 +176,7 @@
                             <select class="form-control" id="" name="time_id">
                                 <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
                                 @foreach($times as $time)
-                                    <option value="{{$time->id}}" @if (old('time_id') === $time->id) selected @endif>{{$time->time}}</option>
+                                    <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -184,8 +184,8 @@
                         <div class="form-group">
                             <label for="district_game">District Game</label>
                             <select class="form-control" id="" name="district_game">
-                                <option value="0" @if (old('district_game') === '0') selected @endif>No</option>
-                                <option value="1" @if (old('district_game') === '1') selected @endif>Yes</option>
+                                <option value="0" @if (old('district_game') == '0') selected @endif>No</option>
+                                <option value="1" @if (old('district_game') == '1') selected @endif>Yes</option>
                             </select>
                         </div>
 
