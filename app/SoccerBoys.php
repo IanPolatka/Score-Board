@@ -45,6 +45,16 @@ class SoccerBoys extends Model
       return $this->hasMany(SoccerBoysScore::class, 'match_id');
     }
 
+    public function away_team_district()
+    {
+      return $this->hasMany(TeamMeta::class, 'team_id', 'away_team_id');
+    }
+
+    public function home_team_district()
+    {
+      return $this->hasMany(TeamMeta::class, 'team_id', 'home_team_id');
+    }
+
     public function away_team_goals()
     {
         return $this->hasMany(SoccerBoysScore::class);

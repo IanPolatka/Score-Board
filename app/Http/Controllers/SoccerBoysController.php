@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\SoccerBoys;
 use App\SoccerBoysScore;
 use App\Team;
+use App\TeamMeta;
 use App\Time;
 use App\Tournament;
 use App\Year;
@@ -111,13 +112,14 @@ class SoccerBoysController extends Controller
     {
         $game = SoccerBoys::where('id', $id)->with('away_team')
                                      ->with('home_team')
+                                     ->with('home_team_district')
                                      ->with('away_team')
+                                     ->with('away_team_district')
                                      ->with('game_time')
                                      ->with('user_created')
                                      ->with('user_modified')
                                      ->with('scores')
                                      ->first();
-
 
         return view('sports.soccer-boys.show', compact('game'));
     }
@@ -315,10 +317,14 @@ class SoccerBoysController extends Controller
 
         $matchTies = SoccerBoys::where('game_status', '=', 1)->whereRaw('away_team_final_score = home_team_final_score')->count();
 
+        // $districWins = SoccerBoys::with('away_team')->('home_team'
+
         $teams = Team::orderBy('school_name')->get();
 
         $varsity = SoccerBoys::with('away_team')
                                ->with('home_team')
+                               ->with('home_team_district')
+                               ->with('away_team_district')
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
@@ -443,6 +449,49 @@ class SoccerBoysController extends Controller
                                      
                                      ->orderBy('date','asc')
                                      ->get();
+
+        return $game;
+
+    }
+
+    public function todaysEvents($team)
+    {
+
+        $theteam = Team::where('school_name', '=', $team)->pluck('id');
+
+        $game = SoccerBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where(function ($query) use ($theteam) {
+                                        $query->where('away_team_id', '=' , $theteam)
+                                        ->orWhere('home_team_id', '=', $theteam);
+                                     })
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        return $game;
+
+    }
+
+    public function singleMatch($id)
+    {
+
+        $game = SoccerBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->first();
 
         return $game;
 

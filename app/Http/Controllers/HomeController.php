@@ -28,10 +28,9 @@ class HomeController extends Controller
     public function index()
     {
 
-        $soccer_boys = SoccerBoys::where('date', Carbon::today())->get();
-
-        //return $soccer_boys;
+        $soccer_boys = SoccerBoys::where('date', Carbon::today('America/New_York'))->get();
 
         return view('home', compact('soccer_boys'));
+        
     }
 }

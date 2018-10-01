@@ -157,7 +157,7 @@
                                 <span class="mobile-view">{{ $match->home_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->home_team->school_name }}</span>
                             </a>
-                            <p class="mb-0"><small class="text-muted">({{$home_wins}}-{{$home_losses}}@if($away_team_ties > 0)-{{$home_team_ties}}@endif)</small></p>
+                            <p class="mb-0"><small class="text-muted">({{$home_wins}}-{{$home_losses}}@if($home_team_ties > 0)-{{$home_team_ties}}@endif)</small></p>
                         </h5>
                     </div>
 
