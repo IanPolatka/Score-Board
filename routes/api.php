@@ -25,3 +25,4 @@ Route::get('/soccer-boys/{id}', 'SoccerBoysController@apiGameId');
 Route::get('/soccer-boys/schedule/{year}/{team}/{teamlevel}', 'SoccerBoysController@apiteamschedule');
 Route::get('/soccer-boys/todays-events/{team}', 'SoccerBoysController@todaysEvents');
 Route::get('/soccer-boys/match/{id}', 'SoccerBoysController@singleMatch');
+Route::get('/soccer-boys/year-summary/{year}/{team}', 'SoccerBoysController@yearSummary');
