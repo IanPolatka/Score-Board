@@ -114,10 +114,10 @@
 
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                               <label class="btn btn-small btn-outline-primary active">
-                                <input type="radio" name="location" id="no" value="no" autocomplete="off" checked> No
+                                <input type="radio" name="location-place" id="no" value="no" autocomplete="off" checked> No
                               </label>
                               <label class="btn btn-small btn-outline-primary">
-                                <input type="radio" name="location" id="yes" value="yes" autocomplete="off"> Yes
+                                <input type="radio" name="location-place" id="yes" value="yes" autocomplete="off"> Yes
                               </label>
                             </div>
 
@@ -222,7 +222,7 @@
 
 $(document).ready(function(){
 
-    $('input:radio[name=location]').change(function() {
+    $('input:radio[name=location-place]').change(function() {
         if (this.value == 'no') {
             $('.location').slideToggle();
         }
