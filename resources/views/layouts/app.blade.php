@@ -90,6 +90,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
+                                <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>
                             </div>
                         </li>
                         @guest

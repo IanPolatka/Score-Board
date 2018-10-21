@@ -50,11 +50,30 @@ Route::delete('/boys-soccer-score-delete/{id}', 'SoccerBoysController@scoreDelet
 Route::patch('/boys-soccer-half-update/{id}', 'SoccerBoysController@storeGameHalf');
 
 
-// Route::resource('/SoccerBoys', 'SoccerBoysController');
 
-// Route::middleware('role:superadministrator')->group(function() {
-// 	Route::resource('/teams', 'TeamController');
-// });
+
+
+///////////////////////////////////////////////////////////////////////
+//  Girls Soccer
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/girls-soccer', 'SoccerGirlsController@index')->name('girlssoccer.index');
+Route::get('/girls-soccer/create', 'SoccerGirlsController@create')->name('girlssoccer.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/girls-soccer/create', 'SoccerGirlsController@store')->name('girls-soccer-create-match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/girls-soccer/delete/{id}', 'SoccerGirlsController@destroy');
+Route::get('/girls-soccer/{id}', 'SoccerGirlsController@show')->name('girls-soccer-show');
+Route::get('/girls-soccer/{id}/edit', 'SoccerGirlsController@edit')->name('girls-soccer-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/girls-soccer/{id}/update', 'SoccerGirlsController@update')->name('girls-soccer-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/girls-soccer/{id}/edit-score', 'SoccerGirlsController@editScore')->name('girls-soccer-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/girls-soccer/{id}/match-update', 'SoccerGirlsController@gameUpdate')->name('girls.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/girls-soccer/2018-2019/{team}', 'SoccerGirlsController@teamSchedule')->name('girlssoccer.teamSchedule');
+
+Route::post('/girls-soccer-score-create/{id}', 'SoccerGirlsController@scoreCreate')->name('girls-soccer-score-create');
+Route::delete('/girls-soccer-score-delete/{id}', 'SoccerGirlsController@scoreDelete')->name('girls-soccer-score-delete');
+
+Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameHalf');
 
 
 

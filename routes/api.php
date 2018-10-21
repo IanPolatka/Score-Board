@@ -26,3 +26,14 @@ Route::get('/soccer-boys/schedule/{year}/{team}/{teamlevel}', 'SoccerBoysControl
 Route::get('/soccer-boys/todays-events/{team}', 'SoccerBoysController@todaysEvents');
 Route::get('/soccer-boys/match/{id}', 'SoccerBoysController@singleMatch');
 Route::get('/soccer-boys/year-summary/{year}/{team}', 'SoccerBoysController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Girls Soccer
+///////////////////////////////////////////////////////////////////////
+Route::get('/soccer-girls/{id}', 'SoccerBoysController@apiGameId');
+Route::get('/soccer-girls/schedule/{year}/{team}/{teamlevel}', 'SoccerBoysController@apiteamschedule');
+Route::get('/soccer-girls/todays-events/{team}', 'SoccerBoysController@todaysEvents');
+Route::get('/soccer-girls/match/{id}', 'SoccerBoysController@singleMatch');
+Route::get('/soccer-girls/year-summary/{year}/{team}', 'SoccerBoysController@yearSummary');
