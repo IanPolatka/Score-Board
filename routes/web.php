@@ -82,6 +82,34 @@ Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameH
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Football
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/football', 'FootballController@index')->name('football.index');
+Route::get('/football/create', 'FootballController@create')->name('football.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/football/create', 'FootballController@store')->name('football-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/football/delete/{id}', 'FootballController@destroy');
+Route::get('/football/{id}', 'FootballController@show')->name('football-show');
+Route::get('/football/{id}/edit', 'FootballController@edit')->name('football-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/football/{id}/update', 'FootballController@update')->name('football-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/football/{id}/edit-score', 'FootballController@editScore')->name('football-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/football/{id}/match-update', 'FootballController@gameUpdate')->name('football.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/football/2018-2019/{team}', 'FootballController@teamSchedule')->name('football.teamSchedule');
+
+Route::post('/football-score-create/{id}', 'FootballController@scoreCreate')->name('football-score-create');
+Route::delete('/football-score-delete/{id}', 'FootballController@scoreDelete')->name('football-score-delete');
+
+Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Teams
 ///////////////////////////////////////////////////////////////////////
 
