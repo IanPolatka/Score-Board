@@ -31,9 +31,44 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
+            <div class="card mb-4">
+
+              <div class="card-body">
+
+                <h4>Team Logo</h4>
+
+                <form action="/teams/{{ $team->id }}/image-upload" enctype="multipart/form-data" method="POST">
+
+                  <div class="team-profile mb-4">
+      
+                    {{ csrf_field() }}
+
+                    @if ($team->logo)
+
+                    <div>
+
+                      <img src="/images/team-logos/{{ $team->logo }}" style="max-width: 100px; margin-bottom: 20px;">
+                        @endif
+
+                    </div>
+
+                    <input type="file" name="image" />
+
+                  </div><!--  Team Profile  -->
+
+                  <button type="submit" class="btn btn-primary">Upload</button>
+
+                </form>
+
+              </div>
+
+            </div>
+
             <div class="card">
 
                 <div class="card-body">
+
+                    <h4>Team Information</h4>
 
                     <form action="{{route('team.update', $team->id)}}" method="POST">
                         {{method_field('PATCH')}}

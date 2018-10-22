@@ -171,4 +171,28 @@ class TeamController extends Controller
         
     }
 
+
+    public function imageUpload(Request $request, Team $team, $id)
+    {
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $theImageName = $request->file('image')->getClientOriginalName();
+        //$imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $request->image->resize(300, 300);
+        $request->image->move(public_path('/images/team-logos/'), $theImageName);
+        // Image::make($logo)->resize(300, 300)->save( public_path('/images/team-logos/' . $theImageName ) );
+
+        $team = Team::find($id);
+
+        $team->logo = $theImageName;
+
+        $team->save();
+
+        return back()
+            ->with('success','Image Uploaded successfully. ' .$theImageName )
+            ->with('path',$theImageName);
+    }
+
 }

@@ -95,6 +95,7 @@ Route::middleware('role:superadministrator')->group(function() {
 	Route::get('/teams/{id}/{year}/edit-meta', 'TeamController@editMeta')->name('team.edit.meta');
 	Route::post('/teams/{id}/{year}/create-meta', 'TeamController@createMeta')->name('team.create.meta');
 	Route::patch('/teams/{id}/{year}/edit-meta', 'TeamController@patchMeta')->name('team.update.meta');
+	Route::post('/teams/{id}/image-upload', 'TeamController@imageUpload');
 });
 
 //Route::post('/team/meta-create', 'TeamController@createYearMeta');
