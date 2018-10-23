@@ -18,6 +18,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+
+///////////////////////////////////////////////////////////////////////
+//  Basketball Boys
+///////////////////////////////////////////////////////////////////////
+Route::get('/basketball-boys/{id}', 'BasketballBoysController@apiGameId');
+Route::get('/basketball-boys/schedule/{year}/{team}/{teamlevel}', 'BasketballBoysController@apiteamschedule');
+Route::get('/basketball-boys/todays-events/{team}', 'BasketballBoysController@todaysEvents');
+Route::get('/basketball-boys/year-summary/{year}/{team}', 'BasketballBoysController@yearSummary');
+
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
 ///////////////////////////////////////////////////////////////////////

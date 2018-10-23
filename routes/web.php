@@ -28,6 +28,34 @@ Route::redirect('home', '/');
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Basketball Boys
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/boys-basketball', 'BasketballBoysController@index')->name('basketball-boys.index');
+Route::get('/boys-basketball/create', 'BasketballBoysController@create')->name('basketball-boys.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/boys-basketball/create', 'BasketballBoysController@store')->name('basketball-boys-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/boys-basketball/delete/{id}', 'BasketballBoysController@destroy');
+Route::get('/boys-basketball/{id}', 'BasketballBoysController@show')->name('basketball-boys-show');
+Route::get('/boys-basketball/{id}/edit', 'BasketballBoysController@edit')->name('basketball-boys-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/boys-basketball/{id}/update', 'BasketballBoysController@update')->name('basketball-boys-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/boys-basketball/{id}/edit-score', 'BasketballBoysController@editScore')->name('basketball-boys-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/boys-basketball/{id}/match-update', 'BasketballBoysController@gameUpdate')->name('basketball-boys.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/boys-basketball/2018-2019/{team}', 'BasketballBoysController@teamSchedule')->name('basketball-boys.teamSchedule');
+
+Route::post('/boys-basketball-score-create/{id}', 'BasketballBoysController@scoreCreate')->name('basketball-boys-score-create');
+Route::delete('/boys-basketball-score-delete/{id}', 'BasketballBoysController@scoreDelete')->name('basketball-boys-score-delete');
+
+Route::patch('/boys-basketball-half-update/{id}', 'BasketballBoysController@storeGameHalf');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
 ///////////////////////////////////////////////////////////////////////
 
