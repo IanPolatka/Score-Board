@@ -45,12 +45,12 @@
 
                     @if ($team->logo)
 
-                    <div>
+
 
                       <img src="/images/team-logos/{{ $team->logo }}" style="max-width: 100px; margin-bottom: 20px;">
                         @endif
 
-                    </div>
+               
 
                     <input type="file" name="image" />
 
@@ -60,9 +60,10 @@
 
                 </form>
 
-              </div>
+              </div><!--  Card Body  -->
 
             </div>
+
 
             <div class="card">
 
