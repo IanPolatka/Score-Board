@@ -201,7 +201,8 @@ Route::middleware('role:superadministrator')->group(function() {
 	//Route::resource('/teams', 'TeamController');
 	Route::get('/teams', 'TeamController@index')->name('teams.index');
 	Route::get('/teams/{id}/edit', 'TeamController@edit')->name('team.edit');
-	Route::post('/teams/create', 'TeamController@create')->name('team.create');
+	Route::get('/teams/create', 'TeamController@create')->name('team.create');
+	Route::post('/teams/create', 'TeamController@store')->name('team.store');
 	Route::patch('/teams/{id}/update', 'TeamController@update')->name('team.update');
 	Route::get('/teams/{id}/{year}', 'TeamController@show')->name('team.show');
 	Route::get('/teams/{id}/{year}/edit-meta', 'TeamController@editMeta')->name('team.edit.meta');

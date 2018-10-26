@@ -37,7 +37,7 @@
 
                 <div class="card-body">
 
-                    <form action="{{route('teams.store')}}" method="POST">
+                    <form action="{{route('team.store')}}" method="POST">
                         {{csrf_field()}}
 
                         <div class="form-group">
