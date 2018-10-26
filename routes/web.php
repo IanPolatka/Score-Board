@@ -28,6 +28,34 @@ Route::redirect('home', '/');
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Baseball
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/baseball', 'BaseballController@index')->name('baseball.index');
+Route::get('/baseball/create', 'BaseballController@create')->name('baseball.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/baseball/create', 'BaseballController@store')->name('baseball-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/baseball/delete/{id}', 'BaseballController@destroy');
+Route::get('/baseball/{id}', 'BaseballController@show')->name('baseball-show');
+Route::get('/baseball/{id}/edit', 'BaseballController@edit')->name('baseball-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/baseball/{id}/update', 'BaseballController@update')->name('baseball-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/baseball/{id}/edit-score', 'BaseballController@editScore')->name('baseball-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/baseball/{id}/match-update', 'BaseballController@gameUpdate')->name('baseball.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/baseball/2018-2019/{team}', 'BaseballController@teamSchedule')->name('baseball.teamSchedule');
+
+Route::post('/baseball-score-create/{id}', 'BaseballController@scoreCreate')->name('baseball-score-create');
+Route::delete('/baseball-score-delete/{id}', 'BaseballController@scoreDelete')->name('baseball-score-delete');
+
+Route::patch('/baseball-inning-update/{id}', 'BaseballController@storeGameHalf');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Basketball Boys
 ///////////////////////////////////////////////////////////////////////
 
@@ -48,6 +76,34 @@ Route::post('/boys-basketball-score-create/{id}', 'BasketballBoysController@scor
 Route::delete('/boys-basketball-score-delete/{id}', 'BasketballBoysController@scoreDelete')->name('basketball-boys-score-delete');
 
 Route::patch('/boys-basketball-half-update/{id}', 'BasketballBoysController@storeGameHalf');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Basketball Girls
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/girls-basketball', 'BasketballGirlsController@index')->name('basketball-girls.index');
+Route::get('/girls-basketball/create', 'BasketballGirlsController@create')->name('basketball-girls.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/girls-basketball/create', 'BasketballGirlsController@store')->name('basketball-girls-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/girls-basketball/delete/{id}', 'BasketballGirlsController@destroy');
+Route::get('/girls-basketball/{id}', 'BasketballGirlsController@show')->name('basketball-girls-show');
+Route::get('/girls-basketball/{id}/edit', 'BasketballGirlsController@edit')->name('basketball-girls-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/girls-basketball/{id}/update', 'BasketballGirlsController@update')->name('basketball-girls-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/girls-basketball/{id}/edit-score', 'BasketballGirlsController@editScore')->name('basketball-girls-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/girls-basketball/{id}/match-update', 'BasketballGirlsController@gameUpdate')->name('basketball-girls.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/girls-basketball/2018-2019/{team}', 'BasketballGirlsController@teamSchedule')->name('basketball-girls.teamSchedule');
+
+Route::post('/girls-basketball-score-create/{id}', 'BasketballGirlsController@scoreCreate')->name('basketball-girls-score-create');
+Route::delete('/girls-basketball-score-delete/{id}', 'BasketballGirlsController@scoreDelete')->name('basketball-girls-score-delete');
+
+Route::patch('/girls-basketball-half-update/{id}', 'BasketballGirlsController@storeGameHalf');
 
 
 

@@ -20,12 +20,32 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Baseball
+///////////////////////////////////////////////////////////////////////
+Route::get('/baseball/{id}', 'BaseballController@apiGameId');
+Route::get('/baseball/schedule/{year}/{team}/{teamlevel}', 'BaseballController@apiteamschedule');
+Route::get('/baseball/todays-events/{team}', 'BaseballController@todaysEvents');
+Route::get('/baseball/year-summary/{year}/{team}', 'BaseballController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Basketball Boys
 ///////////////////////////////////////////////////////////////////////
 Route::get('/basketball-boys/{id}', 'BasketballBoysController@apiGameId');
 Route::get('/basketball-boys/schedule/{year}/{team}/{teamlevel}', 'BasketballBoysController@apiteamschedule');
 Route::get('/basketball-boys/todays-events/{team}', 'BasketballBoysController@todaysEvents');
 Route::get('/basketball-boys/year-summary/{year}/{team}', 'BasketballBoysController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Basketball Girls
+///////////////////////////////////////////////////////////////////////
+Route::get('/basketball-girls/{id}', 'BasketballGirlsController@apiGameId');
+Route::get('/basketball-girls/schedule/{year}/{team}/{teamlevel}', 'BasketballGirlsController@apiteamschedule');
+Route::get('/basketball-girls/todays-events/{team}', 'BasketballGirlsController@todaysEvents');
+Route::get('/basketball-girls/year-summary/{year}/{team}', 'BasketballGirlsController@yearSummary');
 
 
 
