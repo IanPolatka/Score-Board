@@ -99,7 +99,7 @@ class BasketballGirlsController extends Controller
 
         Session::flash('success', 'Girls Basketball Game Has Been Created');
 
-        return redirect('/boys-basketball');
+        return redirect('/girls-basketball');
     }
 
     /**
@@ -195,7 +195,7 @@ class BasketballGirlsController extends Controller
 
         Session::flash('success', 'Girls Basketball Game Has Been Updated');
 
-        return redirect('/boys-basketball/'.$id);
+        return redirect('/girls-basketball/'.$id);
     }
 
     public function editScore($id)
@@ -297,7 +297,7 @@ class BasketballGirlsController extends Controller
     {
         $game = BasketballGirls::find($id);
         $game->delete();
-        return redirect('/boys-basketball');
+        return redirect('/girls-basketball');
     }
 
 
