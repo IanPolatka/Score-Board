@@ -72,9 +72,25 @@ Route::get('/soccer-girls/year-summary/{year}/{team}', 'SoccerGirlsController@ye
 
 
 ///////////////////////////////////////////////////////////////////////
-//  Football Soccer
+//  Football
 ///////////////////////////////////////////////////////////////////////
 Route::get('/football/{id}', 'FootballController@apiGameId');
 Route::get('/football/schedule/{year}/{team}/{teamlevel}', 'FootballController@apiteamschedule');
 Route::get('/football/todays-events/{team}', 'FootballController@todaysEvents');
 Route::get('/football/year-summary/{year}/{team}', 'FootballController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Swimming
+///////////////////////////////////////////////////////////////////////
+Route::get('/swimming/schedule/{year}/{team}/{teamlevel}', 'SwimmingController@apiteamschedule');
+Route::get('/swimming/todays-events/{team}', 'SwimmingController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Wrestling
+///////////////////////////////////////////////////////////////////////
+Route::get('/wrestling/schedule/{year}/{team}/{teamlevel}', 'WrestlingController@apiteamschedule');
+Route::get('/wrestling/todays-events/{team}', 'WrestlingController@todaysEvents');

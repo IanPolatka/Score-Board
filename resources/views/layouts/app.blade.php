@@ -95,6 +95,8 @@
                                 <a class="nav-link" href="{{ route('basketball-boys.index') }}">{{ __('Boys Basketball') }}</a>
                                 <a class="nav-link" href="{{ route('basketball-girls.index') }}">{{ __('Girls Basketball') }}</a>
                                 <a class="nav-link" href="{{ route('football.index') }}">{{ __('Football') }}</a>
+                                <a class="nav-link" href="{{ route('swimming.index') }}">{{ __('Swimming') }}</a>
+                                <a class="nav-link" href="{{ route('wrestling.index') }}">{{ __('Wrestling') }}</a>
                             </div>
                         </li>
                         @guest

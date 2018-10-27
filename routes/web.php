@@ -194,6 +194,50 @@ Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Swimming
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/swimming', 'SwimmingController@index')->name('swimming.index');
+Route::get('/swimming/create', 'SwimmingController@create')->name('swimming.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/swimming/create', 'SwimmingController@store')->name('swimming.create.match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/swimming/delete/{id}', 'SwimmingController@destroy');
+Route::get('/swimming/{id}', 'SwimmingController@show')->name('swimming.show');
+Route::get('/swimming/{id}/edit', 'SwimmingController@edit')->name('swimming.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/swimming/{id}/update', 'SwimmingController@update')->name('swimming.edit.match')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/swimming/{id}/match-update', 'SwimmingController@gameUpdate')->name('swimming.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/swimming/2018-2019/{team}', 'SwimmingController@teamSchedule')->name('swimming.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Wrestling
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/wrestling', 'WrestlingController@index')->name('wrestling.index');
+Route::get('/wrestling/create', 'WrestlingController@create')->name('wrestling.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/wrestling/create', 'WrestlingController@store')->name('wrestling.create.match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/wrestling/delete/{id}', 'WrestlingController@destroy');
+Route::get('/wrestling/{id}', 'WrestlingController@show')->name('wrestling.show');
+Route::get('/wrestling/{id}/edit', 'WrestlingController@edit')->name('wrestling.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/wrestling/{id}/update', 'WrestlingController@update')->name('wrestling.edit.match')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/wrestling/{id}/match-update', 'WrestlingController@gameUpdate')->name('wrestling.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/wrestling/2018-2019/{team}', 'WrestlingController@teamSchedule')->name('wrestling.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Teams
 ///////////////////////////////////////////////////////////////////////
 
