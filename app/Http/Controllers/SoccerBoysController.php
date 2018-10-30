@@ -89,11 +89,11 @@ class SoccerBoysController extends Controller
             'date'          => request('date'),
             'scrimmage'     => request('scrimmage'),
             'tournament_name' => request('tournament_name'),
+            'location'      => request('location'),
             'away_team_id'  => request('away_team_id'),
             'home_team_id'  => request('home_team_id'),
             'time_id'       => request('time_id'),
             'district_game' => request('district_game'),
-            'location'      => request('location'),
             'created_by'    => $user_id
         ]);
 
@@ -207,7 +207,6 @@ class SoccerBoysController extends Controller
 
         $years = Year::all();
 
-
         //  Get Away Team Wins And Losses
         $away_team_id = SoccerBoys::where('id', $id)->pluck('away_team_id');
 
@@ -311,6 +310,8 @@ class SoccerBoysController extends Controller
 
         $selectedTeam = Team::where('school_name', $team)->first();
 
+        $year = Year::pluck('id')->first();
+
         $wins = SoccerBoys::where('winning_team', $id)->count();
 
         $losses = SoccerBoys::where('losing_team', $id)->count();
@@ -323,15 +324,31 @@ class SoccerBoysController extends Controller
 
         $varsity = SoccerBoys::with('away_team')
                                ->with('home_team')
-                               ->with('home_team_district')
                                ->with('away_team_district')
+                               ->with('home_team_district')
+                               // ->with(array('home_team_district'=>function($query){
+                               //  $query->where('team_id', '=', 1)->where('year_id', 1)->first();
+                               // }))
+                               // ->with(array('away_team_district'=>function($query){
+                               //  $query->where('team_id', '=', 75)->where('year_id', 1)->first();
+                               // }))
+                               // ->with(['away_team_district' => function ($query) use ($id, $year) {
+                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
+                               //  }])
+                               // ->with(['home_team_district' => function ($query)  use ($id, $year) {
+                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
+                               //  }])
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
-                                })
-                               ->where('team_level', 1)
+                               })
+                               // ->where('team_level', 1)
                                ->orderBy('date')
                                ->get();
+
+        // foreach ($varsity as $var) {
+        //     echo $var->home_team_district->soccer_district; // this is lazy loaded
+        // }
 
         $juniorvarsity = SoccerBoys::with('away_team')
                                ->with('home_team')
@@ -494,6 +511,48 @@ class SoccerBoysController extends Controller
                                      ->first();
 
         return $game;
+
+    }
+
+
+
+    public function yearSummary($year, $team)
+    {
+
+        // return $year;
+        $selectedyear = Year::where('year', $year)->pluck('year');
+        $selectedyearid = Year::where('year', $year)->pluck('id');
+
+        $selectedteam = Team::where('school_name', $team)->get();
+
+        $selectedteamid =   Team::where('school_name', $team)->pluck('id');
+        // $selectedDistrict = Team::where('school_name', $team)->pluck('district_soccer');
+
+        // return $selectedteam;
+
+        $the_standings = \DB::select('SELECT
+                            school_name AS Team, logo, Sum(W) AS Wins, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A, 
+                        FROM(
+
+                            SELECT
+                                home_team_id Team,
+                                IF(home_team_final_score > away_team_final_score,1,0) W,
+                                IF(home_team_final_score < away_team_final_score,1,0) L,
+                                home_team_final_score F,
+                                away_team_final_score A,
+                                
+                            FROM soccer_boys
+                            WHERE year_id = ? AND team_level = 1
+                              
+                        )
+                        as tot
+                        JOIN teams t ON tot.Team=t.id
+                        JOIN teams_meta t ON tot.Team=t.id
+                        WHERE school_name = ?
+                        GROUP BY Team
+                        ORDER BY wins DESC, losses ASC, school_name', array($selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']));
+
+        return $the_standings;
 
     }
 

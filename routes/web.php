@@ -166,6 +166,52 @@ Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameH
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Bowling Boys
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/boys-bowling', 'BowlingBoysController@index')->name('boys-bowling.index');
+Route::get('/boys-bowling/create', 'BowlingBoysController@create')->name('boys-bowling.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/boys-bowling/create', 'BowlingBoysController@store')->name('boys-bowling.create.game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/boys-bowling/delete/{id}', 'BowlingBoysController@destroy');
+Route::get('/boys-bowling/{id}', 'BowlingBoysController@show')->name('boys-bowling.show');
+Route::get('/boys-bowling/{id}/edit', 'BowlingBoysController@edit')->name('boys-bowling.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/boys-bowling/{id}/update', 'BowlingBoysController@update')->name('boys-bowling.edit.match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/boys-bowling/{id}/edit-score', 'BowlingBoysController@editScore')->name('boys-bowling.score.edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/boys-bowling/{id}/match-update', 'BowlingBoysController@gameUpdate')->name('boys-bowling.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/boys-bowling/2018-2019/{team}', 'BowlingBoysController@teamSchedule')->name('boys-bowling.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Bowling Girls
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/girls-bowling', 'BowlingGirlsController@index')->name('girls-bowling.index');
+Route::get('/girls-bowling/create', 'BowlingGirlsController@create')->name('girls-bowling.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/girls-bowling/create', 'BowlingGirlsController@store')->name('girls-bowling.create.game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/girls-bowling/delete/{id}', 'BowlingGirlsController@destroy');
+Route::get('/girls-bowling/{id}', 'BowlingGirlsController@show')->name('girls-bowling.show');
+Route::get('/girls-bowling/{id}/edit', 'BowlingGirlsController@edit')->name('girls-bowling.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/girls-bowling/{id}/update', 'BowlingGirlsController@update')->name('girls-bowling.edit.match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/girls-bowling/{id}/edit-score', 'BowlingGirlsController@editScore')->name('girls-bowling.score.edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/girls-bowling/{id}/match-update', 'BowlingGirlsController@gameUpdate')->name('girls-bowling.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/girls-bowling/2018-2019/{team}', 'BowlingGirlsController@teamSchedule')->name('girls-bowling.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Football
 ///////////////////////////////////////////////////////////////////////
 

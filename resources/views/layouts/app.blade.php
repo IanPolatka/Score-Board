@@ -91,6 +91,8 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" href="{{ route('baseball.index') }}">{{ __('Baseball') }}</a>
                                 <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
+                                <a class="nav-link" href="{{ route('boys-bowling.index') }}">{{ __('Boys Bowling') }}</a>
+                                <a class="nav-link" href="{{ route('girls-bowling.index') }}">{{ __('Girls Bowling') }}</a>
                                 <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>
                                 <a class="nav-link" href="{{ route('basketball-boys.index') }}">{{ __('Boys Basketball') }}</a>
                                 <a class="nav-link" href="{{ route('basketball-girls.index') }}">{{ __('Girls Basketball') }}</a>

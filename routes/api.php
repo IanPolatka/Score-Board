@@ -50,6 +50,22 @@ Route::get('/basketball-girls/year-summary/{year}/{team}', 'BasketballGirlsContr
 
 
 ///////////////////////////////////////////////////////////////////////
+// 	Bowling Boys
+///////////////////////////////////////////////////////////////////////
+Route::get('/bowling-boys/schedule/{year}/{team}/{teamlevel}', 'BowlingBoysController@apiteamschedule');
+Route::get('/bowling-boys/todays-events/{team}', 'BowlingBoysController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
+// 	Bowling Girls
+///////////////////////////////////////////////////////////////////////
+Route::get('/bowling-girls/schedule/{year}/{team}/{teamlevel}', 'BowlingGirlsController@apiteamschedule');
+Route::get('/bowling-girls/todays-events/{team}', 'BowlingGirlsController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
 ///////////////////////////////////////////////////////////////////////
 Route::get('/soccer-boys/{id}', 'SoccerBoysController@apiGameId');
