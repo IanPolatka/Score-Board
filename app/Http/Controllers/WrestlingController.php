@@ -213,6 +213,7 @@ class WrestlingController extends Controller
                                ->where('team_id', $theteam)
                                ->where('year_id', $theYear)
                                ->where('team_level', $teamlevel)
+                               ->with('game_time')
                                ->orderBy('date')
                                ->get();
 
