@@ -106,6 +106,13 @@ class WrestlingController extends Controller
         return view('sports.wrestling.show', compact('match'));
     }
 
+    public function destroy($id)
+    {
+        $game = Wrestling::find($id);
+        $game->delete();
+        return redirect('/wrestling');
+    }
+
     public function edit($id)
     {
 
