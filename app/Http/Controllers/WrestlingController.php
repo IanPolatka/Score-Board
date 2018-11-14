@@ -193,7 +193,7 @@ class WrestlingController extends Controller
         $juniorvarsity = Wrestling::with('the_team')
                                ->with('host_team')
                                ->where('team_id', $id)
-                               ->where('team_level', 1)
+                               ->where('team_level', 2)
                                ->orderBy('date')
                                ->get();
 
