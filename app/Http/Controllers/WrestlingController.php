@@ -185,6 +185,7 @@ class WrestlingController extends Controller
 
         $varsity = Wrestling::with('the_team')
                                ->with('host_team')
+                               ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 1)
                                ->orderBy('date')
@@ -192,6 +193,7 @@ class WrestlingController extends Controller
 
         $juniorvarsity = Wrestling::with('the_team')
                                ->with('host_team')
+                               ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 2)
                                ->orderBy('date')
@@ -199,6 +201,7 @@ class WrestlingController extends Controller
 
         $freshman = Wrestling::with('the_team')
                                ->with('host_team')
+                               ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 3)
                                ->orderBy('date')

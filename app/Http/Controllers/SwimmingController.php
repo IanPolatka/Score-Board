@@ -210,6 +210,7 @@ class SwimmingController extends Controller
         $game = Swimming::with('the_team')
         						->with('the_year')
                                ->with('host_team')
+                               ->with('game_time')
                                ->where('team_id', $theteam)
                                ->where('year_id', $theYear)
                                ->where('team_level', $teamlevel)
