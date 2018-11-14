@@ -147,19 +147,6 @@
                         </div>
 
                         <div class="form-group">
-
-                            <label for="result">Result</label>
-                            <input type="text" class="form-control" name="result" value="{{ $match->result }}" placeholder="1st Place">
-
-                            @if ($errors->has('location'))
-                                <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
-                                    <strong>{{ $errors->first('location') }}</strong>
-                                </span>
-                            @endif
-
-                        </div>
-
-                        <div class="form-group">
                             <label for="time_id">Event Time</label>
                             <select class="form-control" id="" name="time_id">
                                 <option value="" @if ($match->time_id == '') selected @endif>Please Select A Time</option>
@@ -167,6 +154,50 @@
                                     <option value="{{$time->id}}" @if ($match->time_id == $time->id) selected @endif>{{$time->time}}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div style="background: #f8f8f8; display: block; margin: 0 -20px 20px -20px; padding: 20px;">
+
+                            <h5>Match Summary</h5>
+
+                            <div class="row">
+
+                                <div class="col">
+
+                                    <div class="form-group">
+
+                                        <label for="boys_result">Boys Result</label>
+                                        <input type="text" class="form-control" name="boys_result" value="{{ $match->boys_result }}" placeholder="1st Place">
+
+                                        @if ($errors->has('boys_result'))
+                                            <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                                <strong>{{ $errors->first('boys_result') }}</strong>
+                                            </span>
+                                        @endif
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+
+                                    <div class="form-group">
+
+                                        <label for="girls_result">Girls Result</label>
+                                        <input type="text" class="form-control" name="girls_result" value="{{ $match->girls_result }}" placeholder="1st Place">
+
+                                        @if ($errors->has('girls_result'))
+                                            <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                                <strong>{{ $errors->first('girls_result') }}</strong>
+                                            </span>
+                                        @endif
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update</button>
