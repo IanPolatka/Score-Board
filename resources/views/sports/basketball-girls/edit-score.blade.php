@@ -312,7 +312,7 @@
                             <label for="game_status">Game Minute</label>
                             <select class="form-control" id="game_minute" name="game_minute">
                                 <option value="">Select A Game Minute</option>
-                                @for ($i = 1; $i < 151; $i++)
+                                @for ($i = 1; $i < 31; $i++)
                                     <option value="{{$i}}" @if($match->game_minute == $i) selected @endif>{{$i}}</option>
                                 @endfor
                             </select>
@@ -325,7 +325,12 @@
                             <select class="form-control" id="game_second" name="game_second">
                                 <option value="">Select A Game Second</option>
                                 @for ($i = 1; $i < 59; $i++)
-                                    <option value="{{$i}}" @if($match->game_second == $i) selected @endif>{{$i}}</option>
+                                    @if ($i < 10)
+                                        <?php $y = '0' . $i; ?>
+                                        <option value="{{$y}}" @if($match->game_second == $y) selected @endif>{{$y}}</option>
+                                    @else
+                                        <option value="{{$i}}" @if($match->game_second == $i) selected @endif>{{$i}}</option>
+                                    @endif
                                 @endfor
                             </select>
 
