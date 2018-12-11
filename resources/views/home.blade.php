@@ -11,7 +11,7 @@
 
                 <h5 class="text-muted mt-4">Boys Basketball</h5>
                 @foreach ($basketball_boys as $game)
-                    <a href="/basketball-boys/{{$game->id}}" class="list-group-item list-group-item-action">
+                    <a href="/boys-basketball/{{$game->id}}" class="list-group-item list-group-item-action">
                         <div class="row team-level-identifier">
                             <div class="col">
                                 @if ($game->team_level === 1)
@@ -81,7 +81,7 @@
 
                 <h5 class="text-muted mt-4">Girls Basketball</h5>
                 @foreach ($basketball_girls as $game)
-                    <a href="/basketball-girls/{{$game->id}}" class="list-group-item list-group-item-action">
+                    <a href="/girls-basketball/{{$game->id}}" class="list-group-item list-group-item-action">
                         <div class="row team-level-identifier">
                             <div class="col">
                                 @if ($game->team_level === 1)
@@ -151,7 +151,7 @@
 
                 <h5 class="text-muted mt-4">Boys Bowling</h5>
                 @foreach ($bowling_boys as $game)
-                    <a href="/bowling-boys/{{$game->id}}" class="list-group-item list-group-item-action">
+                    <a href="/boys-bowling/{{$game->id}}" class="list-group-item list-group-item-action">
                         <div class="row team-level-identifier">
                             <div class="col">
                                 @if ($game->team_level === 1)
@@ -221,7 +221,7 @@
 
                 <h5 class="text-muted mt-4">Girls Bowling</h5>
                 @foreach ($bowling_girls as $game)
-                    <a href="/bowling-girls/{{$game->id}}" class="list-group-item list-group-item-action">
+                    <a href="/girls-bowling/{{$game->id}}" class="list-group-item list-group-item-action">
                         <div class="row team-level-identifier">
                             <div class="col">
                                 @if ($game->team_level === 1)
