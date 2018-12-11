@@ -86,6 +86,11 @@
                                 } else {
                                     echo '<strong><span class="text-danger">' . $numberFormatter->format($match->game_status - 4) . ' OT</span></strong>';
                                 } ?>
+                                @if($match->game_status != 4)
+                                    @if(!empty($match->game_minute) || !empty($match->game_second))
+                                        <p class="mb-1"><strong>{{$match->game_minute}}:{{$match->game_second}}</strong></p>
+                                    @endif
+                                @endif
                     <?php endif; ?>
 
                         <?php $away_total_final = $match->away_team_final_score; ?>
@@ -167,7 +172,7 @@
 
 <div class="container main-with-score-summary">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12 @if($match->game_status != 4 && $match->game_status > 1) mt-4 @endif">
 
             <div class="game-final">
 
@@ -248,7 +253,7 @@
 
                                 @csrf 
 
-                                <button type="submit" class="btn btn-primary btn-block"><strong>+ Add Quater</strong></button>
+                                <button type="submit" class="btn btn-primary btn-block"><strong>+ Add Quarter</strong></button>
 
                             </form>
 
@@ -305,7 +310,7 @@
 
                 <div class="card-body">
 
-                    <div class="row mb-3">
+                    <div class="row mb-3 game-time">
 
                         <div class="col">
 
@@ -324,7 +329,7 @@
                             <label for="game_status">Game Second</label>
                             <select class="form-control" id="game_second" name="game_second">
                                 <option value="">Select A Game Second</option>
-                                @for ($i = 1; $i < 59; $i++)
+                                @for ($i = 0; $i < 59; $i++)
                                     @if ($i < 10)
                                         <?php $y = '0' . $i; ?>
                                         <option value="{{$y}}" @if($match->game_second == $y) selected @endif>{{$y}}</option>
@@ -359,22 +364,6 @@
                                         @for ($i = 4; $i < count($scores); $i++)
                                             <option value={{$i+3}} @if($match->game_status == $i+3) selected @endif><?php echo $numberFormatter->format($i-3); ?> Overtime</option>
                                         @endfor
-                                        <?php /*
-                                        <?php $num =  count($match['scores']); ?>
-                                        @for ($i = 0; $i < $num; $i++)
-                                            <?php $j = $i + 5; ?>
-                                            <option value="{{$j}}" @if($match->game_status == $j) selected @endif>
-                                                <?php
-                                                $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL);
-                                                if ($i == 0):
-                                                    echo 'Overtime';
-                                                else:
-                                                    echo $numberFormatter->format($i + 1) . ' Overtime';
-                                                endif;
-                                                ?>
-                                            </option>
-                                        @endfor
-                                        */?>
                                     @endif
                                 </select>
                             </div>
@@ -461,8 +450,10 @@
 
     if (qrt != 1) {
         $('.game-summary-details').hide();
+        $('.game-time').show();
     } else {
         $('.game-summary-details').show();
+        $('.game-time').hide();
         $('.game-final').hide();
     }
 
@@ -480,27 +471,17 @@ $(document).ready(function(){
         }
     });
 
-    // $("#game_status").change(function(){
-    //     if($(this).val() != 1) {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //     } else {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').slideUp('slow');
-    //     }
-    // });
-
     $("#game_status").change(function(){
         var selectedValue = $(this).val();
         if(selectedValue == 1) {
             console.log(selectedValue);
-            // $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-            // $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
             $('.game-summary-details').slideDown();
             $('.game-final').slideUp();
+            $('.game-time').slideUp();
         } else {
             $('.game-summary-details').slideUp();
             $('.game-final').slideDown();
+            $('.game-time').slideDown();
         }
     });
 });

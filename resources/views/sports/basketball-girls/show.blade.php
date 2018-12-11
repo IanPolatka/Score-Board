@@ -89,13 +89,13 @@
 
             <div class="row">
 
-                <div class="col">
+                <div class="col-lg-4 col-mg-4 col-sm-4 mb-3">
                     <a href="{{ route('basketball-girls-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Game</a> 
                 </div>
-                <div class="col">
+                <div class="col-lg-4 col-mg-4 col-sm-4 mb-3">
                     <a href="{{ route('basketball-girls-score-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Game Play</a> 
                 </div>
-                <div class="col">
+                <div class="col-lg-4 col-mg-4 col-sm-4 mb-3">
 
                     <form method="POST" action="/girls-basketball/delete/{{ $game->id }}">
 
