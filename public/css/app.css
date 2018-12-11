@@ -12004,6 +12004,7 @@ body {
   font-family: 'Oswald', sans-serif;
   font-family: 'Open Sans', sans-serif;
   font-family: 'Source Sans Pro', sans-serif;
+  background: #f6f6f6;
 }
 
 .navbar-laravel {
@@ -12042,6 +12043,16 @@ h6 {
   .mobile-view {
     display: none;
   }
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+}
+
+.navbar-laravel {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 1px solid #eee;
 }
 
 .breadcrumb-section {
@@ -12100,10 +12111,8 @@ h6 {
   text-transform: uppercase;
 }
 
-.navbar-laravel {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-bottom: 1px solid #eee;
+.list-group-item {
+  border: 1px solid #ddd;
 }
 
 .score-summary-summary {
@@ -12302,6 +12311,10 @@ h6 {
   margin-left: -20px;
   margin-right: -20px;
   margin-bottom: 10px;
-  background: #eee;
+  background: #f6f6f6;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
