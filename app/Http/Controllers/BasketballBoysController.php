@@ -22,7 +22,7 @@ class BasketballBoysController extends Controller
 {
     public function __construct() 
     {
-      $this->middleware('auth', ['only' => [ 'create', 'edit', 'delete' ]]);
+      $this->middleware('auth', ['only' => [ 'create', 'edit', 'editScore', 'delete' ]]);
     }
 	
     public function index()

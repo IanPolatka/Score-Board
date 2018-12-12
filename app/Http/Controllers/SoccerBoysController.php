@@ -20,6 +20,13 @@ use Illuminate\Http\Request;
 
 class SoccerBoysController extends Controller
 {
+
+    public function __construct() 
+    {
+      $this->middleware('auth', ['only' => [ 'create', 'edit', 'editScore', 'delete' ]]);
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
