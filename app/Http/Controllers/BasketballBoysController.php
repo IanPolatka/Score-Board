@@ -30,7 +30,7 @@ class BasketballBoysController extends Controller
 
         $teams = Team::orderBy('school_name')->get();
 
-        $todaysGames = BasketballBoys::where('date', Carbon::today('America/New_York'))->get();
+        $todaysGames = BasketballBoys::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();
 
         $yesterdaysGames = BasketballBoys::where('date', Carbon::yesterday('America/New_York'))->get();
 

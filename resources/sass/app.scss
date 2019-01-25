@@ -153,7 +153,7 @@ h1, h2, h3, h5, h6 {
 
 .school-logo {
 	display: inline-block;
-	max-height: 40px;
+	height: 40px;
 	width: 40px;
 
 		img {
@@ -226,7 +226,7 @@ h1, h2, h3, h5, h6 {
 
 		@media screen and (max-width: 767px) {
 			.school-logo {
-				max-width: 35px;
+				width: 35px;
 				height: auto;
 			}
 
