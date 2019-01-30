@@ -12,6 +12,8 @@ use App\Time;
 use App\Tournament;
 use App\Year;
 
+use Twitter;
+
 use Session;
 
 use Auth;
@@ -184,6 +186,8 @@ class BaseballController extends Controller
     public function editScore($id)
     {
 
+        $data = Twitter::getUserTimeline(['count' => 10, 'format' => 'array']);
+
         $scores = BaseballScores::where('game_id', $id)->get();
 
         $match = Baseball::where('id', $id)->with('away_team')
@@ -195,7 +199,7 @@ class BaseballController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.baseball.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
+        return view('sports.baseball.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'data', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
     }
 
 

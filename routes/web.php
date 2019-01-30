@@ -323,3 +323,19 @@ Route::patch('/profile/edit', 'ProfileController@update')->name('profile.update'
 Route::post('/profile/edit-password', 'ProfileController@changePassword')->name('profile.edit.password');
 
 
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Users
+///////////////////////////////////////////////////////////////////////
+//Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
+
+Route::post('tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
+
+
+

@@ -51,7 +51,8 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,
-            'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
+            'engine' => 'InnoDB ROW_FORMAT=DYNAMIC'
+            //'unix_socket'   => '/Applications/MAMP/tmp/mysql/mysql.sock'
         ],
 
         'pgsql' => [
