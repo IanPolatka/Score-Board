@@ -335,7 +335,7 @@ Route::post('/profile/edit-password', 'ProfileController@changePassword')->name(
 ///////////////////////////////////////////////////////////////////////
 //Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
 
-Route::post('tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
+Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
 
 
 
