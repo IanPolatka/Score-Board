@@ -19,6 +19,6 @@ class TwitterController extends Controller
 
 		$twitter = Twitter::postTweet($newTweet);
 
-    	return redirect('/');
+    	return back();
     }
 }
