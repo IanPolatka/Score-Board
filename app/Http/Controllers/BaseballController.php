@@ -188,6 +188,36 @@ class BaseballController extends Controller
 
         $data = Twitter::getUserTimeline(['count' => 10, 'format' => 'array']);
 
+
+
+        //  Get Away Team Wins And Losses
+        $away_team_id = Baseball::where('id', $id)->pluck('away_team_id');
+
+        $away_team_losses_loop = Baseball::where('losing_team', '=', $away_team_id)
+                                ->where('team_level', '=', 1)
+                                ->get();
+        $away_losses = $away_team_losses_loop->count();
+
+        $away_team_wins_loop = Baseball::where('winning_team', '=', $away_team_id)
+                                ->where('team_level', '=', 1)
+                                ->get();
+        $away_wins = $away_team_wins_loop->count();
+
+        //  Get Home Team Wins And Losses
+        $home_team_id = Baseball::where('id', $id)->pluck('home_team_id');
+
+        $home_team_losses_loop = Baseball::where('losing_team', '=', $home_team_id)
+                                ->where('team_level', '=', 1)
+                                ->get();
+        $home_losses = $home_team_losses_loop->count();
+
+        $home_team_wins_loop = Baseball::where('winning_team', '=', $home_team_id)
+                                ->where('team_level', '=', 1)
+                                ->get();
+        $home_wins = $home_team_wins_loop->count();
+
+
+
         $scores = BaseballScores::where('game_id', $id)->get();
 
         $match = Baseball::where('id', $id)->with('away_team')
@@ -199,7 +229,7 @@ class BaseballController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.baseball.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'data', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
+        return view('sports.baseball.edit-score', compact('away_losses', 'away_wins', 'data', 'home_losses', 'home_wins', 'match', 'scores'));
     }
 
 

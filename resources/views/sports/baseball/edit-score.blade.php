@@ -66,7 +66,8 @@
                         <strong>{{$match->game_time->time}}</strong>
                     <?php elseif ($match->inning == 99) :?>
                         <strong>Final</strong>
-                    <?php else :
+                    <?php else : ?>
+                    <?php
                         $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL);
                         echo '<strong><span class="text-danger">' . $numberFormatter->format($match->inning) . ' Inning</span></strong>';
                     endif; ?>
@@ -308,7 +309,7 @@
                         <div class="col-6">
 
                             <div class="form-group">
-                                <label for="away_team_final_score">{{$match->away_team->school_name}} Final Score</label>
+                                <label for="away_team_final_score">{{$match->away_team->abbreviated_name}} Final Score</label>
                                 <input type="text" class="form-control" value="{{$match->away_team_final_score}}" name="away_team_final_score">
                             </div>
 
@@ -317,7 +318,7 @@
                         <div class="col-6">
 
                             <div class="form-group">
-                                <label for="home_team_final_score">{{$match->home_team->school_name}} Final Score</label>
+                                <label for="home_team_final_score">{{$match->home_team->abbreviated_name}} Final Score</label>
                                 <input type="text" class="form-control" value="{{$match->home_team_final_score}}" name="home_team_final_score">
                             </div>
 
@@ -349,7 +350,16 @@
 
                         <div class="col-lg-6">
 
-                            <button type="submit" class="btn btn-primary btn-block"><strong>Update</strong></button>
+                            <button type="submit" class="btn btn-primary btn-block mb-3"><strong>Update</strong></button>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#twitterModal">
+                            <i class="fab fa-twitter mr-1"></i> Tweet Score
+                            </button>
 
                         </div>
 
@@ -365,74 +375,6 @@
                     
         </div>
     </div>
-</div>
-
-
-    <form method="POST" action="{{ route('post.tweet') }}">
-
-
-        {{ csrf_field() }}
-
-
-        @if(count($errors))
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.
-                <br/>
-                <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-
-        <div class="form-group">
-            <label>Add Tweet Text:</label>
-            <textarea class="form-control" name="tweet"></textarea>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-success">Add New Tweet</button>
-        </div>
-    </form>
-
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th width="50px">No</th>
-                <th>Twitter Id</th>
-                <th>Message</th>
-                <th>Images</th>
-                <th>Favorite</th>
-                <th>Retweet</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(!empty($data))
-                @foreach($data as $key => $value)
-                    <tr>
-                        <td>{{ ++$key }}</td>
-                        <td>{{ $value['id'] }}</td>
-                        <td>{{ $value['text'] }}</td>
-                        <td>
-                            @if(!empty($value['extended_entities']['media']))
-                                @foreach($value['extended_entities']['media'] as $v)
-                                    <img src="{{ $v['media_url_https'] }}" style="width:100px;">
-                                @endforeach
-                            @endif
-                        </td>
-                        <td>{{ $value['favorite_count'] }}</td>
-                        <td>{{ $value['retweet_count'] }}</td>
-                    </tr>
-                @endforeach
-            @else
-                <tr>
-                    <td colspan="6">There are no data.</td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
 </div>
 
 
@@ -488,3 +430,6 @@ $(document).ready(function(){
 
 </script>
 @stop
+
+<?php // Twitter Form Modal ?>
+@include('sports.baseball.twitter')

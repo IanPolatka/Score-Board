@@ -331,16 +331,10 @@ Route::post('/profile/edit-password', 'ProfileController@changePassword')->name(
 
 
 ///////////////////////////////////////////////////////////////////////
-//  Users
+//  Twitter Routes
 ///////////////////////////////////////////////////////////////////////
-//Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
 
-//Route::post('/tweet', ['as'=>'post.tweet','uses'=>'TwitterController@tweet']);
-
-Route::get('/tweet', function()
-{
-	return Twitter::postTweet(['status' => 'This is a test', 'format' => 'json']);
-});
+Route::post('/tweet', 'TwitterController@tweet')->name('post.tweet');
 
 
 
