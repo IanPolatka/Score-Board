@@ -457,18 +457,26 @@
 
     $('#losing_team').val(losingTeam);
 
-    if (qrt != 1) {
-        $('.game-summary-details').hide();
-        $('.game-time').show();
-    } else {
-        $('.game-summary-details').show();
-        $('.game-time').hide();
-        $('.game-final').hide();
-    }
+    $('.game-time').hide();
+    $('.game-final').hide();
+    $('.game-summary-details').hide();
 
 $(document).ready(function(){
     var home_team_id = <?php echo $match->home_team_id; ?>;
     var away_team_id = <?php echo $match->away_team_id; ?>;
+
+    if (qrt == 0) {
+        $('.game-summary-details').hide();
+        $('.game-time').hide();
+    } else if (qrt == 1) {
+        $('.game-summary-details').show();
+        $('.game-time').hide();
+    } else {
+        $('.game-summary-details').hide();
+        $('.game-time').show();
+        $('.game-final').show();
+    }
+
     $("#winning_team").change(function(){
         if($(this).val() == home_team_id) {
             $('#losing_team').val(away_team_id);
