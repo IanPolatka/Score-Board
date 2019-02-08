@@ -29,16 +29,34 @@ window.$ = window.jQuery = $;
 import 'jquery-ui/ui/widgets/datepicker.js';
 
 
-
 $(document).ready( function(){
 
     $(".alert").delay(1500).fadeOut(function() {
     	$(this).alert('close');
 	});
 
-
-
     $('input').attr('autocomplete','off');
+
+
+
+
+
+    //  Turn of submit button on 'post to twitter' if textarea is blank
+    var maxLength = 279;
+    var currentLength = $('.tweetText').val().length;
+    var theLength = maxLength - currentLength;
+    $('#chars').text(theLength);
+    $('.sendTweet').attr('disabled',false);
+
+    $('.tweetText').keyup(function(){
+        var length = $(this).val().length;
+        var length = maxLength-length;
+        $('#chars').text(length);
+        if($(this).val().length !=0 && $(this).val().length < 280)
+            $('.sendTweet').attr('disabled', false);            
+        else
+            $('.sendTweet').attr('disabled',true);
+    });
 
 });
 
@@ -81,3 +99,11 @@ $(document).on('click', '.subtractingAway', function (e) {
         $(".away-total").addClass("text-danger font-weight-bold");
     }
 });
+
+
+
+
+
+
+
+

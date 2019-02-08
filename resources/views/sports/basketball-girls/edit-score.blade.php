@@ -310,6 +310,35 @@
 
                 <div class="card-body">
 
+                    <div class="row">
+
+                        <div class="col">
+
+                            
+
+                            <div class="form-group">
+                                <label for="game_status">Game Status</label>
+                                <select class="form-control" id="game_status" name="game_status">
+                                    <option value="0">Game Has Not Started</option>
+                                    <option value="1" @if($match->game_status == 1) selected @endif>Final</option>
+                                    <option value="2" @if($match->game_status == 2) selected @endif>1st Quarter</option>
+                                    <option value="3" @if($match->game_status == 3) selected @endif>2nd Quarter</option>
+                                    <option value="4" @if($match->game_status == 4) selected @endif>Halftime</option>
+                                    <option value="5" @if($match->game_status == 5) selected @endif>3rd Quarter</option>
+                                    <option value="6" @if($match->game_status == 6) selected @endif>4th Quarter</option>
+                                    @if(count($scores) > 4)
+                                        <?php $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL); ?>
+                                        @for ($i = 4; $i < count($scores); $i++)
+                                            <option value={{$i+3}} @if($match->game_status == $i+3) selected @endif><?php echo $numberFormatter->format($i-3); ?> Overtime</option>
+                                        @endfor
+                                    @endif
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div><!--  Row  -->
+
                     <div class="row mb-3 game-time">
 
                         <div class="col">
@@ -342,35 +371,6 @@
                         </div>
 
                     </div>
-
-                    <div class="row">
-
-                        <div class="col">
-
-                            
-
-                            <div class="form-group">
-                                <label for="game_status">Game Status</label>
-                                <select class="form-control" id="game_status" name="game_status">
-                                    <option value="0">Game Has Not Started</option>
-                                    <option value="1" @if($match->game_status == 1) selected @endif>Final</option>
-                                    <option value="2" @if($match->game_status == 2) selected @endif>1st Quarter</option>
-                                    <option value="3" @if($match->game_status == 3) selected @endif>2nd Quarter</option>
-                                    <option value="4" @if($match->game_status == 4) selected @endif>Halftime</option>
-                                    <option value="5" @if($match->game_status == 5) selected @endif>3rd Quarter</option>
-                                    <option value="6" @if($match->game_status == 6) selected @endif>4th Quarter</option>
-                                    @if(count($scores) > 4)
-                                        <?php $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL); ?>
-                                        @for ($i = 4; $i < count($scores); $i++)
-                                            <option value={{$i+3}} @if($match->game_status == $i+3) selected @endif><?php echo $numberFormatter->format($i-3); ?> Overtime</option>
-                                        @endfor
-                                    @endif
-                                </select>
-                            </div>
-
-                        </div>
-
-                    </div><!--  Row  -->
 
                     <div class="game-summary-details">
 
@@ -420,7 +420,16 @@
 
                         <div class="col-lg-6">
 
-                            <button type="submit" class="btn btn-primary btn-block"><strong>Update</strong></button>
+                            <button type="submit" class="btn btn-primary btn-block mb-3"><strong>Update</strong></button>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#twitterModal">
+                            <i class="fab fa-twitter mr-1"></i> Tweet Score
+                            </button>
 
                         </div>
 
@@ -478,6 +487,10 @@ $(document).ready(function(){
             $('.game-summary-details').slideDown();
             $('.game-final').slideUp();
             $('.game-time').slideUp();
+        } else if (selectedValue == 0) {
+            $('.game-summary-details').slideUp();
+            $('.game-final').slideUp();
+            $('.game-time').slideUp();
         } else {
             $('.game-summary-details').slideUp();
             $('.game-final').slideDown();
@@ -485,7 +498,12 @@ $(document).ready(function(){
         }
     });
 });
-    
+
+
+    $('#twitterModal').hide();
 
 </script>
 @stop
+
+<?php // Twitter Form Modal ?>
+@include('sports.basketball-girls.twitter')

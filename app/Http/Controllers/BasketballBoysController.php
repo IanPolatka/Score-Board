@@ -261,7 +261,7 @@ class BasketballBoysController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.basketball-boys.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
+        return view('sports.basketball-boys.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'match', 'scores', 'teams','times','years'));
     }
 
     public function gameUpdate(Request $request, $id)
