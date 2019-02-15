@@ -240,6 +240,34 @@ Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Softball
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/softball', 'SoftballController@index')->name('softball.index');
+Route::get('/softball/create', 'SoftballController@create')->name('softball.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/softball/create', 'SoftballController@store')->name('softball-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/softball/delete/{id}', 'SoftballController@destroy');
+Route::get('/softball/{id}', 'SoftballController@show')->name('softball-show');
+Route::get('/softball/{id}/edit', 'SoftballController@edit')->name('softball-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/softball/{id}/update', 'SoftballController@update')->name('softball-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/softball/{id}/edit-score', 'SoftballController@editScore')->name('softball-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/softball/{id}/match-update', 'SoftballController@gameUpdate')->name('softball.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/softball/2018-2019/{team}', 'SoftballController@teamSchedule')->name('softball.teamSchedule');
+
+Route::post('/softball-score-create/{id}', 'SoftballController@scoreCreate')->name('softball-score-create');
+Route::delete('/softball-score-delete/{id}', 'SoftballController@scoreDelete')->name('softball-score-delete');
+
+Route::patch('/softball-inning-update/{id}', 'SoftballController@storeGameHalf');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Swimming
 ///////////////////////////////////////////////////////////////////////
 

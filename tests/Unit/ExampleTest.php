@@ -12,17 +12,9 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+
     public function testBasicTest()
     {
         $this->assertTrue(true);
-    }
-
-    public function soccerEditAuthenticated()
-    {
-
-        $response = $this->get('/boys-soccer/3/edit');
-
-        $response->assertStatus(403);
-
     }
 }

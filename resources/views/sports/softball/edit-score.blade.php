@@ -13,8 +13,8 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/baseball">Baseball</a></li>
-                    <li class="breadcrumb-item"><a href="/baseball/{{$match->id}}">Game ID: {{$match->id}}</a></li>
+                    <li class="breadcrumb-item"><a href="/softball">Softball</a></li>
+                    <li class="breadcrumb-item"><a href="/softball/{{$match->id}}">Game ID: {{$match->id}}</a></li>
                     <li class="breadcrumb-item active">Edit Score</li>
                   </ol>
                 </nav>
@@ -43,14 +43,14 @@
                     @if($match->away_team->logo)
                             
                     <div class="the-logo">
-                        <a href="/baseball/2018-2019/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
+                        <a href="/softball/2018-2019/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/baseball/2018-2019/{{$match->away_team->school_name}}">
+                            <a href="/softball/2018-2019/{{$match->away_team->school_name}}">
                                 <span class="mobile-view">{{ $match->away_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->away_team->school_name }}</span>
                             </a>
@@ -116,14 +116,14 @@
                     @if($match->home_team->logo)
 
                     <div class="the-logo">
-                        <a href="/baseball/2018-2019/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
+                        <a href="/softball/2018-2019/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/baseball/2018-2019/{{$match->home_team->school_name}}">
+                            <a href="/softball/2018-2019/{{$match->home_team->school_name}}">
                                 <span class="mobile-view">{{ $match->home_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->home_team->school_name }}</span>
                             </a>
@@ -180,7 +180,7 @@
 
                     </div>
                     
-                    <form method="POST" action="/baseball-inning-update/{{ $score->id }}">
+                    <form method="POST" action="/softball-inning-update/{{ $score->id }}">
                         <div class="row mb-4">
                         {{ method_field('PATCH') }}
                         @csrf
@@ -226,7 +226,7 @@
 
                         <div class="col">
 
-                            <form method="POST" action="/baseball-score-create/{{$match->id}}">
+                            <form method="POST" action="/softball-score-create/{{$match->id}}">
 
                                 @csrf 
 
@@ -240,7 +240,7 @@
 
                         <div class="col">
 
-                            <form method="POST" action="/baseball-score-delete/{{$score->id}}">
+                            <form method="POST" action="/softball-score-delete/{{$score->id}}">
 
                                 {{ method_field('DELETE') }}
 
@@ -272,7 +272,7 @@
 
             <h5 class="text-muted">GAME DETAILS</h5>
 
-            <form method="POST" action="/baseball/{{$match->id}}/match-update">
+            <form method="POST" action="/softball/{{$match->id}}/match-update">
 
                 {{ method_field('PATCH') }}
                 @csrf
@@ -433,4 +433,4 @@ $(document).ready(function(){
 @stop
 
 <?php // Twitter Form Modal ?>
-@include('sports.baseball.twitter')
+@include('sports.softball.twitter')
