@@ -90,23 +90,37 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Fall Sports <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{{ route('football.index') }}">{{ __('Football') }}</a>
+                                <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
+                                <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Sports <span class="caret"></span>
+                                Winter Sports <span class="caret"></span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('baseball.index') }}">{{ __('Baseball') }}</a>
-                                <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
                                 <a class="nav-link" href="{{ route('boys-bowling.index') }}">{{ __('Boys Bowling') }}</a>
                                 <a class="nav-link" href="{{ route('girls-bowling.index') }}">{{ __('Girls Bowling') }}</a>
-                                <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>
                                 <a class="nav-link" href="{{ route('basketball-boys.index') }}">{{ __('Boys Basketball') }}</a>
                                 <a class="nav-link" href="{{ route('basketball-girls.index') }}">{{ __('Girls Basketball') }}</a>
-                                <a class="nav-link" href="{{ route('football.index') }}">{{ __('Football') }}</a>
                                 <a class="nav-link" href="{{ route('swimming.index') }}">{{ __('Swimming') }}</a>
                                 <a class="nav-link" href="{{ route('wrestling.index') }}">{{ __('Wrestling') }}</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Spring Sports <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{{ route('baseball.index') }}">{{ __('Baseball') }}</a>
+                                <a class="nav-link" href="{{ route('softball.index') }}">{{ __('Softball') }}</a>
                             </div>
                         </li>
                         @guest
