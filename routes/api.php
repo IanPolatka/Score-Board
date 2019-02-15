@@ -106,6 +106,22 @@ Route::get('/swimming/todays-events/{team}', 'SwimmingController@todaysEvents');
 
 
 ///////////////////////////////////////////////////////////////////////
+// 	Tennis Boys
+///////////////////////////////////////////////////////////////////////
+Route::get('/tennis-boys/schedule/{year}/{team}/{teamlevel}', 'TennisBoysController@apiteamschedule');
+Route::get('/tennis-boys/todays-events/{team}', 'TennisBoysController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
+// 	Tennis Girls
+///////////////////////////////////////////////////////////////////////
+Route::get('/tennis-girls/schedule/{year}/{team}/{teamlevel}', 'TennisGirlsController@apiteamschedule');
+Route::get('/tennis-girls/todays-events/{team}', 'TennisGirlsController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Wrestling
 ///////////////////////////////////////////////////////////////////////
 Route::get('/wrestling/schedule/{year}/{team}/{teamlevel}', 'WrestlingController@apiteamschedule');

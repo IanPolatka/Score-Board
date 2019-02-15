@@ -120,6 +120,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" href="{{ route('baseball.index') }}">{{ __('Baseball') }}</a>
+                                <a class="nav-link" href="{{ route('boys-tennis.index') }}">{{ __('Boys Tennis') }}</a>
+                                <a class="nav-link" href="{{ route('girls-tennis.index') }}">{{ __('Girls Tennis') }}</a>
                                 <a class="nav-link" href="{{ route('softball.index') }}">{{ __('Softball') }}</a>
                             </div>
                         </li>

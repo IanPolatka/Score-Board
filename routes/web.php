@@ -290,6 +290,52 @@ Route::get('/swimming/2018-2019/{team}', 'SwimmingController@teamSchedule')->nam
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Tennis Boys
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/boys-tennis', 'TennisBoysController@index')->name('boys-tennis.index');
+Route::get('/boys-tennis/create', 'TennisBoysController@create')->name('boys-tennis.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/boys-tennis/create', 'TennisBoysController@store')->name('boys-tennis.create.game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/boys-tennis/delete/{id}', 'TennisBoysController@destroy');
+Route::get('/boys-tennis/{id}', 'TennisBoysController@show')->name('boys-tennis.show');
+Route::get('/boys-tennis/{id}/edit', 'TennisBoysController@edit')->name('boys-tennis.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/boys-tennis/{id}/update', 'TennisBoysController@update')->name('boys-tennis.edit.match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/boys-tennis/{id}/edit-score', 'TennisBoysController@editScore')->name('boys-tennis.score.edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/boys-tennis/{id}/match-update', 'TennisBoysController@gameUpdate')->name('boys-tennis.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/boys-tennis/2018-2019/{team}', 'TennisBoysController@teamSchedule')->name('boys-tennis.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Tennis Girls
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/girls-tennis', 'TennisGirlsController@index')->name('girls-tennis.index');
+Route::get('/girls-tennis/create', 'TennisGirlsController@create')->name('girls-tennis.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/girls-tennis/create', 'TennisGirlsController@store')->name('girls-tennis.create.game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/girls-tennis/delete/{id}', 'TennisGirlsController@destroy');
+Route::get('/girls-tennis/{id}', 'TennisGirlsController@show')->name('girls-tennis.show');
+Route::get('/girls-tennis/{id}/edit', 'TennisGirlsController@edit')->name('girls-tennis.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/girls-tennis/{id}/update', 'TennisGirlsController@update')->name('girls-tennis.edit.match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/girls-tennis/{id}/edit-score', 'TennisGirlsController@editScore')->name('girls-tennis.score.edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/girls-tennis/{id}/match-update', 'TennisGirlsController@gameUpdate')->name('girls-tennis.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/girls-tennis/2018-2019/{team}', 'TennisGirlsController@teamSchedule')->name('girls-tennis.teamSchedule');
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Wrestling
 ///////////////////////////////////////////////////////////////////////
 
