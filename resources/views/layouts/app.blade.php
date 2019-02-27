@@ -123,6 +123,7 @@
                                 <a class="nav-link" href="{{ route('boys-tennis.index') }}">{{ __('Boys Tennis') }}</a>
                                 <a class="nav-link" href="{{ route('girls-tennis.index') }}">{{ __('Girls Tennis') }}</a>
                                 <a class="nav-link" href="{{ route('softball.index') }}">{{ __('Softball') }}</a>
+                                <a class="nav-link" href="{{ route('track.index') }}">{{ __('Track') }}</a>
                             </div>
                         </li>
                         @guest
@@ -134,11 +135,15 @@
                             </li>
                         @else
                             @role(['superadministrator'])
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teams.index') }}">{{ __('Teams') }}</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Settings <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('teams.index') }}">{{ __('Teams') }}</a>
+                                    <a class="nav-link" href="{{ route('years.index') }}">{{ __('Years') }}</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                                </div>
                             </li>
                             @endrole
                             <li class="nav-item dropdown">
