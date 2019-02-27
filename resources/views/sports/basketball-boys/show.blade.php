@@ -35,7 +35,7 @@
                 <div class="card-header">
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-6">
                             <strong>
                                 @if ($game->team_level === 1)
                                     VARSITY LEVEL EVENT
@@ -46,7 +46,7 @@
                                 @endif
                             </strong>
                         </div>
-                        <div class="col-lg-6 text-right">
+                        <div class="col-6 text-right">
                             <strong>
                                 @if ($game->game_status < 1)
                                     {{$game->game_time->time}}
