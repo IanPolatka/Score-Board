@@ -98,7 +98,7 @@ Route::get('/girls-basketball/{id}/edit-score', 'BasketballGirlsController@editS
 
 Route::patch('/girls-basketball/{id}/match-update', 'BasketballGirlsController@gameUpdate')->name('basketball-girls.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/girls-basketball/2018-2019/{team}', 'BasketballGirlsController@teamSchedule')->name('basketball-girls.teamSchedule');
+Route::get('/girls-basketball/{year}/{team}', 'BasketballGirlsController@teamSchedule')->name('basketball-girls.teamSchedule');
 
 Route::post('/girls-basketball-score-create/{id}', 'BasketballGirlsController@scoreCreate')->name('basketball-girls-score-create');
 Route::delete('/girls-basketball-score-delete/{id}', 'BasketballGirlsController@scoreDelete')->name('basketball-girls-score-delete');

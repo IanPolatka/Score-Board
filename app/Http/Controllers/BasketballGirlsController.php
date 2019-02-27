@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 use App\BasketballGirls;
 use App\BasketballGirlsScores;
+use App\CurrentYear;
 use App\Team;
 use App\TeamMeta;
 use App\Time;
@@ -30,7 +31,7 @@ class BasketballGirlsController extends Controller
 
         $teams = Team::orderBy('school_name')->get();
 
-        $todaysGames = BasketballGirls::where('date', Carbon::today('America/New_York'))->get();
+        $todaysGames = BasketballGirls::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->with('scores')->get();
 
         $yesterdaysGames = BasketballGirls::where('date', Carbon::yesterday('America/New_York'))->get();
 
@@ -38,7 +39,11 @@ class BasketballGirlsController extends Controller
 
         $games = BasketballGirls::all();
 
-        return view('sports.basketball-girls.index', compact('games', 'teams', 'todaysGames', 'tomorrowsGames', 'yesterdaysGames'));
+        $currentYearId = CurrentYear::pluck('year_id');
+
+        $theCurrentYear = Year::where('id', $currentYearId)->get();
+
+        return view('sports.basketball-girls.index', compact('games', 'teams', 'theCurrentYear', 'todaysGames', 'tomorrowsGames', 'yesterdaysGames'));
     }
 
     /**
@@ -48,13 +53,17 @@ class BasketballGirlsController extends Controller
      */
     public function create()
     {
+
+        $currentYearId = CurrentYear::pluck('year_id');
+
         $teams = Team::orderBy('school_name')->get();
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year')->get();
 
-        return view('sports.basketball-girls.create', compact('teams','times','years'));
+        return view('sports.basketball-girls.create', compact('teams', 'currentYearId', 'times', 'years'));
+
     }
 
     /**
@@ -97,7 +106,7 @@ class BasketballGirlsController extends Controller
             'created_by'    => $user_id
         ]);
 
-        Session::flash('success', 'Girls Basketball Game Has Been Created');
+        Session::flash('success', 'Basketball Girls Game Has Been Created');
 
         return redirect('/girls-basketball');
     }
@@ -116,6 +125,7 @@ class BasketballGirlsController extends Controller
                                      ->with('away_team')
                                      ->with('away_team_district')
                                      ->with('game_time')
+                                     ->with('the_year')
                                      ->with('user_created')
                                      ->with('user_modified')
                                      ->with('scores')
@@ -137,7 +147,7 @@ class BasketballGirlsController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year')->get();
 
         $match = BasketballGirls::where('id',$id)->with('away_team')
                                      ->with('home_team')
@@ -193,7 +203,7 @@ class BasketballGirlsController extends Controller
 
         $game->update();
 
-        Session::flash('success', 'Girls Basketball Game Has Been Updated');
+        Session::flash('success', 'Basketball Girls Game Has Been Updated');
 
         return redirect('/girls-basketball/'.$id);
     }
@@ -302,8 +312,13 @@ class BasketballGirlsController extends Controller
 
 
 
-    public function teamSchedule($team)
+    public function teamSchedule($year, $team)
     {
+
+        // return $year;
+        $selectedyear = Year::where('year', $year)->pluck('year');
+
+        $selectedyearid = Year::where('year', $year)->pluck('id');
 
         $id = Team::where('school_name', $team)->pluck('id');
 
@@ -311,13 +326,15 @@ class BasketballGirlsController extends Controller
 
         $year = Year::pluck('id')->first();
 
-        $wins = BasketballGirls::where('winning_team', $id)->where('team_level', 1)->count();
+        $years = Year::orderBy('year')->get();
 
-        $losses = BasketballGirls::where('losing_team', $id)->where('team_level', 1)->count();
+        $wins = BasketballGirls::where('winning_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->count();
 
-        $matchTies = BasketballGirls::where('game_status', '=', 1)->whereRaw('away_team_final_score = home_team_final_score')->count();
+        $losses = BasketballGirls::where('losing_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->count();
 
-        // $districWins = BasketballGirls::with('away_team')->('home_team'
+        $districtWins = BasketballGirls::where('winning_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->where('district_game', 1)->count();
+
+        $districtLosses = BasketballGirls::where('losing_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->where('district_game', 1)->count();
 
         $teams = Team::orderBy('school_name')->get();
 
@@ -325,30 +342,14 @@ class BasketballGirlsController extends Controller
                                ->with('home_team')
                                ->with('away_team_district')
                                ->with('home_team_district')
-                               // ->with(array('home_team_district'=>function($query){
-                               //  $query->where('team_id', '=', 1)->where('year_id', 1)->first();
-                               // }))
-                               // ->with(array('away_team_district'=>function($query){
-                               //  $query->where('team_id', '=', 75)->where('year_id', 1)->first();
-                               // }))
-                               // ->with(['away_team_district' => function ($query) use ($id, $year) {
-                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
-                               //  }])
-                               // ->with(['home_team_district' => function ($query)  use ($id, $year) {
-                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
-                               //  }])
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
                                })
                                ->where('team_level', 1)
-                               // ->where('team_level', 1)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
-
-        // foreach ($varsity as $var) {
-        //     echo $var->home_team_district->soccer_district; // this is lazy loaded
-        // }
 
         $juniorvarsity = BasketballGirls::with('away_team')
                                ->with('home_team')
@@ -357,6 +358,7 @@ class BasketballGirlsController extends Controller
                                     ->orWhere('home_team_id', '=', $id);
                                 })
                                ->where('team_level', 2)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
@@ -367,10 +369,11 @@ class BasketballGirlsController extends Controller
                                     ->orWhere('home_team_id', '=', $id);
                                 })
                                ->where('team_level', 3)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
-        return view('sports.basketball-girls.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses', 'matchTies'));
+        return view('sports.basketball-girls.teamschedule', compact('id', 'districtWins', 'districtLosses', 'selectedTeam', 'selectedyear', 'selectedyearid', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses', 'years'));
 
     }
 
