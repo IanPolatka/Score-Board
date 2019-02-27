@@ -148,17 +148,6 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
-                            <label for="logo">Logo</label>
-                            <input type="text" class="form-control{{ $errors->has('logo') ? ' is-invalid' : '' }}" name="logo" id="logo" aria-describedby="Logo" placeholder="Logo" value="{{ old('logo') }}">
-
-                            @if ($errors->has('logo'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('logo') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
                         <button type="submit" class="btn btn-primary">Create</button>
 
                     </form>

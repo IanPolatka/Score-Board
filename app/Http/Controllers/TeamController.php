@@ -64,7 +64,7 @@ class TeamController extends Controller
         $team->state = $request->state;
         $team->abbreviated_name = $request->abbreviated_name;
         $team->mascot = $request->mascot;
-        $team->logo = $request->logo;
+        $team->logo = 'blank-logo.png';
         if ($team->save()){
             Session::flash('success', 'Team created.');
             return redirect()->route('teams.index');

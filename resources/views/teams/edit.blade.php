@@ -47,7 +47,7 @@
 
 
 
-                      <img src="/images/team-logos/{{ $team->logo }}" style="max-width: 100px; margin-bottom: 20px;">
+                      <img src="/images/team-logos/{{ $team->logo }}" style="max-width: 100px;">
                         @endif
 
                
@@ -182,18 +182,6 @@
                                 </span>
                             @endif
                         </div>
-
-                        <div class="form-group">
-                            <label for="city">Logo</label>
-                            <input type="text" class="form-control{{ $errors->has('logo') ? ' is-invalid' : '' }}" name="logo" id="logo" aria-describedby="Logo" placeholder="Logo" value="{{$team->logo}}">
-
-                            @if ($errors->has('logo'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('logo') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
 
                         <button type="submit" class="btn btn-primary">Submit</button>
 
