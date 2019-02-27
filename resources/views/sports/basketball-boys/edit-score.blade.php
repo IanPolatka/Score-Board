@@ -358,7 +358,7 @@
                             <label for="game_status">Game Second</label>
                             <select class="form-control" id="game_second" name="game_second">
                                 <option value="">Select A Game Second</option>
-                                @for ($i = 0; $i < 59; $i++)
+                                @for ($i = 0; $i <= 59; $i++)
                                     @if ($i < 10)
                                         <?php $y = '0' . $i; ?>
                                         <option value="{{$y}}" @if($match->game_second == $y) selected @endif>{{$y}}</option>
@@ -495,6 +495,8 @@ $(document).ready(function(){
             $('.game-summary-details').slideDown();
             $('.game-final').slideUp();
             $('.game-time').slideUp();
+            $('#game_minute').val('');
+            $('#game_second').val('');
         } else if (selectedValue == 0) {
             $('.game-summary-details').slideUp();
             $('.game-final').slideUp();

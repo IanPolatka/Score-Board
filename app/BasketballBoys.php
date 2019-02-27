@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BasketballBoys extends Model
 {
+    
     protected $table = 'basketball_boys';
 
     protected $fillable = [
@@ -84,4 +85,10 @@ class BasketballBoys extends Model
     {
         return $this->belongsTo('App\Year', 'year_id');
     }
+
+    public function currentyear()
+    {
+        return $this->belongsTo('App\CurrentYear', 'year_id');
+    }
+
 }

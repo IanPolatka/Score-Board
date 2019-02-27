@@ -8,6 +8,8 @@ class CurrentYear extends Model
 {
     protected $table = 'current_year';
 
+    protected $fillable = ['year_id'];
+
     public function the_year()
     {
         return $this->belongsTo('App\Year', 'year_id');
