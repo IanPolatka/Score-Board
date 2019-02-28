@@ -220,44 +220,34 @@ class BasketballGirlsController extends Controller
         //  Get Away Team Wins And Losses
         $away_team_id = BasketballGirls::where('id', $id)->pluck('away_team_id');
 
+        $year_id = BasketballGirls::where('id', $id)->pluck('year_id');
+
         $away_team_losses_loop = BasketballGirls::where('losing_team', '=', $away_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $year_id)
                                 ->get();
         $away_losses = $away_team_losses_loop->count();
 
         $away_team_wins_loop = BasketballGirls::where('winning_team', '=', $away_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $year_id)
                                 ->get();
         $away_wins = $away_team_wins_loop->count();
-
-        $away_team_ties = BasketballGirls::where(function ($query) use ($away_team_id) {
-                            $query->where('away_team_id', '=' , $away_team_id)
-                            ->orWhere('home_team_id', '=', $away_team_id);
-                        })
-                        ->where('game_status', '=', 1)
-                        ->whereRaw('away_team_final_score = home_team_final_score')
-                        ->count();
 
         //  Get Home Team Wins And Losses
         $home_team_id = BasketballGirls::where('id', $id)->pluck('home_team_id');
 
         $home_team_losses_loop = BasketballGirls::where('losing_team', '=', $home_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $year_id)
                                 ->get();
         $home_losses = $home_team_losses_loop->count();
 
         $home_team_wins_loop = BasketballGirls::where('winning_team', '=', $home_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $year_id)
                                 ->get();
         $home_wins = $home_team_wins_loop->count();
-
-        $home_team_ties = BasketballGirls::where(function ($query) use ($home_team_id) {
-                            $query->where('away_team_id', '=' , $home_team_id)
-                            ->orWhere('home_team_id', '=', $home_team_id);
-                        })
-                        ->where('game_status', '=', 1)
-                        ->whereRaw('away_team_final_score = home_team_final_score')
-                        ->count();
 
         //  Get Scores from each half
         $scores = BasketballGirlsScores::where('game_id', $id)->get();
@@ -271,7 +261,8 @@ class BasketballGirlsController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.basketball-girls.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'match', 'scores', 'teams','times','years'));
+        return view('sports.basketball-girls.edit-score', compact('away_losses', 'away_wins', 'home_losses', 'home_wins', 'match', 'scores', 'teams','times','years'));
+        
     }
 
     public function gameUpdate(Request $request, $id)
