@@ -136,10 +136,11 @@
                 @forelse ($varsity as $game)
                     <a href="/boys-basketball/{{$game->id}}" class="list-group-item list-group-item-action">
 
-                        <div class="row">
+                        <div class="row d-flex justify-content-between">
                             <div class="col">
                             <em>{{ Carbon\Carbon::parse($game->date)->format('l') }} {{ Carbon\Carbon::parse($game->date)->format('M j, o') }}</em>
                             </div>
+
                         </div>
 
                         <div class="row align-items-center">
@@ -219,6 +220,29 @@
                             @endif
 
                         </div><!--  Row  -->
+
+                        @if ($game->location || $game->tournament_name)
+
+                            <div class="row">
+
+                                <div class="col">
+
+                                    <hr class="mt-2 mb-2">
+
+                                    <em>
+                                        @if ($game->tournament_name)
+                                            {{$game->tournament_name}}
+                                        @endif
+                                        @if ($game->location)
+                                            @ {{$game->location}}
+                                        @endif
+                                    </em>
+
+                                </div><!--  Col  -->
+
+                            </div><!--  Row  -->
+
+                        @endif
 
                     </a>
                 @empty

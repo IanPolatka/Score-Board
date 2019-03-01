@@ -461,6 +461,11 @@
 @endsection
 
 @section('javascript')
+
+<?php // Twitter Form Modal ?>
+@include('sports.basketball-boys.twitter')
+
+
 <script>
 
     var qrt = "<?php echo $match->game_status; ?>";
@@ -524,8 +529,3 @@ $(document).ready(function(){
 
 </script>
 @stop
-
-
-
-<?php // Twitter Form Modal ?>
-@include('sports.basketball-boys.twitter')
