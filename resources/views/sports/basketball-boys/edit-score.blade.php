@@ -514,6 +514,9 @@ $(document).ready(function(){
             $('.game-time').slideUp();
             $('#game_minute').val('');
             $('#game_second').val('');
+        } else if (selectedValue == 4) {
+            $('#game_minute').val('');
+            $('#game_second').val('');
         } else if (selectedValue == 0) {
             $('.game-summary-details').slideUp();
             $('.game-final').slideUp();
