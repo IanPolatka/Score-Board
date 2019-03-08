@@ -61,6 +61,7 @@ Boys 🏀@if ($match->tournament_name) {{$match->tournament_name}} @endif Update
 @if ($match->game_status > 1)
 
 <?php
+
 $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL);
 if ($match->game_status == 1) {
 echo 'Final';
@@ -79,7 +80,10 @@ echo 'Overtime';
 } else {
 echo '' . $numberFormatter->format($match->game_status - 6) . ' OT';
 } ?>
+@endif
 
+@if ($match->game_minute || $match->game_second)
+{{$match->game_minute}}:{{$match->game_second}}
 @endif
 
 #camelpride</textarea>
