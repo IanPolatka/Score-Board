@@ -98,6 +98,16 @@ Route::get('/football/year-summary/{year}/{team}', 'FootballController@yearSumma
 
 
 ///////////////////////////////////////////////////////////////////////
+//  Softball
+///////////////////////////////////////////////////////////////////////
+Route::get('/softball/{id}', 'SoftballController@apiGameId');
+Route::get('/softball/schedule/{year}/{team}/{teamlevel}', 'SoftballController@apiteamschedule');
+Route::get('/softball/todays-events/{team}', 'SoftballController@todaysEvents');
+Route::get('/softball/year-summary/{year}/{team}', 'SoftballController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
 //  Swimming
 ///////////////////////////////////////////////////////////////////////
 Route::get('/swimming/schedule/{year}/{team}/{teamlevel}', 'SwimmingController@apiteamschedule');
@@ -118,6 +128,14 @@ Route::get('/tennis-boys/todays-events/{team}', 'TennisBoysController@todaysEven
 ///////////////////////////////////////////////////////////////////////
 Route::get('/tennis-girls/schedule/{year}/{team}/{teamlevel}', 'TennisGirlsController@apiteamschedule');
 Route::get('/tennis-girls/todays-events/{team}', 'TennisGirlsController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Track
+///////////////////////////////////////////////////////////////////////
+Route::get('/track/schedule/{year}/{team}/{teamlevel}', 'TrackController@apiteamschedule');
+Route::get('/track/todays-events/{team}', 'TrackController@todaysEvents');
 
 
 
