@@ -524,7 +524,7 @@ class BasketballGirlsController extends Controller
 
         // return $selectedteam;
 
-        $the_standings = \DB::select('SELECT school_name as Team, Sum(W) AS Wins, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A
+        $the_standings = \DB::select('SELECT school_name as Team, Sum(W) AS Wins, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A, SUM(DW) AS DistrictWins, SUM(DL) AS DistrictLoses
                         FROM(
 
                             SELECT
@@ -532,7 +532,9 @@ class BasketballGirlsController extends Controller
                                 IF(home_team_final_score > away_team_final_score,1,0) W,
                                 IF(home_team_final_score < away_team_final_score,1,0) L,
                                 home_team_final_score F,
-                                away_team_final_score A
+                                away_team_final_score A,
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0) DW,
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0) DL
                                 
                             FROM basketball_girls
                             WHERE team_level = 1 AND year_id = ?
@@ -543,7 +545,9 @@ class BasketballGirlsController extends Controller
                                 IF(home_team_final_score < away_team_final_score,1,0),
                                 IF(home_team_final_score > away_team_final_score,1,0),
                                 away_team_final_score,
-                                home_team_final_score
+                                home_team_final_score,
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0),
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0)
                                
                             FROM basketball_girls
                             WHERE team_level = 1 AND year_id = ?
