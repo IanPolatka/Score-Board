@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class SoccerBoys extends Model
 {
-  protected $fillable = [
+
+    protected $appends = ['sport_name'];
+
+    protected $fillable = [
         'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'away_team_id', 'home_team_id', 'time_id', 'district_game', 'game_status', 'game_minute', 'away_team_final_score', 'home_team_final_score', 'winning_team', 'losing_team', 'location', 'created_by', 'modified_by'
     ];
 
@@ -72,5 +75,9 @@ class SoccerBoys extends Model
             $away_total += $score->away_team_score;
         }
         return $away_total;
+    }
+
+    public function getSportNameAttribute() {
+      return 'boys-soccer';
     }
 }

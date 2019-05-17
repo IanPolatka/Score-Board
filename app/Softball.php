@@ -8,6 +8,8 @@ class Softball extends Model
 {
     protected $table = 'softball';
 
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
+
     protected $fillable = [
         'year_id',
         'team_level',
@@ -61,7 +63,7 @@ class Softball extends Model
 
     public function scores()
     {
-      return $this->hasMany(BaseballScores::class, 'game_id');
+      return $this->hasMany(SoftballScores::class, 'game_id');
     }
 
     public function away_team_district()
@@ -77,5 +79,33 @@ class Softball extends Model
     public function the_year()
     {
         return $this->belongsTo('App\Year', 'year_id');
+    }
+
+    public function getSportNameAttribute() {
+      return 'softball';
+    }
+
+    public function getHomeScoreSumAttribute() {
+        
+        $totalHomeScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalHomeScore += $score->home_team_score;
+        }
+
+        return $totalHomeScore;
+
+    }
+
+    public function getAwayScoreSumAttribute() {
+        
+        $totalAwayScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalAwayScore += $score->away_team_score;
+        }
+
+        return $totalAwayScore;
+
     }
 }

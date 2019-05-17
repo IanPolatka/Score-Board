@@ -435,6 +435,7 @@ class BaseballController extends Controller
                                      ->with('user_created')
                                      ->with('user_modified')
                                      ->with('scores')
+                                     ->with('total_score')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
                                         $query->where('away_team_id', '=' , $theteam)

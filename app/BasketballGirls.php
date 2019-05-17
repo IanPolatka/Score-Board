@@ -8,6 +8,8 @@ class BasketballGirls extends Model
 {
     protected $table = 'basketball_girls';
 
+    protected $appends = ['sport_name'];
+
     protected $fillable = [
         'year_id',
         'team_level',
@@ -83,5 +85,9 @@ class BasketballGirls extends Model
     public function the_year()
     {
         return $this->belongsTo('App\Year', 'year_id');
+    }
+
+    function getSportNameAttribute() {
+      return 'girls-basketball';
     }
 }

@@ -8,6 +8,8 @@ class Baseball extends Model
 {
     protected $table = 'baseball';
 
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
+
     protected $fillable = [
         'year_id',
         'team_level',
@@ -77,5 +79,33 @@ class Baseball extends Model
     public function the_year()
     {
         return $this->belongsTo('App\Year', 'year_id');
+    }
+
+    public function getSportNameAttribute() {
+      return 'baseball';
+    }
+
+    public function getAwayScoreSumAttribute() {
+        
+        $totalAwayScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalAwayScore += $score->away_team_score;
+        }
+
+        return $totalAwayScore;
+
+    }
+
+    public function getHomeScoreSumAttribute() {
+        
+        $totalHomeScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalHomeScore += $score->home_team_score;
+        }
+
+        return $totalHomeScore;
+
     }
 }

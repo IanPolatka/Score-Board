@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+// Route::get('/todays-events/{team}', 'HomeController@eventsNow');
+
 Route::redirect('home', '/');
 
 

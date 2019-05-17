@@ -8,6 +8,8 @@ class Track extends Model
 {
     protected $table = 'track';
 
+    protected $appends = ['sport_name'];
+
     protected $fillable = [
         'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'team_id', 'time_id', 'host_id', 'boys_results', 'girls_results', 'location', 'created_by', 'modified_by'
     ];
@@ -45,5 +47,9 @@ class Track extends Model
     public function user_modified()
     {
     	return $this->belongsTo('App\User', 'modified_by');
+    }
+
+    public function getSportNameAttribute() {
+      return 'track-and-field';
     }
 }

@@ -9,6 +9,8 @@ class Wrestling extends Model
 
 	protected $table = 'wrestling';
 
+    protected $appends = ['sport_name'];
+
     protected $fillable = [
         'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'team_id', 'time_id', 'host_id', 'results', 'location', 'created_by', 'modified_by'
     ];
@@ -46,6 +48,10 @@ class Wrestling extends Model
     public function user_modified()
     {
     	return $this->belongsTo('App\User', 'modified_by');
+    }
+
+    public function getSportNameAttribute() {
+      return 'wrestling';
     }
 
 }

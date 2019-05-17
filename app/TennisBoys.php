@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class TennisBoys extends Model
 {
 
+    protected $appends = ['sport_name'];
+
     protected $fillable = [
         'year_id',
         'team_level',
@@ -58,5 +60,9 @@ class TennisBoys extends Model
     public function the_year()
     {
         return $this->belongsTo('App\Year', 'year_id');
+    }
+
+    public function getSportNameAttribute() {
+      return 'boys-tennis';
     }
 }

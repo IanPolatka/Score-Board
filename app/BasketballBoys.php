@@ -9,6 +9,8 @@ class BasketballBoys extends Model
     
     protected $table = 'basketball_boys';
 
+    protected $appends = ['sport_name'];
+
     protected $fillable = [
         'year_id',
         'team_level',
@@ -89,6 +91,10 @@ class BasketballBoys extends Model
     public function currentyear()
     {
         return $this->belongsTo('App\CurrentYear', 'year_id');
+    }
+
+    function getSportNameAttribute() {
+      return 'boys-basketball';
     }
 
 }

@@ -4,9 +4,13 @@
 <div class="container">
 
     <div class="row justify-content-center">
-        <div class="col-lg-10 col-md-12 col-sm-12">
+        <div class="col-lg-8 col-md-8 col-sm-12">
 
             <h3>Todays Event's</h3>
+
+            <todays-events></todays-events>
+
+            <?php /*
 
             @if (count($basketball_boys) > 0)
 
@@ -476,6 +480,8 @@
                 @endforeach
 
             @endif
+
+            */ ?>
 
         </div>
     </div>
