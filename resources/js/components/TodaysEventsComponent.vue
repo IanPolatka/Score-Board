@@ -24,7 +24,10 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <strong>{{event.sport_name | capitalize}}</strong>
                             <div v-if="event.sport_name === 'baseball' || event.sport_name === 'softball'">
-                                <span v-if="event.inning !== null">
+                                <span v-if="event.inning === null">
+                                    <strong>{{event.game_time.time}}</strong>
+                                </span>
+                                <span v-else>
                                     <span v-if="event.inning === 99">
                                         <strong>Final</strong>
                                     </span>
@@ -32,11 +35,8 @@
                                         <strong>{{event.inning}} Inning</strong>
                                     </span>
                                 </span>
-                                <span v-else>
-                                    <strong>{{event.game_time.time}}</strong>
-                                </span>
                             </div>
-                            <div v-if="event.sport_name === 'girls-tennis' || event.sport_name === 'boys-tennis'">
+                            <div v-else-if="event.sport_name === 'girls-tennis' || event.sport_name === 'boys-tennis'">
                                 <span v-if="event.winning_team !== null">
                                     <strong>Final</strong>
                                 </span>
