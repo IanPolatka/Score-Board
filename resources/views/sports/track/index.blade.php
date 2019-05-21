@@ -40,7 +40,7 @@
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/track/2018-2019/{{$team->school_name}}">{{$team->school_name}}</option>
+                                <option value="/track-and-field/2018-2019/{{$team->school_name}}">{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -58,7 +58,7 @@
             <h5 class="text-muted">Today's Matches</h5>
             <div class="list-group mb-4">
                 @forelse ($todaysMatches as $match)
-                    <a href="/track/{{$match->id}}" class="list-group-item list-group-item-action">
+                    <a href="/track-and-field/{{$match->id}}" class="list-group-item list-group-item-action">
                         <div class="row">
                         <div class="col-lg-1">
                             <img class="school-logo" src="/images/team-logos/{{ $match->the_team->logo }}" />
@@ -77,7 +77,7 @@
             <h5 class="text-muted">Tomorrow's Matches</h5>
             <div class="list-group mb-4">
                 @forelse ($tomorrowsMatches as $match)
-                    <a href="/track/{{$match->id}}" class="list-group-item list-group-item-action">
+                    <a href="/track-and-field/{{$match->id}}" class="list-group-item list-group-item-action">
                         <div class="row">
                         <div class="col-lg-1">
                             <img class="school-logo" src="/images/team-logos/{{ $match->the_team->logo }}" />
@@ -96,7 +96,7 @@
             <h5 class="text-muted">Yesterday's Matches</h5>
             <div class="list-group">
                 @forelse ($yesterdaysMatches as $match)
-                    <a href="/track/{{$match->id}}" class="list-group-item list-group-item-action">
+                    <a href="/track-and-field/{{$match->id}}" class="list-group-item list-group-item-action">
                         <div class="row">
                         <div class="col-lg-1">
                             <img class="school-logo" src="/images/team-logos/{{ $match->the_team->logo }}" />

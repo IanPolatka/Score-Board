@@ -136,8 +136,8 @@ Route::get('/tennis-girls/todays-events/{team}', 'TennisGirlsController@todaysEv
 ///////////////////////////////////////////////////////////////////////
 //  Track
 ///////////////////////////////////////////////////////////////////////
-Route::get('/track/schedule/{year}/{team}/{teamlevel}', 'TrackController@apiteamschedule');
-Route::get('/track/todays-events/{team}', 'TrackController@todaysEvents');
+Route::get('/track-and-field/schedule/{year}/{team}/{teamlevel}', 'TrackController@apiteamschedule');
+Route::get('/track-and-field/todays-events/{team}', 'TrackController@todaysEvents');
 
 
 

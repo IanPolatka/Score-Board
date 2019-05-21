@@ -88,7 +88,7 @@ class TrackController extends Controller
 
         Session::flash('success', 'Track Event Has Been Created');
 
-        return redirect('/track');
+        return redirect('/track-and-field');
     }
 
 
@@ -162,7 +162,7 @@ class TrackController extends Controller
 
         Session::flash('success', 'Track Event Has Been Updated');
 
-        return redirect('/track/'.$id);
+        return redirect('/track-and-field/'.$id);
     }
 
 
@@ -174,7 +174,7 @@ class TrackController extends Controller
 
         Session::flash('success', 'Track Event Has Been Deleted');
 
-        return redirect('/track');
+        return redirect('/track-and-field');
     }
 
 

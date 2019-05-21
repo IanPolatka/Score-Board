@@ -341,17 +341,17 @@ Route::get('/girls-tennis/2018-2019/{team}', 'TennisGirlsController@teamSchedule
 //  Track
 ///////////////////////////////////////////////////////////////////////
 
-Route::get('/track', 'TrackController@index')->name('track.index');
-Route::get('/track/create', 'TrackController@create')->name('track.create')->middleware('role:superadministrator|administrator|editor');
-Route::post('/track/create', 'TrackController@store')->name('track.create.match')->middleware('role:superadministrator|administrator|editor');
-Route::delete('/track/delete/{id}', 'TrackController@destroy');
-Route::get('/track/{id}', 'TrackController@show')->name('track.show');
-Route::get('/track/{id}/edit', 'TrackController@edit')->name('track.edit')->middleware('role:superadministrator|administrator|editor');
-Route::put('/track/{id}/update', 'TrackController@update')->name('track.edit.match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/track-and-field', 'TrackController@index')->name('track.index');
+Route::get('/track-and-field/create', 'TrackController@create')->name('track.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/track-and-field/create', 'TrackController@store')->name('track.create.match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/track-and-field/delete/{id}', 'TrackController@destroy');
+Route::get('/track-and-field/{id}', 'TrackController@show')->name('track.show');
+Route::get('/track-and-field/{id}/edit', 'TrackController@edit')->name('track.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/track-and-field/{id}/update', 'TrackController@update')->name('track.edit.match')->middleware('role:superadministrator|administrator|editor');
 
-Route::patch('/track/{id}/match-update', 'TrackController@gameUpdate')->name('track.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
+Route::patch('/track-and-field/{id}/match-update', 'TrackController@gameUpdate')->name('track.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/track/2018-2019/{team}', 'TrackController@teamSchedule')->name('track.teamSchedule');
+Route::get('/track-and-field/2018-2019/{team}', 'TrackController@teamSchedule')->name('track.teamSchedule');
 
 
 
