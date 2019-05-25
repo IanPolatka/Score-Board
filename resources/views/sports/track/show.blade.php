@@ -13,7 +13,7 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/track">Track & Field</a></li>
+                    <li class="breadcrumb-item"><a href="/track-and-field">Track & Field</a></li>
                     <li class="breadcrumb-item active">Event ID: {{$match->id}}</li>
                   </ol>
                 </nav>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col">
 
-                    <form method="POST" action="/track/delete/{{ $match->id }}">
+                    <form method="POST" action="/track-and-field/delete/{{ $match->id }}">
 
                         {{ method_field('DELETE') }}
 

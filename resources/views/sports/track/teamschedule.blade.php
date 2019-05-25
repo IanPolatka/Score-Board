@@ -13,7 +13,7 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/track">Track & Field</a></li>
+                    <li class="breadcrumb-item"><a href="/track-and-field">Track & Field</a></li>
                     <li class="breadcrumb-item active">{{$selectedTeam->school_name}}</li>
                   </ol>
                 </nav>
@@ -40,7 +40,7 @@
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/track/2018-2019/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
+                                <option value="/track-and-field/2018-2019/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,7 +69,7 @@
 
             <div class="list-group mb-4">
                 @forelse ($varsity as $match)
-                    <a href="/track/{{$match->id}}" class="list-group-item list-group-item-action">
+                    <a href="/track-and-field/{{$match->id}}" class="list-group-item list-group-item-action">
 
                         <div class="row">
                             <div class="col">

@@ -13,8 +13,8 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/track">Track & Field</a></li>
-                    <li class="breadcrumb-item"><a href="/track/{{$match->id}}">Event ID: {{$match->id}}</a></li>
+                    <li class="breadcrumb-item"><a href="/track-and-field">Track & Field</a></li>
+                    <li class="breadcrumb-item"><a href="/track-and-field/{{$match->id}}">Event ID: {{$match->id}}</a></li>
                     <li class="breadcrumb-item active">Edit</li>
                   </ol>
                 </nav>
