@@ -17,6 +17,10 @@ window.Vue = require('vue');
 
 Vue.component('todays-events', require('./components/TodaysEventsComponent.vue'));
 
+//  Single Events
+Vue.component('baseball', require('./components/SingleEvents/Baseball.vue'));
+Vue.component('softball', require('./components/SingleEvents/Softball.vue'));
+
 Vue.filter('capitalize', function (value) {
   if (!value) return ''
   value = value.toString()

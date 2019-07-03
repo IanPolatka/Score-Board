@@ -385,6 +385,7 @@ class SoftballController extends Controller
                                      ->with('user_created')
                                      ->with('user_modified')
                                      ->with('scores')
+                                     ->with('the_year')
                                      ->first();
 
         return $game;

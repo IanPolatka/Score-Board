@@ -62,6 +62,193 @@ class HomeController extends Controller
 
 
 
+    public function events()
+    {
+
+        $basketball_boys = BasketballBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $basketball_girls = BasketballGirls::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $baseball = Baseball::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $bowling_boys = BowlingBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $bowling_girls = BowlingGirls::with('away_team')
+                                     ->with('home_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $football = Football::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $soccer_boys = SoccerBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $soccer_girls = SoccerGirls::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $softball = Softball::with('away_team')
+                                     ->with('home_team')
+                                     ->with('away_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('scores')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $swimming = Swimming::with('the_team')
+                                ->with('the_year')
+                                ->with('host_team')
+                                ->with('game_time')
+                                ->where('team_level', 1)
+                                ->where('date', Carbon::today('America/New_York'))
+                                ->get();
+
+        $tennis_boys = TennisBoys::with('away_team')
+                                     ->with('home_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $tennis_girls = TennisGirls::with('away_team')
+                                     ->with('home_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('the_year')
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date','asc')
+                                     ->get();
+
+        $track = Track::with('the_team')
+                                ->with('the_year')
+                                ->with('host_team')
+                                ->with('game_time')
+                                ->where('team_level', 1)
+                                ->where('date', Carbon::today('America/New_York'))
+                                ->get();
+
+        $wrestling = Wrestling::with('the_team')
+                                ->with('the_year')
+                               ->with('host_team')
+                               ->with('game_time')
+                               ->where('team_level', 1)
+                               ->where('date', Carbon::today('America/New_York'))
+                               ->get();
+
+        $array = array_merge($baseball->toArray(), 
+                             $basketball_girls->toArray(), 
+                             $basketball_boys->toArray(),
+                             $bowling_boys->toArray(),
+                             $bowling_girls->toArray(),
+                             $football->toArray(),
+                             $soccer_boys->toArray(),
+                             $soccer_girls->toArray(),
+                             $softball->toArray(),
+                             $swimming->toArray(),
+                             $tennis_boys->toArray(),
+                             $tennis_girls->toArray(),
+                             $track->toArray(),
+                             $wrestling->toArray()
+                        );
+
+        //$result = $basketball_boys->toBase()->merge($basketball_girls->toBase(), $baseball->toBase());
+
+        return Response::json($array);
+
+
+    }
+
+
+
     public function eventsNow($team)
     {
 

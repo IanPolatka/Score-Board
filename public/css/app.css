@@ -1527,6 +1527,10 @@ a.ui-button:active,
  *
  * http://api.jqueryui.com/category/theming/
  */
+.link-no-decoration:hover {
+  text-decoration: none;
+}
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
