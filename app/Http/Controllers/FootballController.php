@@ -124,6 +124,7 @@ class FootballController extends Controller
                                      ->with('game_time')
                                      ->with('user_created')
                                      ->with('user_modified')
+                                     ->with('the_year')
                                      ->with('scores')
                                      ->first();
 
