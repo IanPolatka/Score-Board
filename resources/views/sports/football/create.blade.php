@@ -138,58 +138,81 @@
 
                         <hr>
 
-                        <div class="form-group">
-                            <label for="away_team_id">Away Team</label>
-                            <select class="form-control" id="" name="away_team_id" @if ($errors->has('away_team_id')) style="border-color: #dc3545;" @endif>
-                                <option value="">Select A Team</option>
-                                @foreach($teams as $team)
-                                    <option value="{{$team->id}}" @if (old('away_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
 
-                            @if ($errors->has('away_team_id'))
-                                <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
-                                    <strong>{{ $errors->first('away_team_id') }}</strong>
-                                </span>
-                            @endif
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+
+                                <div class="form-group">
+                                    <label for="away_team_id">Away Team</label>
+                                    <select class="form-control" id="" name="away_team_id" @if ($errors->has('away_team_id')) style="border-color: #dc3545;" @endif>
+                                        <option value="">Select A Team</option>
+                                        @foreach($teams as $team)
+                                            <option value="{{$team->id}}" @if (old('away_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('away_team_id'))
+                                        <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                            <strong>{{ $errors->first('away_team_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+
+                                <div class="form-group">
+                                    <label for="home_team_id">Home Team</label>
+                                    <select class="form-control" id="" name="home_team_id" @if ($errors->has('home_team_id')) style="border-color: #dc3545;" @endif>
+                                        <option value="">Select A Team</option>
+                                        @foreach($teams as $team)
+                                            <option value="{{$team->id}}" @if (old('home_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('home_team_id'))
+                                        <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                            <strong>{{ $errors->first('home_team_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label for="home_team_id">Home Team</label>
-                            <select class="form-control" id="" name="home_team_id" @if ($errors->has('home_team_id')) style="border-color: #dc3545;" @endif>
-                                <option value="">Select A Team</option>
-                                @foreach($teams as $team)
-                                    <option value="{{$team->id}}" @if (old('home_team_id') == $team->id) selected @endif>{{$team->school_name}} ({{$team->state}})</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
 
-                            @if ($errors->has('home_team_id'))
-                                <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
-                                    <strong>{{ $errors->first('home_team_id') }}</strong>
-                                </span>
-                            @endif
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+
+                                <div class="form-group">
+                                    <label for="time_id">Game Time</label>
+                                    <select class="form-control" id="" name="time_id">
+                                        <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
+                                        @foreach($times as $time)
+                                            <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+
+                                <div class="form-group">
+                                    <label for="district_game">District Game</label>
+                                    <select class="form-control" id="" name="district_game">
+                                        <option value="0" @if (old('district_game') == '0') selected @endif>No</option>
+                                        <option value="1" @if (old('district_game') == '1') selected @endif>Yes</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
                         </div>
 
-
-                        <div class="form-group">
-                            <label for="time_id">Game Time</label>
-                            <select class="form-control" id="" name="time_id">
-                                <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
-                                @foreach($times as $time)
-                                    <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="district_game">District Game</label>
-                            <select class="form-control" id="" name="district_game">
-                                <option value="0" @if (old('district_game') == '0') selected @endif>No</option>
-                                <option value="1" @if (old('district_game') == '1') selected @endif>Yes</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Create Game</button>
 
                     </form>
 

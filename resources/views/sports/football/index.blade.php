@@ -36,11 +36,11 @@
                 <div class="col">
 
                     <div class="form-group mb-0">
-                        <label for="exampleFormControlSelect1">Jump To A Team</label>
+                        <label for="exampleFormControlSelect1"><h6 class="mb-0">JUMP TO TEAM</h6></label>
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/football/2018-2019/{{$team->school_name}}">{{$team->school_name}}</option>
+                                <option value="/football/{{ $theCurrentYear[0]->year }}/{{$team->school_name}}">{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -54,6 +54,8 @@
                 @endrole
 
             </div><!--  Row  -->
+
+            <hr>
 
             <h5 class="text-muted">Today's Events</h5>
             <div class="list-group">

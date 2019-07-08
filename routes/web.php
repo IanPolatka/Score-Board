@@ -228,7 +228,7 @@ Route::get('/football/{id}/edit-score', 'FootballController@editScore')->name('f
 
 Route::patch('/football/{id}/match-update', 'FootballController@gameUpdate')->name('football.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/football/2018-2019/{team}', 'FootballController@teamSchedule')->name('football.teamSchedule');
+Route::get('/football/{year}/{team}', 'FootballController@teamSchedule')->name('football.teamSchedule');
 
 Route::post('/football-score-create/{id}', 'FootballController@scoreCreate')->name('football-score-create');
 Route::delete('/football-score-delete/{id}', 'FootballController@scoreDelete')->name('football-score-delete');

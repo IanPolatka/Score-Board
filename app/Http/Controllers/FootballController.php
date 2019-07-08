@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 use App\Football;
 use App\FootballScore;
+use App\CurrentYear;
 use App\Team;
 use App\TeamMeta;
 use App\Time;
@@ -39,7 +40,11 @@ class FootballController extends Controller
 
         $games = Football::all();
 
-        return view('sports.football.index', compact('games', 'teams', 'todaysGames', 'tomorrowsGames', 'yesterdaysGames'));
+        $currentYearId = CurrentYear::pluck('year_id');
+
+        $theCurrentYear = Year::where('id', $currentYearId)->get();
+
+        return view('sports.football.index', compact('games', 'teams', 'theCurrentYear', 'todaysGames', 'tomorrowsGames', 'yesterdaysGames'));
     }
 
     /**
@@ -53,7 +58,7 @@ class FootballController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.football.create', compact('teams','times','years'));
     }
@@ -303,22 +308,28 @@ class FootballController extends Controller
 
 
 
-    public function teamSchedule($team)
+    public function teamSchedule($year, $team)
     {
 
         $id = Team::where('school_name', $team)->pluck('id');
+
+        $selectedyear = Year::where('year', $year)->pluck('year');
+
+        $selectedyearid = Year::where('year', $year)->pluck('id');
 
         $selectedTeam = Team::where('school_name', $team)->first();
 
         $year = Year::pluck('id')->first();
 
-        $wins = Football::where('winning_team', $id)->where('team_level', 1)->count();
+        $years = Year::orderBy('year')->get();
 
-        $losses = Football::where('losing_team', $id)->where('team_level', 1)->count();
+        $wins = Football::where('winning_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->count();
 
-        $matchTies = Football::where('game_status', '=', 1)->whereRaw('away_team_final_score = home_team_final_score')->count();
+        $losses = Football::where('losing_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->count();
 
-        // $districWins = Football::with('away_team')->('home_team'
+        $districtWins = Football::where('winning_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->where('district_game', 1)->count();
+
+        $districtLosses = Football::where('losing_team', $id)->where('team_level', 1)->where('year_id', $selectedyearid)->where('district_game', 1)->count();
 
         $teams = Team::orderBy('school_name')->get();
 
@@ -326,52 +337,42 @@ class FootballController extends Controller
                                ->with('home_team')
                                ->with('away_team_district')
                                ->with('home_team_district')
-                               // ->with(array('home_team_district'=>function($query){
-                               //  $query->where('team_id', '=', 1)->where('year_id', 1)->first();
-                               // }))
-                               // ->with(array('away_team_district'=>function($query){
-                               //  $query->where('team_id', '=', 75)->where('year_id', 1)->first();
-                               // }))
-                               // ->with(['away_team_district' => function ($query) use ($id, $year) {
-                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
-                               //  }])
-                               // ->with(['home_team_district' => function ($query)  use ($id, $year) {
-                               //      $query->where('team_id', '=', $id)->where('year_id', $year)->first();
-                               //  }])
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
                                })
                                ->where('team_level', 1)
-                               // ->where('team_level', 1)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
-        // foreach ($varsity as $var) {
-        //     echo $var->home_team_district->soccer_district; // this is lazy loaded
-        // }
-
         $juniorvarsity = Football::with('away_team')
                                ->with('home_team')
+                               ->with('away_team_district')
+                               ->with('home_team_district')
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
-                                })
+                               })
                                ->where('team_level', 2)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
         $freshman = Football::with('away_team')
                                ->with('home_team')
+                               ->with('away_team_district')
+                               ->with('home_team_district')
                                ->where(function ($query) use ($id) {
                                     $query->where('away_team_id', '=' , $id)
                                     ->orWhere('home_team_id', '=', $id);
-                                })
+                               })
                                ->where('team_level', 3)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
-        return view('sports.football.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses', 'matchTies'));
+        return view('sports.football.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses', 'selectedyear', 'selectedyearid', 'districtWins', 'districtLosses', 'years'));
 
     }
 

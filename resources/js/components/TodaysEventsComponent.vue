@@ -54,11 +54,13 @@
 <script>
 
     import Baseball from './TodaysEvents/Baseball'
+    import Football from './TodaysEvents/Football'
     import Softball from './TodaysEvents/Softball'
 
     export default {
         components: {
             Baseball,
+            Football,
             Softball
         },
         mounted() {

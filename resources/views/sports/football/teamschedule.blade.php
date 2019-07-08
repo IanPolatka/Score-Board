@@ -40,7 +40,7 @@
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/football/2018-2019/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
+                                <option value="/football/{{ $selectedyear[0] }}/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -63,7 +63,41 @@
 
         <div class="col-lg-8 col-md-10 col-sm-12">
 
-            <h2>{{$selectedTeam->school_name}}</h2>
+            <hr>
+
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8 col-md-10 col-sm-12">
+
+            <div class="row d-flex align-items-center mb-2">
+
+                <div class="col-lg-9 col-md-8 col-sm-7 col-7">
+
+                    <h2>{{$selectedTeam->school_name}}</h2>
+
+                </div><!--  Col  -->
+
+                <div class="col-lg-3 col-md-4 col-sm-5 col-5 align-self-center">
+
+                    <select name="home_team_id"class="form-control" onChange="window.location.href=this.value">
+
+                        @foreach($years as $year)
+
+                            <option value="/football/{{ $year->year }}/{{ $selectedTeam->school_name }}" @if ($selectedyearid[0] === $year->id) selected @endif>
+                                {{ $year->year }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div><!--  Col  -->
+
+            </div><!--  Row  -->
 
             <h5 class="text-muted">Varsity Summary</h5>
 
@@ -77,7 +111,7 @@
 
                             <p class="mb-0 text-muted">Overall Record</p>
 
-                            <h3>{{$wins}} - {{$losses}} @if ($matchTies > 0) - {{$matchTies}} @endif</h3>
+                            <h3>{{$wins}} - {{$losses}}</h3>
 
                         </div>
 
@@ -85,7 +119,7 @@
 
                             <p class="mb-0 text-muted">District Record</p>
 
-                            <h3>-</h3>
+                            <h3>{{$districtWins}} - {{$districtLosses}}</h3>
 
                         </div>
 
