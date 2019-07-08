@@ -47,18 +47,18 @@
                     @if($match->away_team->logo)
                             
                     <div class="the-logo">
-                        <a href="/football/2018-2019/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
+                        <a href="/football/{{$match->the_year->year}}/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/football/2018-2019/{{$match->away_team->school_name}}">
+                            <a href="/football/{{$match->the_year->year}}/{{$match->away_team->school_name}}">
                                 <span class="mobile-view">{{ $match->away_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->away_team->school_name }}</span>
                             </a>
-                            <p class="mb-0"><small class="text-muted">({{$away_wins}}-{{$away_losses}}@if($away_team_ties > 0)-{{$away_team_ties}}@endif)</small></p>
+                            <p class="mb-0"><small class="text-muted">({{$away_wins}}-{{$away_losses}})</small></p>
                         </h5></a>
                     </div>
 
@@ -132,18 +132,18 @@
                     @if($match->home_team->logo)
 
                     <div class="the-logo">
-                        <a href="/football/2018-2019/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
+                        <a href="/football/{{$match->the_year->year}}/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/football/2018-2019/{{$match->home_team->school_name}}">
+                            <a href="/football/{{$match->the_year->year}}/{{$match->home_team->school_name}}">
                                 <span class="mobile-view">{{ $match->home_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->home_team->school_name }}</span>
                             </a>
-                            <p class="mb-0"><small class="text-muted">({{$home_wins}}-{{$home_losses}}@if($home_team_ties > 0)-{{$home_team_ties}}@endif)</small></p>
+                            <p class="mb-0"><small class="text-muted">({{$home_wins}}-{{$home_losses}})</small></p>
                         </h5>
                     </div>
 

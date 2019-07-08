@@ -143,7 +143,7 @@ class FootballController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         $match = Football::where('id',$id)->with('away_team')
                                      ->with('home_team')
@@ -213,26 +213,22 @@ class FootballController extends Controller
 
         $years = Year::all();
 
+        $selectedYear = Football::where('id', $id)->pluck('year_id');
+
         //  Get Away Team Wins And Losses
         $away_team_id = Football::where('id', $id)->pluck('away_team_id');
 
         $away_team_losses_loop = Football::where('losing_team', '=', $away_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $selectedYear)
                                 ->get();
         $away_losses = $away_team_losses_loop->count();
 
         $away_team_wins_loop = Football::where('winning_team', '=', $away_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $selectedYear)
                                 ->get();
         $away_wins = $away_team_wins_loop->count();
-
-        $away_team_ties = Football::where(function ($query) use ($away_team_id) {
-                            $query->where('away_team_id', '=' , $away_team_id)
-                            ->orWhere('home_team_id', '=', $away_team_id);
-                        })
-                        ->where('game_status', '=', 1)
-                        ->whereRaw('away_team_final_score = home_team_final_score')
-                        ->count();
 
         //  Get Home Team Wins And Losses
         $home_team_id = Football::where('id', $id)->pluck('home_team_id');
@@ -247,14 +243,6 @@ class FootballController extends Controller
                                 ->get();
         $home_wins = $home_team_wins_loop->count();
 
-        $home_team_ties = Football::where(function ($query) use ($home_team_id) {
-                            $query->where('away_team_id', '=' , $home_team_id)
-                            ->orWhere('home_team_id', '=', $home_team_id);
-                        })
-                        ->where('game_status', '=', 1)
-                        ->whereRaw('away_team_final_score = home_team_final_score')
-                        ->count();
-
         //  Get Scores from each half
         $scores = FootballScore::where('game_id', $id)->get();
 
@@ -267,7 +255,7 @@ class FootballController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.football.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'game', 'match', 'scores', 'teams','times','years'));
+        return view('sports.football.edit-score', compact('away_losses', 'away_wins', 'home_losses', 'home_wins', 'match', 'scores', 'teams','times','years'));
     }
 
     public function gameUpdate(Request $request, $id)

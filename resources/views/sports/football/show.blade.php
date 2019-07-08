@@ -41,9 +41,9 @@
                                 @endif
                             </div>
                             @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
-                                <strong><a href="/football/2018-2019/{{$game->away_team->school_name}}">{{$game->away_team->school_name}} ({{$game->away_team->state}})</a></strong>
+                                <strong><a href="/football/{{$game->the_year->year}}/{{$game->away_team->school_name}}">{{$game->away_team->school_name}} ({{$game->away_team->state}})</a></strong>
                             @else
-                                <a href="/football/2018-2019/{{$game->away_team->school_name}}">{{$game->away_team->school_name}}</a>
+                                <a href="/football/{{$match->the_year->year}}/{{$game->away_team->school_name}}">{{$game->away_team->school_name}}</a>
                             @endif
                         </div>
                         <div class="col-3 text-right">
@@ -66,9 +66,9 @@
                                 @endif
                             </div>
                             @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
-                                <span><strong><a href="/football/2018-2019/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a></strong></span>
+                                <span><strong><a href="/football/{{$match->the_year->year}}/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a></strong></span>
                             @else
-                                <span><a href="/football/2018-2019/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a><br />
+                                <span><a href="/football/{{$game->the_year->year}}/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a><br />
                             @endif
                         </div>
                         <div class="col-3 text-right">
@@ -89,13 +89,13 @@
 
             <div class="row">
 
-                <div class="col">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <a href="{{ route('football-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Match</a> 
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <a href="{{ route('football-score-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Match Play</a> 
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12 mb-3">
 
                     <form method="POST" action="/football/delete/{{ $game->id }}">
 
