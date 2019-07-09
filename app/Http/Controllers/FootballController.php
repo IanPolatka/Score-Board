@@ -236,11 +236,13 @@ class FootballController extends Controller
 
         $home_team_losses_loop = Football::where('losing_team', '=', $home_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $selectedYear)
                                 ->get();
         $home_losses = $home_team_losses_loop->count();
 
         $home_team_wins_loop = Football::where('winning_team', '=', $home_team_id)
                                 ->where('team_level', '=', 1)
+                                ->where('year_id', $selectedYear)
                                 ->get();
         $home_wins = $home_team_wins_loop->count();
 
@@ -253,6 +255,7 @@ class FootballController extends Controller
                                      ->with('game_time')
                                      ->with('user_created')
                                      ->with('user_modified')
+                                     ->with('the_year')
                                      ->with('scores')
                                      ->first();
 
