@@ -43,7 +43,7 @@
                             @if($game->away_team_final_score && ($game->away_team_final_score > $game->home_team_final_score))
                                 <strong><a href="/football/{{$game->the_year->year}}/{{$game->away_team->school_name}}">{{$game->away_team->school_name}} ({{$game->away_team->state}})</a></strong>
                             @else
-                                <a href="/football/{{$match->the_year->year}}/{{$game->away_team->school_name}}">{{$game->away_team->school_name}}</a>
+                                <a href="/football/{{$game->the_year->year}}/{{$game->away_team->school_name}}">{{$game->away_team->school_name}}</a>
                             @endif
                         </div>
                         <div class="col-3 text-right">
@@ -66,7 +66,7 @@
                                 @endif
                             </div>
                             @if($game->home_team_final_score && ($game->home_team_final_score > $game->away_team_final_score))
-                                <span><strong><a href="/football/{{$match->the_year->year}}/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a></strong></span>
+                                <span><strong><a href="/football/{{$game->the_year->year}}/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a></strong></span>
                             @else
                                 <span><a href="/football/{{$game->the_year->year}}/{{$game->home_team->school_name}}">{{$game->home_team->school_name}} ({{$game->home_team->state}})</a><br />
                             @endif
