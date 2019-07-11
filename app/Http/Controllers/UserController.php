@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Role;
-use Hash;
-
-use Session;
-
 use Auth;
+use Hash;
+use Session;
+use App\Role;
+
+use App\User;
+
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -21,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
+
         return view('manage.users.index', compact('users'));
     }
 
@@ -66,7 +67,7 @@ class UserController extends Controller
         $user
            ->roles()
            ->attach(Role::where('name', 'user')->first());
-        
+
         Session::flash('success', 'User has been created.');
 
         return redirect('/manage/users');
@@ -81,6 +82,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->with('roles')->first();
+
         return view('manage.users.show', compact('user'));
     }
 
@@ -94,7 +96,8 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $user = User::where('id', $id)->with('roles')->first();
-        return view('manage.users.edit', compact('roles','user'));
+
+        return view('manage.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -108,7 +111,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name'  =>  'required|max:255',
-            'email' =>  'required|email|unique:users,email,'.$id
+            'email' =>  'required|email|unique:users,email,'.$id,
         ]);
 
         $user = User::findOrFail($id);
@@ -122,7 +125,6 @@ class UserController extends Controller
         Session::flash('success', 'Profile has been edited');
 
         return redirect()->route('users.index');
-
     }
 
     /**

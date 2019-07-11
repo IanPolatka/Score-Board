@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-
-use App\BasketballBoys;
-use App\BasketballGirls;
-use App\Baseball;
-use App\BowlingBoys;
-use App\BowlingGirls;
-use App\Football;
-use App\SoccerBoys;
-use App\SoccerGirls;
-use App\Softball;
-use App\Swimming;
 use App\Team;
-use App\Track;
-use App\TennisBoys;
-use App\TennisGirls;
-use App\Wrestling;
-
-use Illuminate\Http\Request;
 
 use Response;
+use App\Track;
+use App\Baseball;
+use App\Football;
+use App\Softball;
+use App\Swimming;
+use App\Wrestling;
+use Carbon\Carbon;
+use App\SoccerBoys;
+use App\TennisBoys;
+use App\BowlingBoys;
+use App\SoccerGirls;
+use App\TennisGirls;
+use App\BowlingGirls;
+use App\BasketballBoys;
+
+use App\BasketballGirls;
+
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -48,66 +48,62 @@ class HomeController extends Controller
 
         // $basketball_girls = BasketballGirls::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();
 
-        // $bowling_boys = BowlingBoys::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();  
+        // $bowling_boys = BowlingBoys::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();
 
-        // $bowling_girls = BowlingGirls::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get(); 
+        // $bowling_girls = BowlingGirls::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();
 
-        // // $bowling_girls = BowlingBoys::where('id', 5)->get();       
+        // // $bowling_girls = BowlingBoys::where('id', 5)->get();
 
         // $soccer_boys = SoccerBoys::where('date', Carbon::today('America/New_York'))->orderBy('team_level')->get();
 
         return view('home'/*, compact('basketball_boys', 'basketball_girls', 'bowling_boys', 'bowling_girls', 'soccer_boys') */);
-        
     }
-
-
 
     public function events()
     {
-
         $basketball_boys = BasketballBoys::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $basketball_girls = BasketballGirls::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $baseball = Baseball::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $bowling_boys = BowlingBoys::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $bowling_girls = BowlingGirls::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $football = Football::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $soccer_boys = SoccerBoys::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $soccer_girls = SoccerGirls::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $softball = Softball::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $swimming = Swimming::with('the_team')
@@ -120,26 +116,26 @@ class HomeController extends Controller
 
         $tennis_boys = TennisBoys::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $tennis_girls = TennisGirls::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $track = Track::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
         $wrestling = Wrestling::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('time_id','desc')
+                                     ->orderBy('time_id', 'desc')
                                      ->get();
 
-        $array = array_merge($baseball->toArray(), 
-                             $basketball_girls->toArray(), 
+        $array = array_merge($baseball->toArray(),
+                             $basketball_girls->toArray(),
                              $basketball_boys->toArray(),
                              $bowling_boys->toArray(),
                              $bowling_girls->toArray(),
@@ -157,15 +153,10 @@ class HomeController extends Controller
         //$result = $basketball_boys->toBase()->merge($basketball_girls->toBase(), $baseball->toBase());
 
         return Response::json($array);
-
-
     }
-
-
 
     public function eventsNow($team)
     {
-
         $theteam = Team::where('school_name', '=', $team)->pluck('id');
 
         $basketball_boys = BasketballBoys::with('away_team')
@@ -177,12 +168,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $basketball_girls = BasketballGirls::with('away_team')
@@ -194,12 +185,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $baseball = Baseball::with('away_team')
@@ -211,12 +202,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $bowling_boys = BowlingBoys::with('away_team')
@@ -226,12 +217,12 @@ class HomeController extends Controller
                                      ->with('user_modified')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $bowling_girls = BowlingGirls::with('away_team')
@@ -241,12 +232,12 @@ class HomeController extends Controller
                                      ->with('user_modified')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $football = Football::with('away_team')
@@ -258,12 +249,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $soccer_boys = SoccerBoys::with('away_team')
@@ -275,12 +266,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $soccer_girls = SoccerGirls::with('away_team')
@@ -292,12 +283,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $softball = Softball::with('away_team')
@@ -309,12 +300,12 @@ class HomeController extends Controller
                                      ->with('scores')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $swimming = Swimming::with('the_team')
@@ -333,12 +324,12 @@ class HomeController extends Controller
                                      ->with('user_modified')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $tennis_girls = TennisGirls::with('away_team')
@@ -348,12 +339,12 @@ class HomeController extends Controller
                                      ->with('user_modified')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         $track = Track::with('the_team')
@@ -374,8 +365,8 @@ class HomeController extends Controller
                                ->where('date', Carbon::today('America/New_York'))
                                ->get();
 
-        $array = array_merge($baseball->toArray(), 
-                             $basketball_girls->toArray(), 
+        $array = array_merge($baseball->toArray(),
+                             $basketball_girls->toArray(),
                              $basketball_boys->toArray(),
                              $bowling_boys->toArray(),
                              $bowling_girls->toArray(),
@@ -393,7 +384,5 @@ class HomeController extends Controller
         //$result = $basketball_boys->toBase()->merge($basketball_girls->toBase(), $baseball->toBase());
 
         return Response::json($array);
-
-
     }
 }

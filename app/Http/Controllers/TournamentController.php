@@ -8,12 +8,10 @@ use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-	public function listByYear($year)
-	{
+    public function listByYear($year)
+    {
+        $tournaments = Tournament::where('year_id', $year)->get();
 
-		$tournaments = Tournament::where('year_id', $year)->get();
-
-		return $tournaments;
-
-	}
+        return $tournaments;
+    }
 }

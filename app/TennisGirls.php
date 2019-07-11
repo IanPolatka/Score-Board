@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TennisGirls extends Model
 {
-
     protected $appends = ['sport_name'];
 
     protected $fillable = [
@@ -24,45 +23,46 @@ class TennisGirls extends Model
         'losing_team',
         'location',
         'created_by',
-        'modified_by'
+        'modified_by',
     ];
 
     public function users()
-	{
-	  return $this->belongsToMany(User::class);
-	}
-
-	public function away_team()
     {
-    	return $this->belongsTo('App\Team', 'away_team_id');
+        return $this->belongsToMany(User::class);
+    }
+
+    public function away_team()
+    {
+        return $this->belongsTo(\App\Team::class, 'away_team_id');
     }
 
     public function home_team()
     {
-        return $this->belongsTo('App\Team', 'home_team_id');
+        return $this->belongsTo(\App\Team::class, 'home_team_id');
     }
 
     public function game_time()
     {
-        return $this->belongsTo('App\Time', 'time_id');
+        return $this->belongsTo(\App\Time::class, 'time_id');
     }
 
     public function user_created()
     {
-    	return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo(\App\User::class, 'created_by');
     }
 
     public function user_modified()
     {
-    	return $this->belongsTo('App\User', 'modified_by');
+        return $this->belongsTo(\App\User::class, 'modified_by');
     }
 
     public function the_year()
     {
-        return $this->belongsTo('App\Year', 'year_id');
+        return $this->belongsTo(\App\Year::class, 'year_id');
     }
 
-    public function getSportNameAttribute() {
-      return 'girls-tennis';
+    public function getSportNameAttribute()
+    {
+        return 'girls-tennis';
     }
 }

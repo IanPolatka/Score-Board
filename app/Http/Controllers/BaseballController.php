@@ -2,37 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-
-use App\Baseball;
-use App\BaseballScores;
-use App\Team;
-use App\TeamMeta;
-use App\Time;
-use App\Tournament;
-use App\Year;
-
-use Twitter;
+use Auth;
 
 use Session;
+use Twitter;
+use App\Team;
+use App\Time;
+use App\Year;
+use App\Baseball;
+use App\TeamMeta;
 
-use Auth;
+use Carbon\Carbon;
+
+use App\Tournament;
+
+use App\BaseballScores;
 
 use Illuminate\Http\Request;
 
 class BaseballController extends Controller
 {
-    
-    public function __construct() 
+    public function __construct()
     {
-      $this->middleware('auth', ['only' => [ 'create', 'edit', 'editScore', 'delete' ]]);
+        $this->middleware('auth', ['only' => ['create', 'edit', 'editScore', 'delete']]);
     }
-
-
 
     public function index()
     {
-
         $teams = Team::orderBy('school_name')->get();
 
         $todaysGames = Baseball::where('date', Carbon::today('America/New_York'))->get();
@@ -46,8 +42,6 @@ class BaseballController extends Controller
         return view('sports.baseball.index', compact('games', 'teams', 'todaysGames', 'tomorrowsGames', 'yesterdaysGames'));
     }
 
-
-
     public function create()
     {
         $teams = Team::orderBy('school_name')->get();
@@ -56,10 +50,8 @@ class BaseballController extends Controller
 
         $years = Year::all();
 
-        return view('sports.baseball.create', compact('teams','times','years'));
+        return view('sports.baseball.create', compact('teams', 'times', 'years'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -71,14 +63,14 @@ class BaseballController extends Controller
             'date'              => 'date|required',
             'away_team_id'      => 'required',
             'home_team_id'      => 'required',
-            'time_id'           => 'required'
+            'time_id'           => 'required',
         ],
         [
             'year_id.required'          =>  'Please select a school year.',
             'team_level.required'       =>  'Please select a team level.',
             'away_team_id.required'     =>  'Please select an away team.',
             'home_team_id.required'     =>  'Please select a home team.',
-            'time_id.required'          =>  'Please select a game time.'
+            'time_id.required'          =>  'Please select a game time.',
         ]);
 
         Baseball::create([
@@ -92,15 +84,13 @@ class BaseballController extends Controller
             'home_team_id'  => request('home_team_id'),
             'time_id'       => request('time_id'),
             'district_game' => request('district_game'),
-            'created_by'    => $user_id
+            'created_by'    => $user_id,
         ]);
 
         Session::flash('success', 'Baseball Game Has Been Created');
 
         return redirect('/baseball');
     }
-
-
 
     public function show($id)
     {
@@ -118,18 +108,15 @@ class BaseballController extends Controller
         return view('sports.baseball.show', compact('game'));
     }
 
-
-
     public function edit($id)
     {
-
         $teams = Team::orderBy('school_name')->get();
 
         $times = Time::all();
 
         $years = Year::all();
 
-        $match = Baseball::where('id',$id)->with('away_team')
+        $match = Baseball::where('id', $id)->with('away_team')
                                      ->with('home_team')
                                      ->with('away_team')
                                      ->with('game_time')
@@ -138,10 +125,8 @@ class BaseballController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.baseball.edit', compact('match', 'teams','times','years'));
+        return view('sports.baseball.edit', compact('match', 'teams', 'times', 'years'));
     }
-
-
 
     public function update(Request $request, $id)
     {
@@ -153,14 +138,14 @@ class BaseballController extends Controller
             'date'              => 'date|required',
             'away_team_id'      => 'required',
             'home_team_id'      => 'required',
-            'time_id'           => 'required'
+            'time_id'           => 'required',
         ],
         [
             'year_id.required'          =>  'Please select a school year.',
             'team_level.required'       =>  'Please select a team level.',
             'away_team_id.required'     =>  'Please select an away team.',
             'home_team_id.required'     =>  'Please select a home team.',
-            'time_id.required'          =>  'Please select a game time.'
+            'time_id.required'          =>  'Please select a game time.',
         ]);
 
         $game = Baseball::findOrFail($id);
@@ -173,8 +158,8 @@ class BaseballController extends Controller
         $game->home_team_id = request('home_team_id');
         $game->time_id = request('time_id');
         $game->district_game = request('district_game');
-        $game->location     = request('location');
-        $game->modified_by   = $user_id;
+        $game->location = request('location');
+        $game->modified_by = $user_id;
 
         $game->update();
 
@@ -185,10 +170,7 @@ class BaseballController extends Controller
 
     public function editScore($id)
     {
-
         $data = Twitter::getUserTimeline(['count' => 10, 'format' => 'array']);
-
-
 
         //  Get Away Team Wins And Losses
         $away_team_id = Baseball::where('id', $id)->pluck('away_team_id');
@@ -216,8 +198,6 @@ class BaseballController extends Controller
                                 ->get();
         $home_wins = $home_team_wins_loop->count();
 
-
-
         $scores = BaseballScores::where('game_id', $id)->get();
 
         $match = Baseball::where('id', $id)->with('away_team')
@@ -232,8 +212,6 @@ class BaseballController extends Controller
         return view('sports.baseball.edit-score', compact('away_losses', 'away_wins', 'data', 'home_losses', 'home_wins', 'match', 'scores'));
     }
 
-
-
     public function gameUpdate(Request $request, $id)
     {
         $user_id = Auth::user()->id;
@@ -246,7 +224,7 @@ class BaseballController extends Controller
         $game->home_team_final_score = request('home_team_final_score');
         $game->winning_team = request('winning_team');
         $game->losing_team = request('losing_team');
-        $game->modified_by   = $user_id;
+        $game->modified_by = $user_id;
 
         $game->update();
 
@@ -255,20 +233,16 @@ class BaseballController extends Controller
         return back();
     }
 
-
-
     public function destroy($id)
     {
         $game = Baseball::find($id);
         $game->delete();
+
         return redirect('/baseball');
     }
 
-
-
     public function teamSchedule($team)
     {
-
         $id = Team::where('school_name', $team)->pluck('id');
 
         $selectedTeam = Team::where('school_name', $team)->first();
@@ -286,7 +260,7 @@ class BaseballController extends Controller
                                ->with('away_team_district')
                                ->with('home_team_district')
                                ->where(function ($query) use ($id) {
-                                    $query->where('away_team_id', '=' , $id)
+                                   $query->where('away_team_id', '=', $id)
                                     ->orWhere('home_team_id', '=', $id);
                                })
                                ->where('team_level', 1)
@@ -297,9 +271,9 @@ class BaseballController extends Controller
         $juniorvarsity = Baseball::with('away_team')
                                ->with('home_team')
                                ->where(function ($query) use ($id) {
-                                    $query->where('away_team_id', '=' , $id)
+                                   $query->where('away_team_id', '=', $id)
                                     ->orWhere('home_team_id', '=', $id);
-                                })
+                               })
                                ->where('team_level', 2)
                                ->orderBy('date')
                                ->get();
@@ -307,41 +281,34 @@ class BaseballController extends Controller
         $freshman = Baseball::with('away_team')
                                ->with('home_team')
                                ->where(function ($query) use ($id) {
-                                    $query->where('away_team_id', '=' , $id)
+                                   $query->where('away_team_id', '=', $id)
                                     ->orWhere('home_team_id', '=', $id);
-                                })
+                               })
                                ->where('team_level', 3)
                                ->orderBy('date')
                                ->get();
 
         return view('sports.baseball.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman', 'wins', 'losses'));
-
     }
-
 
     public function scoreCreate($id)
     {
-
         $user_id = Auth::user()->id;
 
         BaseballScores::create([
             'game_id'          =>  $id,
             'away_team_score'   =>  0,
             'home_team_score'   =>  0,
-            'created_by'        =>  $user_id
+            'created_by'        =>  $user_id,
         ]);
 
         Session::flash('success', 'Quarter Has Been Added');
 
         return back();
-
     }
-
-
 
     public function storeGameHalf(Request $request, $id)
     {
-
         $user_id = Auth::user()->id;
 
         $this->validate(request(), [
@@ -350,8 +317,8 @@ class BaseballController extends Controller
         ]);
 
         $half = BaseballScores::findOrFail($id);
-        $half->away_team_score  = request('away_team_score');
-        $half->home_team_score  = request('home_team_score');
+        $half->away_team_score = request('away_team_score');
+        $half->home_team_score = request('home_team_score');
         $half->modified_by = $user_id;
 
         $half->update();
@@ -359,10 +326,7 @@ class BaseballController extends Controller
         Session::flash('success', 'Score Has Been Updated');
 
         return back();
-
     }
-
-
 
     public function scoreDelete($id)
     {
@@ -373,11 +337,8 @@ class BaseballController extends Controller
         return back();
     }
 
-
-
     public function apiGameId($id)
     {
-
         $game = Baseball::where('id', $id)->with('away_team')
                                      ->with('home_team')
                                      ->with('away_team')
@@ -389,14 +350,10 @@ class BaseballController extends Controller
                                      ->first();
 
         return $game;
-
     }
-
-
 
     public function apiTeamSchedule($year, $team, $teamlevel)
     {
-
         $theteam = Team::where('school_name', '=', $team)->pluck('id');
         $theYear = Year::where('year', $year)->pluck('id')->first();
 
@@ -410,23 +367,19 @@ class BaseballController extends Controller
                                      ->with('the_year')
                                      ->where('year_id', $theYear)
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', $teamlevel)
-                                     
-                                     ->orderBy('date','asc')
+
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         return $game;
-
     }
-
-
 
     public function todaysEvents($team)
     {
-
         $theteam = Team::where('school_name', '=', $team)->pluck('id');
 
         $game = Baseball::with('away_team')
@@ -439,23 +392,19 @@ class BaseballController extends Controller
                                      ->with('total_score')
                                      ->with('the_year')
                                      ->where(function ($query) use ($theteam) {
-                                        $query->where('away_team_id', '=' , $theteam)
+                                         $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
-                                     ->orderBy('date','asc')
+                                     ->orderBy('date', 'asc')
                                      ->get();
 
         return $game;
-
     }
-
-
 
     public function singleMatch($id)
     {
-
         $game = Baseball::with('away_team')
                                      ->with('home_team')
                                      ->with('away_team')
@@ -467,21 +416,17 @@ class BaseballController extends Controller
                                      ->first();
 
         return $game;
-
     }
-
-
 
     public function yearSummary($year, $team)
     {
-
         $selectedyear = Year::where('year', $year)->pluck('year');
 
         $selectedyearid = Year::where('year', $year)->pluck('id');
 
         $selectedteam = Team::where('school_name', $team)->get();
 
-        $selectedteamid =   Team::where('school_name', $team)->pluck('id');
+        $selectedteamid = Team::where('school_name', $team)->pluck('id');
 
         $the_standings = \DB::select('SELECT school_name as Team, Sum(W) AS Wins, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A, SUM(DW) AS DistrictWins, SUM(DL) AS DistrictLoses
                         FROM(
@@ -515,9 +460,8 @@ class BaseballController extends Controller
                         as tot
                         JOIN teams t ON tot.Team = t.id
                         WHERE school_name = ?
-                        GROUP BY Team, school_name', array($selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']));
+                        GROUP BY Team, school_name', [$selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']]);
 
         return $the_standings;
-
     }
 }

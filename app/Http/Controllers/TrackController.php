@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-
-use App\Track;
-use App\Team;
-use App\TeamMeta;
-use App\Time;
-use App\Tournament;
-use App\Year;
+use Auth;
 
 use Session;
+use App\Team;
+use App\Time;
+use App\Year;
+use App\Track;
+use App\TeamMeta;
 
-use Auth;
+use Carbon\Carbon;
+
+use App\Tournament;
 
 use Illuminate\Http\Request;
 
 class TrackController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
-      $this->middleware('auth', ['only' => [ 'create', 'edit', 'delete' ]]);
+        $this->middleware('auth', ['only' => ['create', 'edit', 'delete']]);
     }
 
     public function index()
     {
-
         $teams = Team::orderBy('school_name')->get();
 
         $todaysMatches = Track::where('date', Carbon::today('America/New_York'))->get();
@@ -42,15 +41,13 @@ class TrackController extends Controller
 
     public function create()
     {
-
         $teams = Team::orderBy('school_name')->get();
 
         $times = Time::all();
 
         $years = Year::all();
 
-        return view('sports.track.create', compact('teams','times','years'));
-
+        return view('sports.track.create', compact('teams', 'times', 'years'));
     }
 
     public function store(Request $request)
@@ -63,14 +60,14 @@ class TrackController extends Controller
             'date'              => 'date|required',
             'team_id'      		=> 'required',
             'host_id'      		=> 'required',
-            'time_id'           => 'required'
+            'time_id'           => 'required',
         ],
         [
             'year_id.required'          =>  'Please select a school year.',
             'team_level.required'       =>  'Please select a team level.',
             'team_id.required'     		=>  'Please select an team that this event is for.',
             'host_id.required'     		=>  'Please select a host.',
-            'time_id.required'          =>  'Please select a match time.'
+            'time_id.required'          =>  'Please select a match time.',
         ]);
 
         Track::create([
@@ -83,15 +80,13 @@ class TrackController extends Controller
             'team_id'  		=> request('team_id'),
             'host_id'  		=> request('host_id'),
             'time_id'       => request('time_id'),
-            'created_by'    => $user_id
+            'created_by'    => $user_id,
         ]);
 
         Session::flash('success', 'Track Event Has Been Created');
 
         return redirect('/track-and-field');
     }
-
-
 
     public function show($id)
     {
@@ -107,7 +102,6 @@ class TrackController extends Controller
 
     public function edit($id)
     {
-
         $teams = Team::orderBy('school_name')->get();
 
         $times = Time::all();
@@ -121,7 +115,7 @@ class TrackController extends Controller
                                      ->with('user_modified')
                                      ->first();
 
-        return view('sports.track.edit', compact('match', 'teams','times','years'));
+        return view('sports.track.edit', compact('match', 'teams', 'times', 'years'));
     }
 
     public function update(Request $request, $id)
@@ -134,14 +128,14 @@ class TrackController extends Controller
             'date'              => 'date|required',
             'team_id'      		=> 'required',
             'host_id'      		=> 'required',
-            'time_id'           => 'required'
+            'time_id'           => 'required',
         ],
         [
             'year_id.required'          =>  'Please select a school year.',
             'team_level.required'       =>  'Please select a team level.',
             'team_id.required'     		=>  'Please select an team that this event is for.',
             'host_id.required'     		=>  'Please select a host.',
-            'time_id.required'          =>  'Please select a match time.'
+            'time_id.required'          =>  'Please select a match time.',
         ]);
 
         $game = Track::findOrFail($id);
@@ -156,7 +150,7 @@ class TrackController extends Controller
         $game->location = request('location');
         $game->boys_result = request('boys_result');
         $game->girls_result = request('girls_result');
-        $game->modified_by   = $user_id;
+        $game->modified_by = $user_id;
 
         $game->update();
 
@@ -164,8 +158,6 @@ class TrackController extends Controller
 
         return redirect('/track-and-field/'.$id);
     }
-
-
 
     public function destroy($id)
     {
@@ -177,11 +169,8 @@ class TrackController extends Controller
         return redirect('/track-and-field');
     }
 
-
-
     public function teamSchedule($team)
     {
-
         $id = Team::where('school_name', $team)->pluck('id');
 
         $selectedTeam = Team::where('school_name', $team)->first();
@@ -212,17 +201,15 @@ class TrackController extends Controller
                                ->get();
 
         return view('sports.track.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman'));
-
     }
 
     public function apiTeamSchedule($year, $team, $teamlevel)
     {
-
         $theteam = Team::where('school_name', '=', $team)->pluck('id');
         $theYear = Year::where('year', $year)->pluck('id')->first();
 
         $game = Track::with('the_team')
-        						->with('the_year')
+                                ->with('the_year')
                                ->with('host_team')
                                ->with('game_time')
                                ->where('team_id', $theteam)
@@ -232,12 +219,10 @@ class TrackController extends Controller
                                ->get();
 
         return $game;
-
     }
 
     public function todaysEvents($team)
     {
-
         $theteam = Team::where('school_name', '=', $team)->pluck('id');
 
         $game = Track::with('the_team')
@@ -250,6 +235,5 @@ class TrackController extends Controller
                                 ->get();
 
         return $game;
-
     }
 }
