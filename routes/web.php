@@ -235,6 +235,10 @@ Route::delete('/football-score-delete/{id}', 'FootballController@scoreDelete')->
 
 Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 
+//  Football Rosters
+
+Route::get('/football/{team}/{year}/roster', 'FootballRosterController@index');
+
 
 
 
