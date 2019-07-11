@@ -33,32 +33,32 @@ class TennisBoys extends Model
 
     public function away_team()
     {
-        return $this->belongsTo('App\Team', 'away_team_id');
+        return $this->belongsTo(\App\Team::class, 'away_team_id');
     }
 
     public function home_team()
     {
-        return $this->belongsTo('App\Team', 'home_team_id');
+        return $this->belongsTo(\App\Team::class, 'home_team_id');
     }
 
     public function game_time()
     {
-        return $this->belongsTo('App\Time', 'time_id');
+        return $this->belongsTo(\App\Time::class, 'time_id');
     }
 
     public function user_created()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo(\App\User::class, 'created_by');
     }
 
     public function user_modified()
     {
-        return $this->belongsTo('App\User', 'modified_by');
+        return $this->belongsTo(\App\User::class, 'modified_by');
     }
 
     public function the_year()
     {
-        return $this->belongsTo('App\Year', 'year_id');
+        return $this->belongsTo(\App\Year::class, 'year_id');
     }
 
     public function getSportNameAttribute()

@@ -10,6 +10,6 @@ class Team extends Model
 
     public function team_alignment()
     {
-        return $this->hasMany('App\TeamMeta', 'team_id');
+        return $this->hasMany(\App\TeamMeta::class, 'team_id');
     }
 }

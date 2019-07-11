@@ -12,6 +12,6 @@ class CurrentYear extends Model
 
     public function the_year()
     {
-        return $this->belongsTo('App\Year', 'year_id');
+        return $this->belongsTo(\App\Year::class, 'year_id');
     }
 }
