@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class SoccerGirls extends Model
 {
-
     protected $appends = ['sport_name'];
-    
+
     protected $fillable = [
-        'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'away_team_id', 'home_team_id', 'time_id', 'district_game', 'game_status', 'game_minute', 'away_team_final_score', 'home_team_final_score', 'winning_team', 'losing_team', 'location', 'created_by', 'modified_by'
+        'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'away_team_id', 'home_team_id', 'time_id', 'district_game', 'game_status', 'game_minute', 'away_team_final_score', 'home_team_final_score', 'winning_team', 'losing_team', 'location', 'created_by', 'modified_by',
     ];
 
-	public function users()
-	{
-	  return $this->belongsToMany(User::class);
-	}
-
-	public function away_team()
+    public function users()
     {
-    	return $this->belongsTo('App\Team', 'away_team_id');
+        return $this->belongsToMany(User::class);
+    }
+
+    public function away_team()
+    {
+        return $this->belongsTo('App\Team', 'away_team_id');
     }
 
     public function home_team()
@@ -35,27 +34,27 @@ class SoccerGirls extends Model
 
     public function user_created()
     {
-    	return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo('App\User', 'created_by');
     }
 
     public function user_modified()
     {
-    	return $this->belongsTo('App\User', 'modified_by');
+        return $this->belongsTo('App\User', 'modified_by');
     }
 
     public function scores()
     {
-      return $this->hasMany(SoccerBoysScore::class, 'match_id');
+        return $this->hasMany(SoccerBoysScore::class, 'match_id');
     }
 
     public function away_team_district()
     {
-      return $this->hasOne(TeamMeta::class, 'team_id', 'away_team_id', 'year_id');
+        return $this->hasOne(TeamMeta::class, 'team_id', 'away_team_id', 'year_id');
     }
 
     public function home_team_district()
     {
-      return $this->hasOne(TeamMeta::class, 'team_id', 'home_team_id');
+        return $this->hasOne(TeamMeta::class, 'team_id', 'home_team_id');
     }
 
     public function away_team_goals()
@@ -68,7 +67,8 @@ class SoccerGirls extends Model
         return $this->belongsTo('App\Year', 'year_id');
     }
 
-    public function getSportNameAttribute() {
-      return 'girls-soccer';
+    public function getSportNameAttribute()
+    {
+        return 'girls-soccer';
     }
 }

@@ -10,10 +10,8 @@ class soccerTest extends TestCase
     /** @test **/
     public function soccerEditAuthenticated()
     {
-
         $response = $this->get('/boys-soccer/3/edit');
 
         $response->assertStatus(403);
-
     }
 }

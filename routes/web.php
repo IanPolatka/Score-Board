@@ -23,12 +23,6 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::redirect('home', '/');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Baseball
 ///////////////////////////////////////////////////////////////////////
@@ -50,12 +44,6 @@ Route::post('/baseball-score-create/{id}', 'BaseballController@scoreCreate')->na
 Route::delete('/baseball-score-delete/{id}', 'BaseballController@scoreDelete')->name('baseball-score-delete');
 
 Route::patch('/baseball-inning-update/{id}', 'BaseballController@storeGameHalf');
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Boys
@@ -79,12 +67,6 @@ Route::delete('/boys-basketball-score-delete/{id}', 'BasketballBoysController@sc
 
 Route::patch('/boys-basketball-half-update/{id}', 'BasketballBoysController@storeGameHalf');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Girls
 ///////////////////////////////////////////////////////////////////////
@@ -106,12 +88,6 @@ Route::post('/girls-basketball-score-create/{id}', 'BasketballGirlsController@sc
 Route::delete('/girls-basketball-score-delete/{id}', 'BasketballGirlsController@scoreDelete')->name('basketball-girls-score-delete');
 
 Route::patch('/girls-basketball-half-update/{id}', 'BasketballGirlsController@storeGameHalf');
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
@@ -135,10 +111,6 @@ Route::delete('/boys-soccer-score-delete/{id}', 'SoccerBoysController@scoreDelet
 
 Route::patch('/boys-soccer-half-update/{id}', 'SoccerBoysController@storeGameHalf');
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Girls Soccer
 ///////////////////////////////////////////////////////////////////////
@@ -161,12 +133,6 @@ Route::delete('/girls-soccer-score-delete/{id}', 'SoccerGirlsController@scoreDel
 
 Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameHalf');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Boys
 ///////////////////////////////////////////////////////////////////////
@@ -184,12 +150,6 @@ Route::patch('/boys-bowling/{id}/match-update', 'BowlingBoysController@gameUpdat
 
 Route::get('/boys-bowling/2018-2019/{team}', 'BowlingBoysController@teamSchedule')->name('boys-bowling.teamSchedule');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Girls
 ///////////////////////////////////////////////////////////////////////
@@ -206,12 +166,6 @@ Route::get('/girls-bowling/{id}/edit-score', 'BowlingGirlsController@editScore')
 Route::patch('/girls-bowling/{id}/match-update', 'BowlingGirlsController@gameUpdate')->name('girls-bowling.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/girls-bowling/2018-2019/{team}', 'BowlingGirlsController@teamSchedule')->name('girls-bowling.teamSchedule');
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Football
@@ -239,12 +193,6 @@ Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 
 Route::get('/football/{team}/{year}/roster', 'FootballRosterController@index');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Softball
 ///////////////////////////////////////////////////////////////////////
@@ -267,12 +215,6 @@ Route::delete('/softball-score-delete/{id}', 'SoftballController@scoreDelete')->
 
 Route::patch('/softball-inning-update/{id}', 'SoftballController@storeGameHalf');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Swimming
 ///////////////////////////////////////////////////////////////////////
@@ -288,12 +230,6 @@ Route::put('/swimming/{id}/update', 'SwimmingController@update')->name('swimming
 Route::patch('/swimming/{id}/match-update', 'SwimmingController@gameUpdate')->name('swimming.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/swimming/2018-2019/{team}', 'SwimmingController@teamSchedule')->name('swimming.teamSchedule');
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Tennis Boys
@@ -312,12 +248,6 @@ Route::patch('/boys-tennis/{id}/match-update', 'TennisBoysController@gameUpdate'
 
 Route::get('/boys-tennis/2018-2019/{team}', 'TennisBoysController@teamSchedule')->name('boys-tennis.teamSchedule');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Tennis Girls
 ///////////////////////////////////////////////////////////////////////
@@ -335,12 +265,6 @@ Route::patch('/girls-tennis/{id}/match-update', 'TennisGirlsController@gameUpdat
 
 Route::get('/girls-tennis/2018-2019/{team}', 'TennisGirlsController@teamSchedule')->name('girls-tennis.teamSchedule');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Track
 ///////////////////////////////////////////////////////////////////////
@@ -356,12 +280,6 @@ Route::put('/track-and-field/{id}/update', 'TrackController@update')->name('trac
 Route::patch('/track-and-field/{id}/match-update', 'TrackController@gameUpdate')->name('track.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/track-and-field/2018-2019/{team}', 'TrackController@teamSchedule')->name('track.teamSchedule');
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Wrestling
@@ -379,85 +297,58 @@ Route::patch('/wrestling/{id}/match-update', 'WrestlingController@gameUpdate')->
 
 Route::get('/wrestling/2018-2019/{team}', 'WrestlingController@teamSchedule')->name('wrestling.teamSchedule');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Teams
 ///////////////////////////////////////////////////////////////////////
 
-Route::middleware('role:superadministrator')->group(function() {
-	//Route::resource('/teams', 'TeamController');
-	Route::get('/teams', 'TeamController@index')->name('teams.index');
-	Route::get('/teams/{id}/edit', 'TeamController@edit')->name('team.edit');
-	Route::get('/teams/create', 'TeamController@create')->name('team.create');
-	Route::post('/teams/create', 'TeamController@store')->name('team.store');
-	Route::patch('/teams/{id}/update', 'TeamController@update')->name('team.update');
-	Route::get('/teams/{id}/{year}', 'TeamController@show')->name('team.show');
-	Route::get('/teams/{id}/{year}/edit-meta', 'TeamController@editMeta')->name('team.edit.meta');
-	Route::post('/teams/{id}/{year}/create-meta', 'TeamController@createMeta')->name('team.create.meta');
-	Route::patch('/teams/{id}/{year}/edit-meta', 'TeamController@patchMeta')->name('team.update.meta');
-	Route::post('/teams/{id}/image-upload', 'TeamController@imageUpload');
+Route::middleware('role:superadministrator')->group(function () {
+    //Route::resource('/teams', 'TeamController');
+    Route::get('/teams', 'TeamController@index')->name('teams.index');
+    Route::get('/teams/{id}/edit', 'TeamController@edit')->name('team.edit');
+    Route::get('/teams/create', 'TeamController@create')->name('team.create');
+    Route::post('/teams/create', 'TeamController@store')->name('team.store');
+    Route::patch('/teams/{id}/update', 'TeamController@update')->name('team.update');
+    Route::get('/teams/{id}/{year}', 'TeamController@show')->name('team.show');
+    Route::get('/teams/{id}/{year}/edit-meta', 'TeamController@editMeta')->name('team.edit.meta');
+    Route::post('/teams/{id}/{year}/create-meta', 'TeamController@createMeta')->name('team.create.meta');
+    Route::patch('/teams/{id}/{year}/edit-meta', 'TeamController@patchMeta')->name('team.update.meta');
+    Route::post('/teams/{id}/image-upload', 'TeamController@imageUpload');
 });
 
 //Route::post('/team/meta-create', 'TeamController@createYearMeta');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Users
 ///////////////////////////////////////////////////////////////////////
 
-Route::prefix('manage')->middleware('role:superadministrator')->group(function() {
-	Route::get('/', 'ManageController@index');
-	Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
-	Route::resource('/users', 'UserController');
+Route::prefix('manage')->middleware('role:superadministrator')->group(function () {
+    Route::get('/', 'ManageController@index');
+    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
+    Route::resource('/users', 'UserController');
 });
-
-
 
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/edit', 'ProfileController@update')->name('profile.update');
 Route::post('/profile/edit-password', 'ProfileController@changePassword')->name('profile.edit.password');
 
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Years
 ///////////////////////////////////////////////////////////////////////
 
-Route::prefix('years')->middleware('role:superadministrator')->group(function() {
-	Route::get('/', 'YearsController@index')->name('years.index');
-	Route::get('/create', 'YearsController@create')->name('year.create');
-	Route::post('/create', 'YearsController@store');
-	Route::get('/{id}', 'YearsController@show')->name('year.show');
-	Route::get('/{id}/edit', 'YearsController@edit')->name('year.edit');
-	Route::patch('/{id}/update', 'YearsController@update')->name('year.update');
-	Route::delete('/delete/{id}', 'YearsController@destroy');
-	Route::patch('/current-year', 'YearsController@currentYear');
+Route::prefix('years')->middleware('role:superadministrator')->group(function () {
+    Route::get('/', 'YearsController@index')->name('years.index');
+    Route::get('/create', 'YearsController@create')->name('year.create');
+    Route::post('/create', 'YearsController@store');
+    Route::get('/{id}', 'YearsController@show')->name('year.show');
+    Route::get('/{id}/edit', 'YearsController@edit')->name('year.edit');
+    Route::patch('/{id}/update', 'YearsController@update')->name('year.update');
+    Route::delete('/delete/{id}', 'YearsController@destroy');
+    Route::patch('/current-year', 'YearsController@currentYear');
 });
-
-
-
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Twitter Routes
 ///////////////////////////////////////////////////////////////////////
 
 Route::post('/tweet', 'TwitterController@tweet')->name('post.tweet');
-
-
-
