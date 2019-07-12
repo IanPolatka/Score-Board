@@ -77,11 +77,6 @@ class Football extends Model
         return $this->hasOne(TeamMeta::class, 'team_id', 'home_team_id');
     }
 
-    public function away_team_goals()
-    {
-        return $this->hasMany(SoccerBoysScore::class);
-    }
-
     public function the_year()
     {
         return $this->belongsTo(\App\Year::class, 'year_id');
@@ -90,5 +85,27 @@ class Football extends Model
     public function getSportNameAttribute()
     {
         return 'football';
+    }
+
+    public function getAwayScoreSumAttribute()
+    {
+        $totalAwayScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalAwayScore += $score->away_team_score;
+        }
+
+        return $totalAwayScore;
+    }
+
+    public function getHomeScoreSumAttribute()
+    {
+        $totalHomeScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalHomeScore += $score->home_team_score;
+        }
+
+        return $totalHomeScore;
     }
 }
