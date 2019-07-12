@@ -248,7 +248,7 @@
 
                                 @csrf 
 
-                                <button type="submit" class="btn btn-primary btn-block"><strong>+ Add Quater</strong></button>
+                                <button type="submit" class="btn btn-primary btn-block"><strong>+ Add Quarter</strong></button>
 
                             </form>
 
@@ -430,6 +430,15 @@
 
                         </div>
 
+                        <div class="col-lg-6">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#twitterModal">
+                            <i class="fab fa-twitter mr-1"></i> Tweet Score
+                            </button>
+
+                        </div>
+
                     </div><!--  Row  -->
 
                 </div><!--  Card Body  -->
@@ -446,6 +455,9 @@
 @endsection
 
 @section('javascript')
+
+<?php // Twitter Form Modal ?>
+@include('sports.football.twitter')
 <script>
 
     var qrt = "<?php echo $match->game_status; ?>";
@@ -461,45 +473,32 @@
         $('.game-final').hide();
     }
 
-$(document).ready(function(){
-    var home_team_id = <?php echo $match->home_team_id; ?>;
-    var away_team_id = <?php echo $match->away_team_id; ?>;
-    $("#winning_team").change(function(){
-        if($(this).val() == home_team_id) {
-            $('#losing_team').val(away_team_id);
-        } else if ($(this).val() == away_team_id) {
-            $('#losing_team').val(home_team_id);
-        } else {
-            $('#losing_team').val("");
-            $('#winning_team').val("");
-        }
-    });
+    $(document).ready(function(){
+        var home_team_id = <?php echo $match->home_team_id; ?>;
+        var away_team_id = <?php echo $match->away_team_id; ?>;
+        $("#winning_team").change(function(){
+            if($(this).val() == home_team_id) {
+                $('#losing_team').val(away_team_id);
+            } else if ($(this).val() == away_team_id) {
+                $('#losing_team').val(home_team_id);
+            } else {
+                $('#losing_team').val("");
+                $('#winning_team').val("");
+            }
+        });
 
-    // $("#game_status").change(function(){
-    //     if($(this).val() != 1) {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //     } else {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').slideUp('slow');
-    //     }
-    // });
-
-    $("#game_status").change(function(){
-        var selectedValue = $(this).val();
-        if(selectedValue == 1) {
-            console.log(selectedValue);
-            // $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-            // $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-            $('.game-summary-details').slideDown();
-            $('.game-final').slideUp();
-        } else {
-            $('.game-summary-details').slideUp();
-            $('.game-final').slideDown();
-        }
+        $("#game_status").change(function(){
+            var selectedValue = $(this).val();
+            if(selectedValue == 1) {
+                console.log(selectedValue);
+                $('.game-summary-details').slideDown();
+                $('.game-final').slideUp();
+            } else {
+                $('.game-summary-details').slideUp();
+                $('.game-final').slideDown();
+            }
+        });
     });
-});
     
-
 </script>
 @stop

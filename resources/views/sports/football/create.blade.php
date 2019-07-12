@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="scrimmage">Is this match a scrimmage?</label>
+                            <label for="scrimmage">Is this game a scrimmage?</label>
                             <select class="form-control" id="" name="scrimmage">
                                 <option value="0" @if (old('scrimmage') == '0') selected @endif>No</option>
                                 <option value="1" @if (old('scrimmage') == '1') selected @endif>Yes</option>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tournament_name">Is this match part of a tournament?  If so, what is the tournament name?</label>
+                            <label for="tournament_name">Is this game part of a tournament?  If so, what is the tournament name?</label>
                             <input type="text" class="form-control" id="tournament_name" name="tournament_name" value="{{ old('tournament_name') }}">
 
                             @if ($errors->has('tournament_name'))
@@ -108,7 +108,7 @@
 
                         <hr>
 
-                        <label>Is this match at a neutral location</label>
+                        <label>Is this game at a neutral location</label>
 
                         <div class="form-group form-inline">
 
@@ -125,7 +125,7 @@
 
                         <div class="form-group location">
 
-                            <label for="away_team_id">Match Location</label>
+                            <label for="away_team_id">Game Location</label>
                             <input type="text" class="form-control" name="location" value="{{ old('location') }}">
 
                             @if ($errors->has('location'))
@@ -189,7 +189,7 @@
                                 <div class="form-group">
                                     <label for="time_id">Game Time</label>
                                     <select class="form-control" id="" name="time_id">
-                                        <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
+                                        <option value="" @if (old('time_id') === '') selected @endif>Select A Time</option>
                                         @foreach($times as $time)
                                             <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
                                         @endforeach
