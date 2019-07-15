@@ -95,6 +95,7 @@
                                 Fall Sports <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{{ route('cross-country.index') }}">{{ __('Cross Country') }}</a>
                                 <a class="nav-link" href="{{ route('football.index') }}">{{ __('Football') }}</a>
                                 <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
                                 <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>

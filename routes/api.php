@@ -76,6 +76,12 @@ Route::get('/soccer-girls/match/{id}', 'SoccerGirlsController@singleMatch');
 Route::get('/soccer-girls/year-summary/{year}/{team}', 'SoccerGirlsController@yearSummary');
 
 ///////////////////////////////////////////////////////////////////////
+//  Cross Country
+///////////////////////////////////////////////////////////////////////
+Route::get('/cross-country/schedule/{year}/{team}/{teamlevel}', 'CrossCountryController@apiteamschedule');
+Route::get('/cross-country/todays-events/{team}', 'CrossCountryController@todaysEvents');
+
+///////////////////////////////////////////////////////////////////////
 //  Football
 ///////////////////////////////////////////////////////////////////////
 Route::get('/football/{id}', 'FootballController@apiGameId');

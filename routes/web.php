@@ -167,6 +167,26 @@ Route::patch('/girls-bowling/{id}/match-update', 'BowlingGirlsController@gameUpd
 
 Route::get('/girls-bowling/2018-2019/{team}', 'BowlingGirlsController@teamSchedule')->name('girls-bowling.teamSchedule');
 
+
+
+///////////////////////////////////////////////////////////////////////
+//  Cross Country
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/cross-country', 'CrossCountryController@index')->name('cross-country.index');
+Route::get('/cross-country/create', 'CrossCountryController@create')->name('cross-country.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/cross-country/create', 'CrossCountryController@store')->name('cross-country.create.match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/cross-country/delete/{id}', 'CrossCountryController@destroy');
+Route::get('/cross-country/{id}', 'CrossCountryController@show')->name('cross-country.show');
+Route::get('/cross-country/{id}/edit', 'CrossCountryController@edit')->name('cross-country.edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/cross-country/{id}/update', 'CrossCountryController@update')->name('cross-country.edit.match')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/cross-country/{id}/match-update', 'CrossCountryController@gameUpdate')->name('cross-country.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/cross-country/2018-2019/{team}', 'CrossCountryController@teamSchedule')->name('cross-country.teamSchedule');
+
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Football
 ///////////////////////////////////////////////////////////////////////
