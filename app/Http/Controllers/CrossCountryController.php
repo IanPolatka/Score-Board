@@ -172,9 +172,13 @@ class CrossCountryController extends Controller
         return redirect('/cross-country/'.$id);
     }
 
-    public function teamSchedule($team)
+    public function teamSchedule($year, $team)
     {
         $id = Team::where('school_name', $team)->pluck('id');
+
+        $selectedyear = Year::where('year', $year)->pluck('year');
+
+        $selectedyearid = Year::where('year', $year)->pluck('id');
 
         $selectedTeam = Team::where('school_name', $team)->first();
 
@@ -187,6 +191,7 @@ class CrossCountryController extends Controller
                                ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 1)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
@@ -195,6 +200,7 @@ class CrossCountryController extends Controller
                                ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 2)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
@@ -203,6 +209,7 @@ class CrossCountryController extends Controller
                                ->with('game_time')
                                ->where('team_id', $id)
                                ->where('team_level', 3)
+                               ->where('year_id', $selectedyearid)
                                ->orderBy('date')
                                ->get();
 
