@@ -183,7 +183,7 @@ Route::put('/cross-country/{id}/update', 'CrossCountryController@update')->name(
 
 Route::patch('/cross-country/{id}/match-update', 'CrossCountryController@gameUpdate')->name('cross-country.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/cross-country/2018-2019/{team}', 'CrossCountryController@teamSchedule')->name('cross-country.teamSchedule');
+Route::get('/cross-country/{year}/{team}', 'CrossCountryController@teamSchedule')->name('cross-country.teamSchedule');
 
 
 
