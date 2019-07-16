@@ -267,6 +267,7 @@ class FootballController extends Controller
         $game = Football::findOrFail($id);
         $game->game_minute = request('game_minute');
         $game->game_second = request('game_second');
+        $game->possession = request('possession');
         $game->game_status = request('game_status');
         $game->away_team_final_score = request('away_team_final_score');
         $game->home_team_final_score = request('home_team_final_score');
@@ -415,6 +416,7 @@ class FootballController extends Controller
                                      ->with('game_time')
                                      ->with('user_created')
                                      ->with('user_modified')
+                                     ->with('the_year')
                                      ->with('scores')
                                      ->first();
 

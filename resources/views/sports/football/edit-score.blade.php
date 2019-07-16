@@ -64,6 +64,12 @@
 
                 </div><!--  Away Team  -->
 
+                <?php if ($match->possession === $match->away_team_id): ?>
+                    <span class="ml-2 mr-2"><i class="fas fa-football-ball"></i></span>
+                <?php else: ?>
+                    <span class="ml-2 mr-2"><i class="fas fa-football-ball text-white"></i></span>
+                <?php endif; ?>
+
                 <div class="score-information">
 
                     <?php if ($match->game_status == 0 || $match->game_status == NULL) : ?>
@@ -86,46 +92,36 @@
                                 } else {
                                     echo '<strong><span class="text-danger">' . $numberFormatter->format($match->game_status - 4) . ' OT</span></strong>';
                                 } ?>
-                    <?php endif; ?>
-
-                        <?php $away_total_final = $match->away_team_final_score; ?>
-
-                        <?php $away_total = 0; ?>
-                        @foreach ($scores as $score)
-                            <?php $away_total += $score->away_team_score; ?>
-                        @endforeach
-
-
-                        <?php $home_total_final = $match->home_team_final_score; ?>
-
-                        <?php $home_total = 0; ?>
-                        @foreach ($scores as $score)
-                            <?php $home_total += $score->home_team_score; ?>
-                        @endforeach
+                                <?php if ($match->game_second != null || $match->game_second != ''): ?>
+                                &nbsp;&nbsp;|&nbsp;&nbsp; {{$match->game_minute}}:{{$match->game_second}}
+                            <?php endif;
+                    endif; ?>
 
                     @if ($match->game_status > 0)
                         <h2>
                             <span class="away-total">
-                            @if($match->game_status === 1)
-                                @if(isset($match->away_team_final_score))
-                                    {{ $away_total_final }}
-                                @endif
+                            @if(isset($match->away_team_final_score))
+                                {{ $match->away_team_final_score }}
                             @else
-                                {{$away_total}}
+                                {{ $match->away_score_sum }}
                             @endif
                             </span> - <span class="home-total">
-                            @if($match->game_status == 1)
-                                @if(isset($match->home_team_final_score))
-                                    {{ $home_total_final }}
-                                @endif
+                            @if(isset($match->home_team_final_score))
+                                {{ $match->home_team_final_score }}
                             @else
-                                {{$home_total}}
+                                {{ $match->home_score_sum }}
                             @endif
                             </span>
                         </h2>
                     @endif
 
                 </div><!--  Score Information  -->
+
+                <?php if ($match->possession === $match->home_team_id): ?>
+                    <span class="ml-2 mr-2"><i class="fas fa-football-ball"></i></span>
+                <?php else: ?>
+                    <span class="ml-2 mr-2"><i class="fas fa-football-ball text-white"></i></span>
+                <?php endif; ?>
 
                 <div class="home-team">
 
@@ -305,39 +301,9 @@
 
                 <div class="card-body">
 
-                    <div class="row mb-3">
-
-                        <div class="col">
-
-                            <label for="game_status">Game Minute</label>
-                            <select class="form-control" id="game_minute" name="game_minute">
-                                <option value="">Select A Game Minute</option>
-                                @for ($i = 1; $i < 151; $i++)
-                                    <option value="{{$i}}" @if($match->game_minute == $i) selected @endif>{{$i}}</option>
-                                @endfor
-                            </select>
-
-                        </div>
-
-                        <div class="col">
-
-                            <label for="game_status">Game Second</label>
-                            <select class="form-control" id="game_second" name="game_second">
-                                <option value="">Select A Game Second</option>
-                                @for ($i = 1; $i < 59; $i++)
-                                    <option value="{{$i}}" @if($match->game_second == $i) selected @endif>{{$i}}</option>
-                                @endfor
-                            </select>
-
-                        </div>
-
-                    </div>
-
                     <div class="row">
 
                         <div class="col">
-
-                            
 
                             <div class="form-group">
                                 <label for="game_status">Game Status</label>
@@ -354,22 +320,7 @@
                                         @for ($i = 4; $i < count($scores); $i++)
                                             <option value={{$i+3}} @if($match->game_status == $i+3) selected @endif><?php echo $numberFormatter->format($i-3); ?> Overtime</option>
                                         @endfor
-                                        <?php /*
-                                        <?php $num =  count($match['scores']); ?>
-                                        @for ($i = 0; $i < $num; $i++)
-                                            <?php $j = $i + 5; ?>
-                                            <option value="{{$j}}" @if($match->game_status == $j) selected @endif>
-                                                <?php
-                                                $numberFormatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL);
-                                                if ($i == 0):
-                                                    echo 'Overtime';
-                                                else:
-                                                    echo $numberFormatter->format($i + 1) . ' Overtime';
-                                                endif;
-                                                ?>
-                                            </option>
-                                        @endfor
-                                        */?>
+                                        
                                     @endif
                                 </select>
                             </div>
@@ -378,47 +329,104 @@
 
                     </div><!--  Row  -->
 
-                    <div class="game-summary-details">
+                    <div class="game-time">
 
-                    <div class="row">
+                        <div class="row mb-3">
 
-                        <div class="col-6">
+                            <div class="col">
 
-                            <div class="form-group">
-                                <label for="away_team_final_score">{{$match->away_team->school_name}} Final Score</label>
-                                <input type="text" class="form-control" value="{{$match->away_team_final_score}}" name="away_team_final_score">
+                                <label for="game_status">Game Minute</label>
+                                <select class="form-control" id="game_minute" name="game_minute">
+                                    <option value="">Select A Game Minute</option>
+                                    @for ($i = 1; $i < 151; $i++)
+                                        <option value="{{$i}}" @if($match->game_minute == $i) selected @endif>{{$i}}</option>
+                                    @endfor
+                                </select>
+
+                            </div>
+
+                            <div class="col">
+
+                                <label for="game_status">Game Second</label>
+                                <select class="form-control" id="game_second" name="game_second">
+                                    <option value="">Select A Game Second</option>
+                                    <option value="00" @if($match->game_second == "00") selected @endif>00</option>
+                                    <option value="01" @if($match->game_second == "01") selected @endif>01</option>
+                                    <option value="02" @if($match->game_second == "02") selected @endif>02</option>
+                                    <option value="03" @if($match->game_second == "03") selected @endif>03</option>
+                                    <option value="04" @if($match->game_second == "04") selected @endif>04</option>
+                                    <option value="05" @if($match->game_second == "05") selected @endif>05</option>
+                                    <option value="06" @if($match->game_second == "06") selected @endif>06</option>
+                                    <option value="07" @if($match->game_second == "07") selected @endif>07</option>
+                                    <option value="08" @if($match->game_second == "08") selected @endif>08</option>
+                                    <option value="09" @if($match->game_second == "09") selected @endif>09</option>
+                                    @for ($i = 10; $i < 59; $i++)
+                                        <option value="{{$i}}" @if($match->game_second == $i) selected @endif>{{$i}}</option>
+                                    @endfor
+                                </select>
+
                             </div>
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="row mb-3">
 
-                            <div class="form-group">
-                                <label for="game_status">{{$match->home_team->school_name}} Final Score</label>
-                                <input type="text" class="form-control" value="{{$match->home_team_final_score}}" name="home_team_final_score">
+                            <div class="col-6">
+
+                                <label for="possession">Who Has Possession?</label>
+                                <select class="form-control" id="possession" name="possession">
+                                    <option value="">Select Team</option>
+                                    <option value="{{$match->away_team_id}}" @if($match->possession == $match->away_team_id) selected @endif>{{$match->away_team->school_name}}</option>
+                                    <option value="{{$match->home_team_id}}" @if($match->possession == $match->home_team_id) selected @endif>{{$match->home_team->school_name}}</option>
+                                </select>
+
                             </div>
-
-                        </div>
-
-                    </div><!--  Row  -->
-
-                    <div class="row">
-
-                        <div class="col-lg-6">
-
-                            <label for="winning_team">Who Won?</label>
-                            <select class="form-control" id="winning_team" name="winning_team">
-                                <option value="">Select An Option</option>
-                                <option value="{{$match->away_team_id}}" @if($match->winning_team == $match->away_team_id) selected @endif>{{$match->away_team->school_name}}</option>
-                                <option value="{{$match->home_team_id}}" @if($match->winning_team == $match->home_team_id) selected @endif>{{$match->home_team->school_name}}</option>
-                            </select>
-                            <small id="emailHelp" class="form-text text-muted">If the match ended in a tie, don't select a team here.</small>
-
-                            <input type="hidden" id="losing_team" name="losing_team" value="">
 
                         </div>
 
                     </div>
+
+                    <div class="game-summary-details">
+
+                        <div class="row">
+
+                            <div class="col-6">
+
+                                <div class="form-group">
+                                    <label for="away_team_final_score">{{$match->away_team->school_name}} Final Score</label>
+                                    <input type="text" id="away_team_final_score" class="form-control" value="{{$match->away_team_final_score}}" name="away_team_final_score">
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <div class="form-group">
+                                    <label for="game_status">{{$match->home_team->school_name}} Final Score</label>
+                                    <input type="text" id="home_team_final_score" class="form-control" value="{{$match->home_team_final_score}}" name="home_team_final_score">
+                                </div>
+
+                            </div>
+
+                        </div><!--  Row  -->
+
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <label for="winning_team">Who Won?</label>
+                                <select class="form-control" id="winning_team" name="winning_team">
+                                    <option value="">Select An Option</option>
+                                    <option value="{{$match->away_team_id}}" @if($match->winning_team == $match->away_team_id) selected @endif>{{$match->away_team->school_name}}</option>
+                                    <option value="{{$match->home_team_id}}" @if($match->winning_team == $match->home_team_id) selected @endif>{{$match->home_team->school_name}}</option>
+                                </select>
+                                <small id="emailHelp" class="form-text text-muted">If the match ended in a tie, don't select a team here.</small>
+
+                                <input type="hidden" id="losing_team" name="losing_team" value="">
+
+                            </div>
+
+                        </div>
 
                     </div><!--  Game Summary Details  -->
 
@@ -426,7 +434,7 @@
 
                         <div class="col-lg-6">
 
-                            <button type="submit" class="btn btn-primary btn-block"><strong>Update</strong></button>
+                            <button type="submit" class="btn btn-primary btn-block mb-3"><strong>Update</strong></button>
 
                         </div>
 
@@ -466,11 +474,15 @@
 
     $('#losing_team').val(losingTeam);
 
-    if (qrt != 1) {
-        $('.game-summary-details').hide();
-    } else {
+    if (qrt === 1) {
         $('.game-summary-details').show();
-        $('.game-final').hide();
+        $('.game-time').hide();
+    } else if (qrt < 1) {
+        $('.game-summary-details').hide();
+        $('.game-time').hide();
+    } else {
+        $('.game-time').show();
+        $('.game-summary-details').hide();
     }
 
     $(document).ready(function(){
@@ -491,11 +503,30 @@
             var selectedValue = $(this).val();
             if(selectedValue == 1) {
                 console.log(selectedValue);
-                $('.game-summary-details').slideDown();
                 $('.game-final').slideUp();
-            } else {
+                $('.game-time').slideUp();
+                $("#game_minute").val('');
+                $("#game_second").val('');
+                $("#possession").val('');
+                $(".game-summary-details").slideDown();
+            } else if (selectedValue > 1) {
+                console.log(selectedValue);
                 $('.game-summary-details').slideUp();
+                $('.game-time').slideDown();
                 $('.game-final').slideDown();
+                $("#winning_team").val('');
+                $("#away_team_final_score").val('');
+                $("#home_team_final_score").val('');
+            } else {
+                console.log(selectedValue);
+                $('.game-time').slideUp();
+                $(".game-summary-details").slideUp();
+                $("#game_minute").val('');
+                $("#game_second").val('');
+                $("#winning_team").val('');
+                $("#away_team_final_score").val('');
+                $("#home_team_final_score").val('');
+                $("#possession").val('');
             }
         });
     });
