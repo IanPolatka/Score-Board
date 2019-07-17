@@ -19,6 +19,9 @@ Vue.component('todays-events', require('./components/TodaysEventsComponent.vue')
 
 //  Single Events
 Vue.component('baseball', require('./components/SingleEvents/Baseball.vue'));
+Vue.component('boys-soccer', require('./components/SingleEvents/BoysSoccer.vue'));
+Vue.component('football', require('./components/SingleEvents/Football.vue'));
+Vue.component('girls-soccer', require('./components/SingleEvents/GirlsSoccer.vue'));
 Vue.component('softball', require('./components/SingleEvents/Softball.vue'));
 
 Vue.filter('capitalize', function (value) {

@@ -19,7 +19,6 @@ use App\SoccerGirls;
 use App\TennisGirls;
 use App\BowlingGirls;
 use App\BasketballBoys;
-
 use App\BasketballGirls;
 
 use Illuminate\Http\Request;
