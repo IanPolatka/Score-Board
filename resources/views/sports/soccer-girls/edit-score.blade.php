@@ -408,6 +408,15 @@
 
                         </div>
 
+                        <div class="col-lg-6">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#twitterModal">
+                            <i class="fab fa-twitter mr-1"></i> Tweet Score
+                            </button>
+
+                        </div>
+
                     </div><!--  Row  -->
 
                 </div><!--  Card Body  -->
@@ -424,6 +433,9 @@
 @endsection
 
 @section('javascript')
+
+<?php // Twitter Form Modal ?>
+@include('sports.soccer-girls.twitter')
 <script>
 
     var qrt = "<?php echo $match->game_status; ?>";
