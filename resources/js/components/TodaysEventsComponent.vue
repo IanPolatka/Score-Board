@@ -24,9 +24,27 @@
 
                     </div>
 
+                    <div v-if="event.sport_name === 'boys-soccer'">
+
+                        <BoysSoccer :id="event.id" class="mb-4"></BoysSoccer>
+
+                    </div>
+
+                    <div v-if="event.sport_name === 'girls-soccer'">
+
+                        <GirlsSoccer :id="event.id" class="mb-4"></GirlsSoccer>
+
+                    </div>
+
                     <div v-if="event.sport_name === 'softball'" class="mb-4">
 
                         <Softball :id="event.id"></Softball>
+
+                    </div>
+
+                    <div v-if="event.sport_name === 'football'" class="mb-4">
+
+                        <Football :id="event.id"></Football>
 
                     </div>
 
@@ -54,13 +72,17 @@
 <script>
 
     import Baseball from './TodaysEvents/Baseball'
+    import BoysSoccer from './TodaysEvents/BoysSoccer'
     import Football from './TodaysEvents/Football'
+    import GirlsSoccer from './TodaysEvents/GirlsSoccer'
     import Softball from './TodaysEvents/Softball'
 
     export default {
         components: {
             Baseball,
+            BoysSoccer,
             Football,
+            GirlsSoccer,
             Softball
         },
         mounted() {

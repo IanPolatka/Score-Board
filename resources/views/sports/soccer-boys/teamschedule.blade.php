@@ -40,7 +40,7 @@
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/boys-soccer/2018-2019/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
+                                <option value="/boys-soccer/{{ $selectedyear[0] }}/{{$team->school_name}}" @if ($team->school_name == $selectedTeam->school_name) selected @endif>{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -63,7 +63,41 @@
 
         <div class="col-lg-8 col-md-10 col-sm-12">
 
-            <h2>{{$selectedTeam->school_name}}</h2>
+            <hr>
+
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8 col-md-10 col-sm-12">
+
+            <div class="row">
+
+                <div class="col-lg-9 col-md-8 col-sm-7 col-7">
+
+                    <h2>{{$selectedTeam->school_name}}</h2>
+
+                </div><!--  Col  -->
+
+                <div class="col-lg-3 col-md-4 col-sm-5 col-5 align-self-center">
+
+                    <select name="home_team_id"class="form-control" onChange="window.location.href=this.value">
+
+                        @foreach($years as $year)
+
+                            <option value="/boys-soccer/{{ $year->year }}/{{ $selectedTeam->school_name }}" @if ($selectedyearid[0] === $year->id) selected @endif>
+                                {{ $year->year }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div><!--  Col  -->
+
+            </div>
 
             <h5 class="text-muted">Varsity Summary</h5>
 
@@ -85,7 +119,7 @@
 
                             <p class="mb-0 text-muted">District Record</p>
 
-                            <h3>1 - 0</h3>
+                            <h3>{{$districtWins}} - {{$districtLosses}}</h3>
 
                         </div>
 
@@ -185,6 +219,14 @@
 
                         </div><!--  Row  -->
 
+                        @if ($game->tournament_name)
+
+                            <hr>
+
+                            {{$game->tournament_name}}
+
+                        @endif
+
                     </a>
                 @empty
                     <a href="#" class="list-group-item list-group-item-action">No Games Listed</a>
@@ -282,6 +324,14 @@
 
                         </div><!--  Row  -->
 
+                        @if ($game->tournament_name)
+
+                            <hr>
+
+                            {{$game->tournament_name}}
+
+                        @endif
+
                     </a>
                 @empty
                     <a href="#" class="list-group-item list-group-item-action">No Games Listed</a>
@@ -376,6 +426,14 @@
                             @endif
 
                         </div><!--  Row  -->
+
+                        @if ($game->tournament_name)
+
+                            <hr>
+
+                            {{$game->tournament_name}}
+
+                        @endif
 
                     </a>
                 @empty

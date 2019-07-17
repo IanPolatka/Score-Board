@@ -36,7 +36,7 @@
                 <div class="col">
 
                     <div class="form-group mb-0">
-                        <label for="exampleFormControlSelect1">Jump To A Team</label>
+                        <label for="exampleFormControlSelect1"><h6 class="mb-0">Jump To A Team</h6></label>
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
@@ -47,13 +47,15 @@
 
                 </div>
 
-                @role(['superadministrator','administrator'])
+                @role(['superadministrator','administrator', 'editor'])
                     <div class="col align-self-end">
                         <a href="{{ route('girlssoccer.create') }}" class="btn btn-primary btn-block">Create Match</a>
                     </div>
                 @endrole
 
             </div><!--  Row  -->
+
+            <hr>
 
             <h5 class="text-muted">Today's Events</h5>
             <div class="list-group">

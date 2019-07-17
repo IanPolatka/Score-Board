@@ -102,38 +102,19 @@
                                 endif;?>
                     <?php endif; ?>
 
-                        <?php $away_total_final = $match->away_team_final_score; ?>
-
-                        <?php $away_total = 0; ?>
-                        @foreach ($match->scores as $score)
-                            <?php $away_total += $score->away_team_score; ?>
-                        @endforeach
-
-
-                        <?php $home_total_final = $match->home_team_final_score; ?>
-
-                        <?php $home_total = 0; ?>
-                        @foreach ($match->scores as $score)
-                            <?php $home_total += $score->home_team_score; ?>
-                        @endforeach
-
                     @if ($match->game_status > 0)
                         <h2>
                             <span class="away-total">
-                            @if($match->game_status === 1)
-                                @if(isset($match->away_team_final_score))
-                                    {{ $away_total_final }}
-                                @endif
+                            @if(isset($match->away_team_final_score))
+                                {{ $match->away_team_final_score }}
                             @else
-                                {{$away_total}}
+                                {{ $match->away_score_sum }}
                             @endif
                             </span> - <span class="home-total">
-                            @if($match->game_status == 1)
-                                @if(isset($match->home_team_final_score))
-                                    {{ $home_total_final }}
-                                @endif
+                            @if(isset($match->home_team_final_score))
+                                {{ $match->home_team_final_score }}
                             @else
-                                {{$home_total}}
+                                {{ $match->home_score_sum }}
                             @endif
                             </span>
                         </h2>
@@ -322,18 +303,6 @@
 
                         <div class="col">
 
-                            <label for="game_status">Game Minute</label>
-                            <select class="form-control" id="game_minute" name="game_minute">
-                                <option value="">Select A Game Minute</option>
-                                @for ($i = 1; $i < 151; $i++)
-                                    <option value="{{$i}}" @if($match->game_minute == $i) selected @endif>{{$i}}</option>
-                                @endfor
-                            </select>
-
-                        </div>
-
-                        <div class="col">
-
                             <div class="form-group">
                                 <label for="game_status">Game Status</label>
                                 <select class="form-control" id="game_status" name="game_status">
@@ -363,6 +332,18 @@
 
                         </div>
 
+                        <div class="col">
+
+                            <label for="game_status">Game Minute</label>
+                            <select class="form-control" id="game_minute" name="game_minute">
+                                <option value="">Select A Game Minute</option>
+                                @for ($i = 1; $i < 151; $i++)
+                                    <option value="{{$i}}" @if($match->game_minute == $i) selected @endif>{{$i}}</option>
+                                @endfor
+                            </select>
+
+                        </div>
+
                     </div><!--  Row  -->
 
                     <div class="game-summary-details">
@@ -373,7 +354,7 @@
 
                             <div class="form-group">
                                 <label for="away_team_final_score">{{$match->away_team->school_name}} Final Score</label>
-                                <input type="text" class="form-control" value="{{$match->away_team_final_score}}" name="away_team_final_score">
+                                <input id="away_team_final_score" type="text" class="form-control" value="{{$match->away_team_final_score}}" name="away_team_final_score">
                             </div>
 
                         </div>
@@ -382,7 +363,7 @@
 
                             <div class="form-group">
                                 <label for="game_status">{{$match->home_team->school_name}} Final Score</label>
-                                <input type="text" class="form-control" value="{{$match->home_team_final_score}}" name="home_team_final_score">
+                                <input id="home_team_final_score" type="text" class="form-control" value="{{$match->home_team_final_score}}" name="home_team_final_score">
                             </div>
 
                         </div>
@@ -472,27 +453,22 @@ $(document).ready(function(){
         }
     });
 
-    // $("#game_status").change(function(){
-    //     if($(this).val() != 1) {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //     } else {
-    //         $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-    //         $('.game-summary-details').slideUp('slow');
-    //     }
-    // });
-
     $("#game_status").change(function(){
         var selectedValue = $(this).val();
         if(selectedValue == 1) {
             console.log(selectedValue);
-            // $('.game-final').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
-            // $('.game-summary-details').animate({ height: 'toggle', opacity: 'toggle' }, 'slow');
             $('.game-summary-details').slideDown();
             $('.game-final').slideUp();
+            $('#game_minute').val('');
+        } else if (selectedValue == 3) {
+            $('#game_minute').val('');
+            $('#away_team_final_score').val('');
+            $('#home_team_final_score').val('');
         } else {
             $('.game-summary-details').slideUp();
             $('.game-final').slideDown();
+            $('#away_team_final_score').val('');
+            $('#home_team_final_score').val('');
         }
     });
 });

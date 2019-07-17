@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SoccerBoys extends Model
 {
-    protected $appends = ['sport_name'];
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
 
     protected $fillable = [
         'year_id', 'team_level', 'date', 'scrimmage', 'tournament_name', 'away_team_id', 'home_team_id', 'time_id', 'district_game', 'game_status', 'game_minute', 'away_team_final_score', 'home_team_final_score', 'winning_team', 'losing_team', 'location', 'created_by', 'modified_by',
@@ -29,7 +29,7 @@ class SoccerBoys extends Model
 
     public function game_time()
     {
-        return $this->belongsTo(\App\Time::class, 'time_id');
+        return $this->belongsTo(Time::class, 'time_id');
     }
 
     public function user_created()
@@ -67,18 +67,30 @@ class SoccerBoys extends Model
         return $this->belongsTo(\App\Year::class, 'year_id');
     }
 
-    public function getAwayTeamTotalScore()
-    {
-        $away_total = 0;
-        foreach ($this->away_team_goals as $score) {
-            $away_total += $score->away_team_score;
-        }
-
-        return $away_total;
-    }
-
     public function getSportNameAttribute()
     {
         return 'boys-soccer';
+    }
+
+    public function getAwayScoreSumAttribute()
+    {
+        $totalAwayScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalAwayScore += $score->away_team_score;
+        }
+
+        return $totalAwayScore;
+    }
+
+    public function getHomeScoreSumAttribute()
+    {
+        $totalHomeScore = 0;
+
+        foreach ($this->scores as $score) {
+            $totalHomeScore += $score->home_team_score;
+        }
+
+        return $totalHomeScore;
     }
 }

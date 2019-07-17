@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<a :href="'/football/' + game.id" class="link-no-decoration text-dark">
+		<a :href="'/girls-soccer/' + game.id" class="link-no-decoration text-dark">
 			<div v-if="isLoading" class="card">
 
 				<div class="card-body">
@@ -15,28 +15,27 @@
 				
 				<div class="card-header">
 					<div class="d-flex justify-content-between">
-						<span><strong>Football</strong></span>
+						<span><strong>Girls Soccer</strong></span>
 						<span v-if="game.game_status === 1">
 							<strong>Final</strong>
 						</span>
 						<span v-else-if="game.game_status > 1">
-							<strong v-if="game.game_status === 4">
+							<strong v-if="game.game_status === 2">
+								1st Half
+							</strong>
+							<strong v-if="game.game_status === 3">
 								Halftime
 							</strong>
-							<strong v-else-if="game.game_status > 1 && game.game_status < 4">
-								{{game.game_status - 1 }} Quarter
+							<strong v-if="game.game_status === 4">
+								2nd Half
 							</strong>
-							<strong v-else-if="game.game_status > 5 && game.game_status < 7">
-								{{game.game_status - 2 }} Quarter
-							</strong>
-							<strong v-else-if="game.game_status > 6">
-								{{game.game_status - 6 }} Overtime
+							<strong v-else-if="game.game_status > 4">
+								{{game.game_status - 3 }} Overtime
 							</strong>
 						</span>
 						<span v-else>
 							<strong>{{game.game_time.time}}</strong>
 						</span>
-						<!-- <strong>{{ game.game_time.time }}</strong> -->
 					</div>
 				</div>
 				<div class="card-body">
@@ -87,7 +86,7 @@
 		data() {
 			return {
 				game: [],
-				id: this.id,
+				matchId: this.id,
 				isLoading: true
 			}
 		},
@@ -99,7 +98,7 @@
         },
 		methods: {
 			fetchEvent() {
-				axios.get('/api/football/' + this.id)
+				axios.get('/api/soccer-girls/' + this.matchId)
 				.then(res =>  {
 	                    this.game = res.data,
 	                    this.isLoading = false

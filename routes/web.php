@@ -104,7 +104,7 @@ Route::get('/boys-soccer/{id}/edit-score', 'SoccerBoysController@editScore')->na
 
 Route::patch('/boys-soccer/{id}/match-update', 'SoccerBoysController@gameUpdate')->name('boys.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/boys-soccer/2018-2019/{team}', 'SoccerBoysController@teamSchedule')->name('boyssoccer.teamSchedule');
+Route::get('/boys-soccer/{year}/{team}', 'SoccerBoysController@teamSchedule')->name('boyssoccer.teamSchedule');
 
 Route::post('/boys-soccer-score-create/{id}', 'SoccerBoysController@scoreCreate')->name('boys-soccer-score-create');
 Route::delete('/boys-soccer-score-delete/{id}', 'SoccerBoysController@scoreDelete')->name('boys-soccer-score-delete');
@@ -126,7 +126,7 @@ Route::get('/girls-soccer/{id}/edit-score', 'SoccerGirlsController@editScore')->
 
 Route::patch('/girls-soccer/{id}/match-update', 'SoccerGirlsController@gameUpdate')->name('girls.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
-Route::get('/girls-soccer/2018-2019/{team}', 'SoccerGirlsController@teamSchedule')->name('girlssoccer.teamSchedule');
+Route::get('/girls-soccer/{year}/{team}', 'SoccerGirlsController@teamSchedule')->name('girlssoccer.teamSchedule');
 
 Route::post('/girls-soccer-score-create/{id}', 'SoccerGirlsController@scoreCreate')->name('girls-soccer-score-create');
 Route::delete('/girls-soccer-score-delete/{id}', 'SoccerGirlsController@scoreDelete')->name('girls-soccer-score-delete');
