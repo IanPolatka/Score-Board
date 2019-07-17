@@ -474,7 +474,7 @@
 
     $('#losing_team').val(losingTeam);
 
-    if (qrt === 1) {
+    if (qrt == 1) {
         $('.game-summary-details').show();
         $('.game-time').hide();
     } else if (qrt < 1) {

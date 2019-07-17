@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Year;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Football extends Model
 {
     protected $table = 'football';
 
-    protected $appends = ['sport_name'];
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
 
     protected $fillable = [
         'year_id',
@@ -79,7 +81,7 @@ class Football extends Model
 
     public function the_year()
     {
-        return $this->belongsTo(\App\Year::class, 'year_id');
+        return $this->belongsTo(Year::class, 'year_id');
     }
 
     public function getSportNameAttribute()

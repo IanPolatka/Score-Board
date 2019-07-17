@@ -47,16 +47,16 @@ $away_total_final = $match->away_team_final_score; ?>
             <label>Tweet Text:</label>
             <textarea class="form-control" name="tweet" rows="7">
 @if ($match->game_status == 1)
-🏈 Final:
+🏈 Football Final:
 @else
-🏈 Update:
+🏈 Football Update:
 @endif
 @if (!empty($match->away_team_final_score) && !empty($match->home_team_final_score))
-{{$match->away_team->school_name}} {{$away_total_final}}
-{{$match->home_team->school_name}} {{$home_total_final}}
+{{$match->away_team->school_name}} {{$match->away_team_final_score}}
+{{$match->home_team->school_name}} {{$match->home_team_final_score}}
 @else
-{{$match->away_team->school_name}} {{$away_total}}
-{{$match->home_team->school_name}} {{$home_total}}
+{{$match->away_team->school_name}} {{$match->away_score_sum}}
+{{$match->home_team->school_name}} {{$match->home_score_sum}}
 @endif
 @if ($match->game_status > 1)
 
@@ -75,7 +75,10 @@ echo '4th Quarter';
 } else {
 echo $numberFormatter->format($match->game_status - 4) . ' OT';
 } ?>
+@endif
 
+@if (!empty($match->game_second))
+{{$match->game_minute}}:{{$match->game_second}}
 @endif
 
 #camelpride
