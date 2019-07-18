@@ -476,6 +476,8 @@ $(document).ready(function(){
             $('#game_minute').val('');
             $('#away_team_final_score').val('');
             $('#home_team_final_score').val('');
+        } else if (selectedValue == 0) {
+            $('#game_minute').val('');
         } else {
             $('.game-summary-details').slideUp();
             $('.game-final').slideDown();
