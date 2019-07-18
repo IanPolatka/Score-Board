@@ -65,6 +65,7 @@ Route::get('/soccer-boys/schedule/{year}/{team}/{teamlevel}', 'SoccerBoysControl
 Route::get('/soccer-boys/todays-events/{team}', 'SoccerBoysController@todaysEvents');
 Route::get('/soccer-boys/match/{id}', 'SoccerBoysController@singleMatch');
 Route::get('/soccer-boys/year-summary/{year}/{team}', 'SoccerBoysController@yearSummary');
+Route::get('/soccer-boys/{team}/{year}/roster', 'SoccerBoysRosterController@index');
 
 ///////////////////////////////////////////////////////////////////////
 //  Girls Soccer
@@ -74,6 +75,7 @@ Route::get('/soccer-girls/schedule/{year}/{team}/{teamlevel}', 'SoccerGirlsContr
 Route::get('/soccer-girls/todays-events/{team}', 'SoccerGirlsController@todaysEvents');
 Route::get('/soccer-girls/match/{id}', 'SoccerGirlsController@singleMatch');
 Route::get('/soccer-girls/year-summary/{year}/{team}', 'SoccerGirlsController@yearSummary');
+Route::get('/soccer-girls/{team}/{year}/roster', 'SoccerGirlsRosterController@index');
 
 ///////////////////////////////////////////////////////////////////////
 //  Cross Country
@@ -88,6 +90,7 @@ Route::get('/football/{id}', 'FootballController@apiGameId');
 Route::get('/football/schedule/{year}/{team}/{teamlevel}', 'FootballController@apiteamschedule');
 Route::get('/football/todays-events/{team}', 'FootballController@todaysEvents');
 Route::get('/football/year-summary/{year}/{team}', 'FootballController@yearSummary');
+Route::get('/football/{team}/{year}/roster', 'FootballRosterController@index');
 
 ///////////////////////////////////////////////////////////////////////
 //  Softball
@@ -126,3 +129,10 @@ Route::get('/track-and-field/todays-events/{team}', 'TrackController@todaysEvent
 ///////////////////////////////////////////////////////////////////////
 Route::get('/wrestling/schedule/{year}/{team}/{teamlevel}', 'WrestlingController@apiteamschedule');
 Route::get('/wrestling/todays-events/{team}', 'WrestlingController@todaysEvents');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Volleyball
+///////////////////////////////////////////////////////////////////////
+Route::get('/volleyball/{team}/{year}/roster', 'VolleyballRosterController@index');
