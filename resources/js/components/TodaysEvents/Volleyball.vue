@@ -28,7 +28,7 @@
 						<span><img style="height: 40px; width: auto; margin-right: 10px;" 
 								   :src="'/images/team-logos/' + match.away_team.logo" 
 								   alt="match.away_team.school_name">
-							   <a :href="'/football/' + match.the_year.year + '/' + match.away_team.school_name">{{match.away_team.school_name}}</a>
+							   <a :href="'/volleyball/' + match.the_year.year + '/' + match.away_team.school_name">{{match.away_team.school_name}}</a>
 						</span>
 						<span v-if="match.away_team_final_score">
 							{{match.away_team_final_score}}
@@ -41,7 +41,7 @@
 						<span><img style="height: 40px; width: auto; margin-right: 10px;" 
 								   :src="'/images/team-logos/' + match.home_team.logo" 
 								   alt="match.home_team.school_name">
-							  <a :href="'/football/' + match.the_year.year + '/' + match.home_team.school_name">{{match.home_team.school_name}}</a>
+							  <a :href="'/volleyball/' + match.the_year.year + '/' + match.home_team.school_name">{{match.home_team.school_name}}</a>
 						</span>
 						<span v-if="match.home_team_final_score">
 							{{match.home_team_final_score}}
