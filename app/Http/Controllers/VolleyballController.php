@@ -311,8 +311,6 @@ class VolleyballController extends Controller
 
         $varsity = Volleyball::with('away_team')
                              ->with('home_team')
-                             ->with('away_team_district')
-                             ->with('home_team_district')
                              ->where(function ($query) use ($id) {
                                 $query->where('away_team_id', '=', $id)
                                     ->orWhere('home_team_id', '=', $id);
@@ -324,8 +322,6 @@ class VolleyballController extends Controller
 
         $juniorvarsity = Volleyball::with('away_team')
                                	   ->with('home_team')
-                                   ->with('away_team_district')
-                                   ->with('home_team_district')
                                    ->where(function ($query) use ($id) {
                                    		$query->where('away_team_id', '=', $id)
                                     	->orWhere('home_team_id', '=', $id);
@@ -337,8 +333,6 @@ class VolleyballController extends Controller
 
         $freshman = Volleyball::with('away_team')
                               ->with('home_team')
-                              ->with('away_team_district')
-                              ->with('home_team_district')
                               ->where(function ($query) use ($id) {
                                 $query->where('away_team_id', '=', $id)
                                 ->orWhere('home_team_id', '=', $id);
