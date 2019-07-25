@@ -99,6 +99,7 @@
                                 <a class="nav-link" href="{{ route('football.index') }}">{{ __('Football') }}</a>
                                 <a class="nav-link" href="{{ route('boyssoccer.index') }}">{{ __('Boys Soccer') }}</a>
                                 <a class="nav-link" href="{{ route('girlssoccer.index') }}">{{ __('Girls Soccer') }}</a>
+                                <a class="nav-link" href="{{ route('volleyball.index') }}">{{ __('Volleyball') }}</a>
                             </div>
                         </li>
                         <!-- Authentication Links -->

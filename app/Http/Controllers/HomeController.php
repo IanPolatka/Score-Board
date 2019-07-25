@@ -20,6 +20,7 @@ use App\TennisGirls;
 use App\BowlingGirls;
 use App\BasketballBoys;
 use App\BasketballGirls;
+use App\Volleyball;
 
 use Illuminate\Http\Request;
 
@@ -133,6 +134,11 @@ class HomeController extends Controller
                                      ->orderBy('time_id', 'desc')
                                      ->get();
 
+        $volleyball = Volleyball::where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('time_id', 'desc')
+                                     ->get();
+
         $array = array_merge($baseball->toArray(),
                              $basketball_girls->toArray(),
                              $basketball_boys->toArray(),
@@ -146,10 +152,9 @@ class HomeController extends Controller
                              $tennis_boys->toArray(),
                              $tennis_girls->toArray(),
                              $track->toArray(),
-                             $wrestling->toArray()
+                             $wrestling->toArray(),
+                             $volleyball->toArray()
                         );
-
-        //$result = $basketball_boys->toBase()->merge($basketball_girls->toBase(), $baseball->toBase());
 
         return Response::json($array);
     }
@@ -364,6 +369,18 @@ class HomeController extends Controller
                                ->where('date', Carbon::today('America/New_York'))
                                ->get();
 
+        $volleyball = Volleyball::with('away_team')
+                                ->with('home_team')
+                                ->with('away_team')
+                                ->with('game_time')
+                                ->with('user_created')
+                                ->with('user_modified')
+                                ->with('scores')
+                                ->with('the_year')
+                                ->where('team_level', 1)
+                                ->where('date', Carbon::today('America/New_York'))
+                                ->get();
+
         $array = array_merge($baseball->toArray(),
                              $basketball_girls->toArray(),
                              $basketball_boys->toArray(),
@@ -377,10 +394,9 @@ class HomeController extends Controller
                              $tennis_boys->toArray(),
                              $tennis_girls->toArray(),
                              $track->toArray(),
-                             $wrestling->toArray()
+                             $wrestling->toArray(),
+                             $volleyball->toArray()
                         );
-
-        //$result = $basketball_boys->toBase()->merge($basketball_girls->toBase(), $baseball->toBase());
 
         return Response::json($array);
     }

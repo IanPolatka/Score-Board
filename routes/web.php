@@ -285,6 +285,8 @@ Route::patch('/girls-tennis/{id}/match-update', 'TennisGirlsController@gameUpdat
 
 Route::get('/girls-tennis/2018-2019/{team}', 'TennisGirlsController@teamSchedule')->name('girls-tennis.teamSchedule');
 
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Track
 ///////////////////////////////////////////////////////////////////////
@@ -300,6 +302,34 @@ Route::put('/track-and-field/{id}/update', 'TrackController@update')->name('trac
 Route::patch('/track-and-field/{id}/match-update', 'TrackController@gameUpdate')->name('track.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/track-and-field/2018-2019/{team}', 'TrackController@teamSchedule')->name('track.teamSchedule');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Volleyball
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/volleyball', 'VolleyballController@index')->name('volleyball.index');
+Route::get('/volleyball/create', 'VolleyballController@create')->name('volleyball.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/volleyball/create', 'VolleyballController@store')->name('volleyball-create-game')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/volleyball/delete/{id}', 'VolleyballController@destroy');
+Route::get('/volleyball/{id}', 'VolleyballController@show')->name('volleyball-show');
+Route::get('/volleyball/{id}/edit', 'VolleyballController@edit')->name('volleyball-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/volleyball/{id}/update', 'VolleyballController@update')->name('volleyball-edit-match')->middleware('role:superadministrator|administrator|editor');
+Route::get('/volleyball/{id}/edit-score', 'VolleyballController@editScore')->name('volleyball-score-edit')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/volleyball/{id}/match-update', 'VolleyballController@gameUpdate')->name('volleyball.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/volleyball/{year}/{team}', 'VolleyballController@teamSchedule')->name('volleyball.teamSchedule');
+
+Route::post('/volleyball-score-create/{id}', 'VolleyballController@scoreCreate')->name('volleyball-score-create');
+Route::delete('/volleyball-score-delete/{id}', 'VolleyballController@scoreDelete')->name('volleyball-score-delete');
+
+Route::patch('/volleyball-game-update/{id}', 'VolleyballController@storeGameScore');
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////
 //  Wrestling
