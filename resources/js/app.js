@@ -19,6 +19,8 @@ Vue.component('todays-events', require('./components/TodaysEventsComponent.vue')
 
 //  Single Events
 Vue.component('baseball', require('./components/SingleEvents/Baseball.vue'));
+Vue.component('boys-golf', require('./components/SingleEvents/BoysGolf.vue'));
+Vue.component('girls-golf', require('./components/SingleEvents/GirlsGolf.vue'));
 Vue.component('boys-soccer', require('./components/SingleEvents/BoysSoccer.vue'));
 Vue.component('football', require('./components/SingleEvents/Football.vue'));
 Vue.component('girls-soccer', require('./components/SingleEvents/GirlsSoccer.vue'));

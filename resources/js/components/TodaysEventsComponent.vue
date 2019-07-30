@@ -24,6 +24,18 @@
 
                     </div>
 
+                    <div v-if="event.sport_name === 'boys-golf'" class="mb-4">
+
+                        <BoysGolf :id="event.id"></BoysGolf>
+
+                    </div>
+
+                    <div v-if="event.sport_name === 'girls-golf'" class="mb-4">
+
+                        <GirlsGolf :id="event.id"></GirlsGolf>
+
+                    </div>
+
                     <div v-if="event.sport_name === 'boys-soccer'">
 
                         <BoysSoccer :id="event.id" class="mb-4"></BoysSoccer>
@@ -78,6 +90,8 @@
 <script>
 
     import Baseball from './TodaysEvents/Baseball'
+    import BoysGolf from './TodaysEvents/BoysGolf'
+    import GirlsGolf from './TodaysEvents/GirlsGolf'
     import BoysSoccer from './TodaysEvents/BoysSoccer'
     import Football from './TodaysEvents/Football'
     import GirlsSoccer from './TodaysEvents/GirlsSoccer'
@@ -87,6 +101,8 @@
     export default {
         components: {
             Baseball,
+            BoysGolf,
+            GirlsGolf,
             BoysSoccer,
             Football,
             GirlsSoccer,

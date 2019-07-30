@@ -23,6 +23,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::redirect('home', '/');
 
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Baseball
 ///////////////////////////////////////////////////////////////////////
@@ -44,6 +46,8 @@ Route::post('/baseball-score-create/{id}', 'BaseballController@scoreCreate')->na
 Route::delete('/baseball-score-delete/{id}', 'BaseballController@scoreDelete')->name('baseball-score-delete');
 
 Route::patch('/baseball-inning-update/{id}', 'BaseballController@storeGameHalf');
+
+
 
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Boys
@@ -67,6 +71,8 @@ Route::delete('/boys-basketball-score-delete/{id}', 'BasketballBoysController@sc
 
 Route::patch('/boys-basketball-half-update/{id}', 'BasketballBoysController@storeGameHalf');
 
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Girls
 ///////////////////////////////////////////////////////////////////////
@@ -88,6 +94,8 @@ Route::post('/girls-basketball-score-create/{id}', 'BasketballGirlsController@sc
 Route::delete('/girls-basketball-score-delete/{id}', 'BasketballGirlsController@scoreDelete')->name('basketball-girls-score-delete');
 
 Route::patch('/girls-basketball-half-update/{id}', 'BasketballGirlsController@storeGameHalf');
+
+
 
 ///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
@@ -111,6 +119,8 @@ Route::delete('/boys-soccer-score-delete/{id}', 'SoccerBoysController@scoreDelet
 
 Route::patch('/boys-soccer-half-update/{id}', 'SoccerBoysController@storeGameHalf');
 
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Girls Soccer
 ///////////////////////////////////////////////////////////////////////
@@ -133,6 +143,8 @@ Route::delete('/girls-soccer-score-delete/{id}', 'SoccerGirlsController@scoreDel
 
 Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameHalf');
 
+
+
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Boys
 ///////////////////////////////////////////////////////////////////////
@@ -149,6 +161,8 @@ Route::get('/boys-bowling/{id}/edit-score', 'BowlingBoysController@editScore')->
 Route::patch('/boys-bowling/{id}/match-update', 'BowlingBoysController@gameUpdate')->name('boys-bowling.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/boys-bowling/2018-2019/{team}', 'BowlingBoysController@teamSchedule')->name('boys-bowling.teamSchedule');
+
+
 
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Girls
@@ -212,6 +226,44 @@ Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 //  Football Rosters
 
 Route::get('/football/{team}/{year}/roster', 'FootballRosterController@index');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Golf Boys
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/boys-golf', 'GolfBoysController@index')->name('boysgolf.index');
+Route::get('/boys-golf/create', 'GolfBoysController@create')->name('boysgolf.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/boys-golf/create', 'GolfBoysController@store')->name('boysgolf-create-match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/boys-golf/delete/{id}', 'GolfBoysController@destroy');
+Route::get('/boys-golf/{id}', 'GolfBoysController@show')->name('boysgolf-show');
+Route::get('/boys-golf/{id}/edit', 'GolfBoysController@edit')->name('boysgolf-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/boys-golf/{id}/update', 'GolfBoysController@update')->name('boysgolf-edit-match')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/boys-golf/{id}/match-update', 'GolfBoysController@gameUpdate')->name('boysgolf.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/boys-golf/{year}/{team}', 'GolfBoysController@teamSchedule')->name('boysgolf.teamSchedule');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Golf Girls
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/girls-golf', 'GolfGirlsController@index')->name('girlsgolf.index');
+Route::get('/girls-golf/create', 'GolfGirlsController@create')->name('girlsgolf.create')->middleware('role:superadministrator|administrator|editor');
+Route::post('/girls-golf/create', 'GolfGirlsController@store')->name('girlsgolf-create-match')->middleware('role:superadministrator|administrator|editor');
+Route::delete('/girls-golf/delete/{id}', 'GolfGirlsController@destroy');
+Route::get('/girls-golf/{id}', 'GolfGirlsController@show')->name('girlsgolf-show');
+Route::get('/girls-golf/{id}/edit', 'GolfGirlsController@edit')->name('girlsgolf-edit')->middleware('role:superadministrator|administrator|editor');
+Route::put('/girls-golf/{id}/update', 'GolfGirlsController@update')->name('girlsgolf-edit-match')->middleware('role:superadministrator|administrator|editor');
+
+Route::patch('/girls-golf/{id}/match-update', 'GolfGirlsController@gameUpdate')->name('girlsgolf.match.update')->middleware('role:superadministrator|administrator|editor');
+
+Route::get('/girls-golf/{year}/{team}', 'GolfGirlsController@teamSchedule')->name('girlsgolf.teamSchedule');
+
+
 
 ///////////////////////////////////////////////////////////////////////
 //  Softball
