@@ -64,6 +64,7 @@ Route::get('/bowling-girls/todays-events/{team}', 'BowlingGirlsController@todays
 ///////////////////////////////////////////////////////////////////////
 
 Route::get('/boys-golf/{id}', 'GolfBoysController@apiMatchId');
+Route::get('/boys-golf/schedule/{year}/{team}/{teamlevel}', 'GolfBoysController@apiteamschedule');
 
 
 
@@ -72,6 +73,7 @@ Route::get('/boys-golf/{id}', 'GolfBoysController@apiMatchId');
 ///////////////////////////////////////////////////////////////////////
 
 Route::get('/girls-golf/{id}', 'GolfGirlsController@apiMatchId');
+Route::get('/girls-golf/schedule/{year}/{team}/{teamlevel}', 'GolfGirlsController@apiteamschedule');
 
 
 

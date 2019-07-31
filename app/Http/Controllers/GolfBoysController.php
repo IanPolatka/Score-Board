@@ -255,7 +255,6 @@ class GolfBoysController extends Controller
                          ->with('game_time')
                          ->with('user_created')
                          ->with('user_modified')
-                         ->with('scores')
                          ->with('the_year')
                          ->where('year_id', $theYear)
                          ->where(function ($query) use ($theteam) {

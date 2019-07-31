@@ -40,7 +40,7 @@
                         <select class="form-control" id="teams" onChange="window.location.href=this.value">
                             <option>Select A Team</option>
                             @foreach($teams as $team)
-                                <option value="/girls-soccer/2018-2019/{{$team->school_name}}">{{$team->school_name}}</option>
+                                <option value="/girls-soccer/{{ $theCurrentYear[0]->year }}/{{$team->school_name}}">{{$team->school_name}}</option>
                             @endforeach
                         </select>
                     </div>

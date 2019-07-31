@@ -87,7 +87,7 @@
 
                         @foreach($years as $year)
 
-                            <option value="/boys-soccer/{{ $year->year }}/{{ $selectedTeam->school_name }}" @if ($selectedyearid[0] === $year->id) selected @endif>
+                            <option value="/girls-soccer/{{ $year->year }}/{{ $selectedTeam->school_name }}" @if ($selectedyearid[0] === $year->id) selected @endif>
                                     {{ $year->year }}
                             </option>
 
