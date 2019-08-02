@@ -173,12 +173,18 @@
 
                         <div class="form-group">
                             <label for="time_id">Game Time</label>
-                            <select class="form-control" id="" name="time_id">
+                            <select class="form-control" id="" name="time_id" @if ($errors->has('time_id')) style="border-color: #dc3545;" @endif>
                                 <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
                                 @foreach($times as $time)
                                     <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
                                 @endforeach
                             </select>
+
+                            @if ($errors->has('time_id'))
+                                <span style="width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">
+                                    <strong>{{ $errors->first('time_id') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="form-group">
