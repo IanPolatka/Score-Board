@@ -13,6 +13,7 @@ use App\GolfGirls;
 use App\Softball;
 use App\Swimming;
 use App\Wrestling;
+use App\Crosscountry;
 use Carbon\Carbon;
 use App\SoccerBoys;
 use App\TennisBoys;
@@ -88,6 +89,11 @@ class HomeController extends Controller
                                      ->orderBy('time_id', 'desc')
                                      ->get();
 
+        $cross_country = Crosscountry::where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('time_id', 'desc')
+                                     ->get();
+
         $football = Football::where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
                                      ->orderBy('time_id', 'desc')
@@ -156,6 +162,7 @@ class HomeController extends Controller
                              $basketball_boys->toArray(),
                              $bowling_boys->toArray(),
                              $bowling_girls->toArray(),
+                             $cross_country->toArray(),
                              $football->toArray(),
                              $golf_boys->toArray(),
                              $golf_girls->toArray(),
@@ -253,6 +260,17 @@ class HomeController extends Controller
                                          $query->where('away_team_id', '=', $theteam)
                                         ->orWhere('home_team_id', '=', $theteam);
                                      })
+                                     ->where('team_level', 1)
+                                     ->where('date', Carbon::today('America/New_York'))
+                                     ->orderBy('date', 'asc')
+                                     ->get();
+
+        $cross_country = Crosscountry::with('the_team')
+                                     ->with('host_team')
+                                     ->with('game_time')
+                                     ->with('user_created')
+                                     ->with('user_modified')
+                                     ->with('the_year')
                                      ->where('team_level', 1)
                                      ->where('date', Carbon::today('America/New_York'))
                                      ->orderBy('date', 'asc')
@@ -430,6 +448,7 @@ class HomeController extends Controller
                              $basketball_boys->toArray(),
                              $bowling_boys->toArray(),
                              $bowling_girls->toArray(),
+                             $cross_country->toArray(),
                              $football->toArray(),
                              $golf_boys->toArray(),
                              $golf_girls->toArray(),
