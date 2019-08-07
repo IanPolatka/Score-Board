@@ -102,7 +102,7 @@
                             <div class="col">
 
                                 <div class="form-group">
-                                    <label for="scrimmage">Is this match a scrimmage?</label>
+                                    <label for="scrimmage">Is this a scrimmage?</label>
                                     <select class="form-control" id="" name="scrimmage">
                                         <option value="0" @if (old('scrimmage') == '0') selected @endif>No</option>
                                         <option value="1" @if (old('scrimmage') == '1') selected @endif>Yes</option>
@@ -213,7 +213,7 @@
                                 <div class="form-group">
                                     <label for="time_id">Game Time</label>
                                     <select class="form-control" id="" name="time_id">
-                                        <option value="" @if (old('time_id') === '') selected @endif>Please Select A Time</option>
+                                        <option value="" @if (old('time_id') === '') selected @endif>Select A Time</option>
                                         @foreach($times as $time)
                                             <option value="{{$time->id}}" @if (old('time_id') == $time->id) selected @endif>{{$time->time}}</option>
                                         @endforeach

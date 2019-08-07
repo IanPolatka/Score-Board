@@ -400,18 +400,18 @@
 
                     </div><!--  Game Summary Details  -->
 
-                    <div class="row mt-4">
+                    <div class="row">
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-2">
 
                             <button type="submit" class="btn btn-primary btn-block"><strong>Update</strong></button>
 
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-2">
 
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#twitterModal">
+                            <button type="button" class="btn btn-outline-primary btn-block mt-2" data-toggle="modal" data-target="#twitterModal">
                             <i class="fab fa-twitter mr-1"></i> Tweet Score
                             </button>
 
