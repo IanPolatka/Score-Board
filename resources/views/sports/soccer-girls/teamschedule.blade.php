@@ -119,7 +119,7 @@
 
                             <p class="mb-0 text-muted">District Record</p>
 
-                            <h3>1 - 0</h3>
+                            <h3>{{$districtWins}} - {{$districtLosses}}</h3>
 
                         </div>
 
