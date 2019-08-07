@@ -36,13 +36,13 @@
 
             <div class="row">
 
-                <div class="col">
+                <div class="col mb-2">
                     <a href="{{ route('boys-soccer-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Match</a> 
                 </div>
-                <div class="col">
+                <div class="col mb-2">
                     <a href="{{ route('boys-soccer-score-edit', $game->id)}}" class="btn btn-primary btn-block">Edit Match Play</a> 
                 </div>
-                <div class="col">
+                <div class="col mb-2">
 
                     <form method="POST" action="/boys-soccer/delete/{{ $game->id }}">
 
