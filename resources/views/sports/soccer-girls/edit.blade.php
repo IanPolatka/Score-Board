@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="team_level">Team Level</label>
                                     <select class="form-control" id="team_level" name="team_level" @if ($errors->has('team_level')) style="border-color: #dc3545;" @endif>
-                                        <option value="" @if ($match->team_level == '') selected @endif>Select A Team Level</option>
+                                        <option value="" @if ($match->team_level == '') selected @endif>Select A Level</option>
                                         <option value="1" @if ($match->team_level == '1') selected @endif>Varsity</option>
                                         <option value="2" @if ($match->team_level == '2') selected @endif>Junior Varsity</option>
                                         <option value="3" @if ($match->team_level == '3') selected @endif>Freshman</option>
@@ -104,7 +104,7 @@
                             <div class="col">
 
                                 <div class="form-group">
-                                    <label for="scrimmage">Is this match a scrimmage?</label>
+                                    <label for="scrimmage">Is this a scrimmage?</label>
                                     <select class="form-control" id="" name="scrimmage">
                                         <option value="0" @if ($match->scrimmage == '0') selected @endif>No</option>
                                         <option value="1" @if ($match->scrimmage == '1') selected @endif>Yes</option>
