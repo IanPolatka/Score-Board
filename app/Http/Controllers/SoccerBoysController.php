@@ -36,11 +36,11 @@ class SoccerBoysController extends Controller
     {
         $teams = Team::orderBy('school_name')->get();
 
-        $todaysGames = SoccerBoys::where('date', Carbon::today())->get();
+        $todaysGames = SoccerBoys::where('date', Carbon::today('America/New_York'))->get();
 
-        $yesterdaysGames = SoccerBoys::where('date', Carbon::yesterday())->get();
+        $yesterdaysGames = SoccerBoys::where('date', Carbon::yesterday('America/New_York'))->get();
 
-        $tomorrowsGames = SoccerBoys::where('date', Carbon::tomorrow())->get();
+        $tomorrowsGames = SoccerBoys::where('date', Carbon::tomorrow('America/New_York'))->get();
 
         $currentYearId = CurrentYear::pluck('year_id');
 

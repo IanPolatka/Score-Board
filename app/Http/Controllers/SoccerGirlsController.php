@@ -31,11 +31,11 @@ class SoccerGirlsController extends Controller
     {
         $teams = Team::orderBy('school_name')->get();
 
-        $todaysGames = SoccerGirls::where('date', Carbon::today())->get();
+        $todaysGames = SoccerGirls::where('date', Carbon::today('America/New_York'))->get();
 
-        $yesterdaysGames = SoccerGirls::where('date', Carbon::yesterday())->get();
+        $yesterdaysGames = SoccerGirls::where('date', Carbon::yesterday('America/New_York'))->get();
 
-        $tomorrowsGames = SoccerGirls::where('date', Carbon::tomorrow())->get();
+        $tomorrowsGames = SoccerGirls::where('date', Carbon::tomorrow('America/New_York'))->get();
 
         $currentYearId = CurrentYear::pluck('year_id');
 
