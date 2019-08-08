@@ -431,4 +431,47 @@ class VolleyballController extends Controller
 
         return $match;
     }
+
+    public function yearSummary($year, $team)
+    {
+        $selectedyear = Year::where('year', $year)->pluck('year');
+
+        $selectedyearid = Year::where('year', $year)->pluck('id');
+
+        $selectedteam = Team::where('school_name', $team)->get();
+
+        $selectedteamid = Team::where('school_name', $team)->pluck('id');
+
+        $the_standings = \DB::select('SELECT school_name as Team, Sum(W) AS Wins, Sum(L) AS Losses, SUM(DW) AS DistrictWins, SUM(DL) AS DistrictLoses
+                        FROM(
+
+                            SELECT
+                                home_team_id Team,
+                                IF(winning_team = ?,1,0) W,
+                                IF(losing_team = ?,1,0) L,
+                                IF(district_game = 1 && winning_team = ?,1,0) DW,
+                                IF(district_game = 1 && losing_team = ?,1,0) DL
+                                
+                            FROM volleyball
+                            WHERE team_level = 1 AND year_id = ?
+                            
+                            UNION ALL
+                              SELECT
+                                away_team_id,
+                                IF(winning_team = ?,1,0),
+                                IF(losing_team = ?,1,0),
+                                IF(district_game = 1 && winning_team = ?,1,0),
+                                IF(district_game = 1 && losing_team = ?,1,0)
+                               
+                            FROM volleyball
+                            WHERE team_level = 1 AND year_id = ?
+                              
+                        )
+                        as tot
+                        JOIN teams t ON tot.Team = t.id
+                        WHERE school_name = ?
+                        GROUP BY Team, school_name', [$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0],$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0], $selectedteam[0]['id'], $selectedteam[0]['school_name']]);
+
+        return $the_standings;
+    }
 }
