@@ -29,9 +29,9 @@
             <label>Tweet Text:</label>
             <textarea class="form-control" name="tweet" rows="7">
 @if ($match->game_status == 1)
-⚽ Boys Soccer Final:
+⚽ Girls Soccer Final:
 @else
-⚽ Boys Soccer Update:
+⚽ Girls Soccer Update:
 @endif
 @if (!empty($match->away_team_final_score) && !empty($match->home_team_final_score))
 {{$match->away_team->school_name}} {{$match->away_team_final_score}}
