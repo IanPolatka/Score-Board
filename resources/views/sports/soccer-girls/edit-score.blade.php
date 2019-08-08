@@ -47,14 +47,14 @@
                     @if($match->away_team->logo)
                             
                     <div class="the-logo">
-                        <a href="/girls-soccer/2018-2019/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
+                        <a href="/girls-soccer/{{$match->the_year->year}}/{{ $match->away_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->away_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/girls-soccer/2018-2019/{{$match->away_team->school_name}}">
+                            <a href="/girls-soccer/{{$match->the_year->year}}/{{$match->away_team->school_name}}">
                                 <span class="mobile-view">{{ $match->away_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->away_team->school_name }}</span>
                             </a>
@@ -127,14 +127,14 @@
                     @if($match->home_team->logo)
 
                     <div class="the-logo">
-                        <a href="/girls-soccer/2018-2019/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
+                        <a href="/girls-soccer/{{$match->the_year->year}}/{{ $match->home_team->school_name }}"><img class="school-logo" src="/images/team-logos/{{ $match->home_team->logo }}" /></a>
                     </div>
 
                     @endif
 
                     <div class="school-name">
                         <h5 class="inline-text text-uppercase">
-                            <a href="/girls-soccer/2018-2019/{{$match->home_team->school_name}}">
+                            <a href="/girls-soccer/{{$match->the_year->year}}/{{$match->home_team->school_name}}">
                                 <span class="mobile-view">{{ $match->home_team->abbreviated_name }}</span>
                                 <span class="non-mobile-view">{{ $match->home_team->school_name }}</span>
                             </a>
