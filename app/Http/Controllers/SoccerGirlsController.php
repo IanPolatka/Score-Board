@@ -512,31 +512,42 @@ class SoccerGirlsController extends Controller
         $selectedteam = Team::where('school_name', $team)->get();
 
         $selectedteamid = Team::where('school_name', $team)->pluck('id');
-        // $selectedDistrict = Team::where('school_name', $team)->pluck('district_soccer');
 
-        // return $selectedteam;
-
-        $the_standings = \DB::select('SELECT
-                            school_name AS Team, logo, Sum(W) AS Wins, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A, 
+        $the_standings = \DB::select('SELECT school_name as Team, Sum(W) AS Wins, Sum(T) AS Ties, Sum(L) AS Losses, SUM(F) as F, SUM(A) AS A, SUM(DW) AS DistrictWins, SUM(DL) AS DistrictLoses
                         FROM(
 
                             SELECT
                                 home_team_id Team,
                                 IF(home_team_final_score > away_team_final_score,1,0) W,
                                 IF(home_team_final_score < away_team_final_score,1,0) L,
+                                IF(home_team_final_score = away_team_final_score,1,0) T,
                                 home_team_final_score F,
                                 away_team_final_score A,
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0) DW,
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0) DL
                                 
                             FROM soccer_girls
-                            WHERE year_id = ? AND team_level = 1
+                            WHERE team_level = 1 AND year_id = ?
+                            
+                            UNION ALL
+                              SELECT
+                                away_team_id,
+                                IF(home_team_final_score < away_team_final_score,1,0),
+                                IF(home_team_final_score > away_team_final_score,1,0),
+                                IF(home_team_final_score = away_team_final_score,1,0),
+                                away_team_final_score,
+                                home_team_final_score,
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0),
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0)
+                               
+                            FROM soccer_girls
+                            WHERE team_level = 1 AND year_id = ?
                               
                         )
                         as tot
-                        JOIN teams t ON tot.Team=t.id
-                        JOIN teams_meta t ON tot.Team=t.id
+                        JOIN teams t ON tot.Team = t.id
                         WHERE school_name = ?
-                        GROUP BY Team
-                        ORDER BY wins DESC, losses ASC, school_name', [$selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']]);
+                        GROUP BY Team, school_name', [$selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']]);
 
         return $the_standings;
     }
