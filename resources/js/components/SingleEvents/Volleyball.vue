@@ -14,7 +14,7 @@
 				<div class="card-header">
 					<div class="d-flex justify-content-between">
 						<span><strong>Volleyball</strong></span>
-						<span v-if="match.winning_team != ''">
+						<span v-if="match.winning_team">
 							<strong>Final</strong>
 						</span>
 						<span v-else>
