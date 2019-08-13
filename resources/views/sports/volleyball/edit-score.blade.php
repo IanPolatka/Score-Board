@@ -13,7 +13,7 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/volleyball">volleyball</a></li>
+                    <li class="breadcrumb-item"><a href="/volleyball">Volleyball</a></li>
                     <li class="breadcrumb-item"><a href="/volleyball/{{$match->id}}">Match ID: {{$match->id}}</a></li>
                     <li class="breadcrumb-item active">Edit Match Score</li>
                   </ol>
