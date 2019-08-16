@@ -93,7 +93,7 @@ Route::get('/soccer-boys/schedule/{year}/{team}/{teamlevel}', 'SoccerBoysControl
 Route::get('/soccer-boys/todays-events/{team}', 'SoccerBoysController@todaysEvents');
 Route::get('/soccer-boys/match/{id}', 'SoccerBoysController@singleMatch');
 Route::get('/soccer-boys/year-summary/{year}/{team}', 'SoccerBoysController@yearSummary');
-Route::get('/soccer-boys/{team}/{year}/roster', 'SoccerBoysRosterController@index');
+Route::get('/boys-soccer/{team}/{year}/roster', 'SoccerBoysRosterController@index');
 
 ///////////////////////////////////////////////////////////////////////
 //  Girls Soccer
@@ -103,7 +103,7 @@ Route::get('/soccer-girls/schedule/{year}/{team}/{teamlevel}', 'SoccerGirlsContr
 Route::get('/soccer-girls/todays-events/{team}', 'SoccerGirlsController@todaysEvents');
 Route::get('/soccer-girls/match/{id}', 'SoccerGirlsController@singleMatch');
 Route::get('/soccer-girls/year-summary/{year}/{team}', 'SoccerGirlsController@yearSummary');
-Route::get('/soccer-girls/{team}/{year}/roster', 'SoccerGirlsRosterController@index');
+Route::get('/girls-soccer/{team}/{year}/roster', 'SoccerGirlsRosterController@index');
 
 ///////////////////////////////////////////////////////////////////////
 //  Cross Country

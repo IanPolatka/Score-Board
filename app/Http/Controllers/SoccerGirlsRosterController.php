@@ -15,7 +15,7 @@ class SoccerGirlsRosterController extends Controller
         $this->middleware('auth', ['only' => ['create', 'edit', 'delete']]);
     }
 
-    public function index($year, $team)
+    public function index($team, $year)
     {
         $selectedTeam = Team::where('school_name', $team)->pluck('id');
         $selectedYear = Year::where('year', $year)->pluck('id');
