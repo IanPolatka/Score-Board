@@ -453,7 +453,7 @@ class VolleyballController extends Controller
                                 IF(district_game = 1 && losing_team = ?,1,0) DL
                                 
                             FROM volleyball
-                            WHERE team_level = 1 AND year_id = ?
+                            WHERE team_level = 1 AND year_id = ? AND scrimmage = 0
                             
                             UNION ALL
                               SELECT
@@ -464,7 +464,7 @@ class VolleyballController extends Controller
                                 IF(district_game = 1 && losing_team = ?,1,0)
                                
                             FROM volleyball
-                            WHERE team_level = 1 AND year_id = ?
+                            WHERE team_level = 1 AND year_id = ? AND scrimmage = 0
                               
                         )
                         as tot
