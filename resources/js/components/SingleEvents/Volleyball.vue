@@ -29,7 +29,7 @@
 								   alt="match.away_team.school_name">
 							   <a :href="'/volleyball/' + match.the_year.year + '/' + match.away_team.school_name">{{match.away_team.school_name}}</a>
 						</span>
-						<span v-if="match.away_team_final_score != null">
+						<span v-if="match.away_team_final_score !== null">
 							{{match.away_team_final_score}}
 						</span>
 						<span v-else>
@@ -42,7 +42,7 @@
 								   alt="match.home_team.school_name">
 							  <a :href="'/volleyball/' + match.the_year.year + '/' + match.home_team.school_name">{{match.home_team.school_name}}</a>
 						</span>
-						<span v-if="match.home_team_final_score != null">
+						<span v-if="match.home_team_final_score !== null">
 							{{match.home_team_final_score}}
 						</span>
 						<span v-else>
