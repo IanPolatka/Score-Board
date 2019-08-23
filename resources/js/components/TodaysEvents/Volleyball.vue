@@ -30,7 +30,7 @@
 								   alt="match.away_team.school_name">
 							   {{match.away_team.school_name}}
 						</span>
-						<span v-if="match.away_team_final_score">
+						<span v-if="match.away_team_final_score != null">
 							{{match.away_team_final_score}}
 						</span>
 						<span v-else>
@@ -43,7 +43,7 @@
 								   alt="match.home_team.school_name">
 							  {{match.home_team.school_name}}
 						</span>
-						<span v-if="match.home_team_final_score">
+						<span v-if="match.home_team_final_score != null">
 							{{match.home_team_final_score}}
 						</span>
 						<span v-else>
