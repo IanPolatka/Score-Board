@@ -335,7 +335,7 @@
 
                             <div class="col">
 
-                                <label for="game_status">Game Minute</label>
+                                <label for="game_minute">Game Minute</label>
                                 <select class="form-control" id="game_minute" name="game_minute">
                                     <option value="">Select A Game Minute</option>
                                     @for ($i = 1; $i < 151; $i++)
@@ -347,7 +347,7 @@
 
                             <div class="col">
 
-                                <label for="game_status">Game Second</label>
+                                <label for="game_second">Game Second</label>
                                 <select class="form-control" id="game_second" name="game_second">
                                     <option value="">Select A Game Second</option>
                                     <option value="00" @if($match->game_second == "00") selected @endif>00</option>
@@ -501,6 +501,7 @@
 
         $("#game_status").change(function(){
             var selectedValue = $(this).val();
+            console.log(selectedValue);
             if(selectedValue == 1) {
                 console.log(selectedValue);
                 $('.game-final').slideUp();
@@ -509,7 +510,17 @@
                 $("#game_second").val('');
                 $("#possession").val('');
                 $(".game-summary-details").slideDown();
-            } else if (selectedValue > 1) {
+            } else if (selectedValue == 4) {
+                console.log(selectedValue);
+                $('#game_second').val('');
+                $('#game_minute').val('');
+                $('.game-summary-details').slideUp();
+                $('.game-time').slideDown();
+                $('.game-final').slideDown();
+                $("#winning_team").val('');
+                $("#away_team_final_score").val('');
+                $("#home_team_final_score").val('');
+            }else if (selectedValue > 1) {
                 console.log(selectedValue);
                 $('.game-summary-details').slideUp();
                 $('.game-time').slideDown();
@@ -532,4 +543,5 @@
     });
     
 </script>
+
 @stop

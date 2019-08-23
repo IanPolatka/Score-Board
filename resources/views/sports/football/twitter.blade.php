@@ -61,7 +61,6 @@ $away_total_final = $match->away_team_final_score; ?>
 @if ($match->game_status > 1)
 
 <?php
-
 if ($match->game_status == 2) {
 echo '1st Quarter';
 } elseif ($match->game_status == 3) {
@@ -76,9 +75,8 @@ echo '4th Quarter';
 echo $numberFormatter->format($match->game_status - 4) . ' OT';
 } ?>
 @endif
-
 @if (!empty($match->game_second))
-{{$match->game_minute}}:{{$match->game_second}}
+ - {{$match->game_minute}}:{{$match->game_second}}
 @endif
 
 #camelpride
