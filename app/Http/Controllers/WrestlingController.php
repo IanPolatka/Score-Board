@@ -203,6 +203,21 @@ class WrestlingController extends Controller
         return view('sports.wrestling.teamschedule', compact('id', 'selectedTeam', 'team', 'teams', 'varsity', 'juniorvarsity', 'freshman'));
     }
 
+    public function apiMatchId($id)
+    {
+        $match = Wrestling::where('id', $id)->with('the_team')
+                                            ->with('the_year')
+                                            ->with('host_team')
+                                            ->with('user_created')
+                                            ->with('user_modified')
+                                            ->with('game_time')
+                                            ->where('team_level', 1)
+                                            ->where('date', Carbon::today('America/New_York'))
+                                            ->first();
+
+        return $match;
+    }
+
     public function apiTeamSchedule($year, $team, $teamlevel)
     {
         $theteam = Team::where('school_name', '=', $team)->pluck('id');

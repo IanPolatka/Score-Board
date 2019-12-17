@@ -26,6 +26,9 @@ Vue.component('football', require('./components/SingleEvents/Football.vue'));
 Vue.component('girls-soccer', require('./components/SingleEvents/GirlsSoccer.vue'));
 Vue.component('softball', require('./components/SingleEvents/Softball.vue'));
 Vue.component('volleyball', require('./components/SingleEvents/Volleyball.vue'));
+Vue.component('boys-basketball', require('./components/SingleEvents/BoysBasketball.vue'));
+Vue.component('girls-basketball', require('./components/SingleEvents/GirlsBasketball.vue'));
+Vue.component('wrestling', require('./components/SingleEvents/Wrestling.vue'));
 
 Vue.filter('capitalize', function (value) {
   if (!value) return ''

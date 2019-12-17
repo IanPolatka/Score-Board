@@ -422,14 +422,14 @@ class HomeController extends Controller
                                 ->where('date', Carbon::today('America/New_York'))
                                 ->get();
 
-        $wrestling = Wrestling::with('the_team')
-                                ->with('the_year')
-                               ->with('host_team')
-                               ->with('game_time')
-                               ->where('team_id', $theteam)
-                               ->where('team_level', 1)
-                               ->where('date', Carbon::today('America/New_York'))
-                               ->get();
+        $wrestling = Wrestling::with('the_year')
+                                ->with('host_team')
+                                ->with('user_created')
+                                ->with('user_modified')
+                                ->with('game_time')
+                                ->where('team_level', 1)
+                                ->where('date', Carbon::today('America/New_York'))
+                                ->get();
 
         $volleyball = Volleyball::with('away_team')
                                 ->with('home_team')

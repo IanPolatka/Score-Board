@@ -155,6 +155,7 @@ Route::get('/track-and-field/todays-events/{team}', 'TrackController@todaysEvent
 ///////////////////////////////////////////////////////////////////////
 //  Wrestling
 ///////////////////////////////////////////////////////////////////////
+Route::get('/wrestling/{id}', 'WrestlingController@apiMatchId');
 Route::get('/wrestling/schedule/{year}/{team}/{teamlevel}', 'WrestlingController@apiteamschedule');
 Route::get('/wrestling/todays-events/{team}', 'WrestlingController@todaysEvents');
 

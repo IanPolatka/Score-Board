@@ -66,6 +66,24 @@
 
                     </div>
 
+                    <div v-if="event.sport_name === 'boys-basketball'" class="mb-4">
+
+                        <BoysBasketball :id="event.id"></BoysBasketball>
+
+                    </div>
+
+                    <div v-if="event.sport_name === 'girls-basketball'" class="mb-4">
+
+                        <GirlsBasketball :id="event.id"></GirlsBasketball>
+
+                    </div>
+
+                    <div v-if="event.sport_name === 'wrestling'" class="mb-4">
+
+                        <Wrestling :id="event.id"></Wrestling>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -97,6 +115,9 @@
     import GirlsSoccer from './TodaysEvents/GirlsSoccer'
     import Softball from './TodaysEvents/Softball'
     import Volleyball from './TodaysEvents/Volleyball'
+    import BoysBasketball from './TodaysEvents/BoysBasketball'
+    import GirlsBasketball from './TodaysEvents/GirlsBasketball'
+    import Wrestling from './TodaysEvents/Wrestling'
 
     export default {
         components: {
@@ -107,7 +128,10 @@
             Football,
             GirlsSoccer,
             Softball,
-            Volleyball
+            Volleyball,
+            BoysBasketball,
+            GirlsBasketball,
+            Wrestling
         },
         mounted() {
             this.fetchEvents();
