@@ -47,9 +47,9 @@ $away_total_final = $match->away_team_final_score; ?>
             <label>Tweet Text:</label>
             <textarea class="form-control tweetText" name="tweet" rows="7" data-limit="280">
 @if ($match->game_status == 1)
-Boys 🏀 @if ($match->tournament_name) {{$match->tournament_name}} @endif Final:
+Girls 🏀 @if ($match->tournament_name) {{$match->tournament_name}} @endif Final:
 @else
-Boys 🏀 @if ($match->tournament_name) {{$match->tournament_name}} @endif Update:
+Girls 🏀 @if ($match->tournament_name) {{$match->tournament_name}} @endif Update:
 @endif
 @if (!empty($match->away_team_final_score) && !empty($match->home_team_final_score))
 {{$match->away_team->school_name}} {{$away_total_final}}
