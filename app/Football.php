@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Year;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,9 @@ class Football extends Model
 {
     protected $table = 'football';
 
-    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum', 'pretty_date'];
+
+    protected $dates = [ 'date' ];
 
     protected $fillable = [
         'year_id',
@@ -109,5 +112,11 @@ class Football extends Model
         }
 
         return $totalHomeScore;
+    }
+
+
+
+    public function getPrettyDateAttribute( $value ) {
+        return $this->date->format('l M jS, Y');
     }
 }
