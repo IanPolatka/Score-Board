@@ -11,7 +11,7 @@ class Football extends Model
 {
     protected $table = 'football';
 
-    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum', 'pretty_date'];
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum', 'pretty_date', 'status'];
 
     protected $dates = [ 'date' ];
 
@@ -114,9 +114,28 @@ class Football extends Model
         return $totalHomeScore;
     }
 
-
-
     public function getPrettyDateAttribute( $value ) {
         return $this->date->format('l M jS, Y');
+    }
+
+    public function getStatusAttribute( $value ) {
+        $status = $this->game_status;
+
+        $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::ORDINAL);
+
+        if ($status === 1) {
+            return "final";
+        } else if ($status === 4) {
+            return "halftime";
+        } else if ($status === 7) {
+            return "OT";
+        } else if ($status > 7) {
+            return $numberFormatter->format($status - 6) . ' OT';
+        } else if ($status === 5 || $status === 6) {
+            return $numberFormatter->format($status - 2) . ' quarter';
+        } else {
+            return $numberFormatter->format($status - 1) . ' quarter';
+        }
+        
     }
 }
