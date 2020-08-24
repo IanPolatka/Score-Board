@@ -168,3 +168,13 @@ Route::get('/volleyball/{id}', 'VolleyballController@apiGameId');
 Route::get('/volleyball/schedule/{year}/{team}/{teamlevel}', 'VolleyballController@apiteamschedule');
 Route::get('/volleyball/{team}/{year}/roster', 'VolleyballRosterController@index');
 Route::get('/volleyball/year-summary/{year}/{team}', 'VolleyballController@yearSummary');
+
+
+
+///////////////////////////////////////////////////////////////////////
+//  Years
+///////////////////////////////////////////////////////////////////////
+Route::get('/years', 'YearsController@yearList');
+
+
+

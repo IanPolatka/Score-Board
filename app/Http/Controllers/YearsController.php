@@ -15,7 +15,7 @@ class YearsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['yearList']]);
     }
 
     public function index()
@@ -106,5 +106,11 @@ class YearsController extends Controller
         Session::flash('success', 'Year Has Been Deleted');
 
         return redirect('/years');
+    }
+
+    public function yearList() {
+        $years = Year::orderBy('year')->get();
+
+        return $years;
     }
 }
