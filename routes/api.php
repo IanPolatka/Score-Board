@@ -57,8 +57,6 @@ Route::get('/bowling-boys/todays-events/{team}', 'BowlingBoysController@todaysEv
 Route::get('/bowling-girls/schedule/{year}/{team}/{teamlevel}', 'BowlingGirlsController@apiteamschedule');
 Route::get('/bowling-girls/todays-events/{team}', 'BowlingGirlsController@todaysEvents');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Boys Golf
 ///////////////////////////////////////////////////////////////////////
@@ -66,15 +64,11 @@ Route::get('/bowling-girls/todays-events/{team}', 'BowlingGirlsController@todays
 Route::get('/boys-golf/{id}', 'GolfBoysController@apiMatchId');
 Route::get('/boys-golf/schedule/{year}/{team}/{teamlevel}', 'GolfBoysController@apiteamschedule');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Cross Country
 ///////////////////////////////////////////////////////////////////////
 
 Route::get('/cross-country/schedule/{year}/{team}/{teamlevel}', 'CrossCountryController@apiteamschedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Girls Golf
@@ -82,8 +76,6 @@ Route::get('/cross-country/schedule/{year}/{team}/{teamlevel}', 'CrossCountryCon
 
 Route::get('/girls-golf/{id}', 'GolfGirlsController@apiMatchId');
 Route::get('/girls-golf/schedule/{year}/{team}/{teamlevel}', 'GolfGirlsController@apiteamschedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
@@ -159,8 +151,6 @@ Route::get('/wrestling/{id}', 'WrestlingController@apiMatchId');
 Route::get('/wrestling/schedule/{year}/{team}/{teamlevel}', 'WrestlingController@apiteamschedule');
 Route::get('/wrestling/todays-events/{team}', 'WrestlingController@todaysEvents');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Volleyball
 ///////////////////////////////////////////////////////////////////////
@@ -169,12 +159,7 @@ Route::get('/volleyball/schedule/{year}/{team}/{teamlevel}', 'VolleyballControll
 Route::get('/volleyball/{team}/{year}/roster', 'VolleyballRosterController@index');
 Route::get('/volleyball/year-summary/{year}/{team}', 'VolleyballController@yearSummary');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Years
 ///////////////////////////////////////////////////////////////////////
 Route::get('/years', 'YearsController@yearList');
-
-
-

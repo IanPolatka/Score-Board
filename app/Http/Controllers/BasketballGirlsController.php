@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use App\Team;
-use App\Time;
-use App\Year;
-use App\TeamMeta;
-use Carbon\Carbon;
-use App\Tournament;
-use App\CurrentYear;
-
 use App\BasketballGirls;
-
-use Illuminate\Http\Request;
-
 use App\BasketballGirlsScores;
+use App\CurrentYear;
+use App\Team;
+use App\TeamMeta;
+use App\Time;
+use App\Tournament;
+use App\Year;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class BasketballGirlsController extends Controller
 {

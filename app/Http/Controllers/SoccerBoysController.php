@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use App\Team;
-use App\Time;
-use App\Year;
-use App\TeamMeta;
-use Carbon\Carbon;
-use App\SoccerBoys;
-
-use App\Tournament;
-
-use App\SoccerBoysScore;
-
 use App\CurrentYear;
-
+use App\SoccerBoys;
+use App\SoccerBoysScore;
+use App\Team;
+use App\TeamMeta;
+use App\Time;
+use App\Tournament;
+use App\Year;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Session;
 
 class SoccerBoysController extends Controller
 {
@@ -277,7 +272,7 @@ class SoccerBoysController extends Controller
                                      ->with('scores')
                                      ->first();
 
-        return view('sports.soccer-boys.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'match', 'scores','teams', 'times', 'years'));
+        return view('sports.soccer-boys.edit-score', compact('away_team_ties', 'away_losses', 'away_wins', 'home_losses', 'home_team_ties', 'home_wins', 'match', 'scores', 'teams', 'times', 'years'));
     }
 
     public function gameUpdate(Request $request, $id)
@@ -509,7 +504,6 @@ class SoccerBoysController extends Controller
 
     public function yearSummary($year, $team)
     {
-
         $selectedyear = Year::where('year', $year)->pluck('year');
 
         $selectedyearid = Year::where('year', $year)->pluck('id');

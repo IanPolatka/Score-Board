@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Hash;
-
-use Session;
-
 use App\User;
-
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
+use Session;
 
 class ProfileController extends Controller
 {

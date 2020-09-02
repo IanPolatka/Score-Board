@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\User;
 use Auth;
 use Hash;
-use Session;
-use App\Role;
-
-use App\User;
-
 use Illuminate\Http\Request;
+use Session;
 
 class UserController extends Controller
 {

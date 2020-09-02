@@ -2,30 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
-
-use Response;
-use App\Track;
 use App\Baseball;
+use App\BasketballBoys;
+use App\BasketballGirls;
+use App\BowlingBoys;
+use App\BowlingGirls;
+use App\Crosscountry;
 use App\Football;
 use App\GolfBoys;
 use App\GolfGirls;
+use App\SoccerBoys;
+use App\SoccerGirls;
 use App\Softball;
 use App\Swimming;
-use App\Wrestling;
-use App\Crosscountry;
-use Carbon\Carbon;
-use App\SoccerBoys;
+use App\Team;
 use App\TennisBoys;
-use App\BowlingBoys;
-use App\SoccerGirls;
 use App\TennisGirls;
-use App\BowlingGirls;
-use App\BasketballBoys;
-use App\BasketballGirls;
+use App\Track;
 use App\Volleyball;
-
+use App\Wrestling;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Response;
 
 class HomeController extends Controller
 {

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\SoccerBoysRoster;
 use App\Team;
 use App\Year;
-use App\SoccerBoysRoster;
-
 use Illuminate\Http\Request;
 
 class SoccerBoysRosterController extends Controller

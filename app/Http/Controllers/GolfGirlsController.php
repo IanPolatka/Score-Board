@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use Twitter;
+use App\CurrentYear;
+use App\GolfGirls;
 use App\Team;
+use App\TeamMeta;
 use App\Time;
 use App\Year;
-use App\TeamMeta;
-use App\GolfGirls;
-
-use App\CurrentYear;
-
+use Auth;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
+use Session;
+use Twitter;
 
 class GolfGirlsController extends Controller
 {
@@ -144,20 +140,20 @@ class GolfGirlsController extends Controller
             'time_id.required'          =>  'Please select a game time.',
         ]);
 
-        $match 							= GolfGirls::findOrFail($id);
-        $match->year_id 				= request('year_id');
-        $match->team_level 				= request('team_level');
-        $match->date 					= request('date');
-        $match->tournament_name 		= request('tournament_name');
-        $match->away_team_id 			= request('away_team_id');
-        $match->home_team_id 			= request('home_team_id');
-        $match->time_id 				= request('time_id');
-        $match->away_team_final_score 	= request('away_team_final_score');
-        $match->home_team_final_score 	= request('home_team_final_score');
-        $match->winning_team 			= request('winning_team');
-        $match->losing_team 			= request('losing_team');
-        $match->location 				= request('location');
-        $match->modified_by 			= $user_id;
+        $match = GolfGirls::findOrFail($id);
+        $match->year_id = request('year_id');
+        $match->team_level = request('team_level');
+        $match->date = request('date');
+        $match->tournament_name = request('tournament_name');
+        $match->away_team_id = request('away_team_id');
+        $match->home_team_id = request('home_team_id');
+        $match->time_id = request('time_id');
+        $match->away_team_final_score = request('away_team_final_score');
+        $match->home_team_final_score = request('home_team_final_score');
+        $match->winning_team = request('winning_team');
+        $match->losing_team = request('losing_team');
+        $match->location = request('location');
+        $match->modified_by = $user_id;
 
         $match->update();
 
@@ -258,11 +254,11 @@ class GolfGirlsController extends Controller
                          ->with('the_year')
                          ->where('year_id', $theYear)
                          ->where(function ($query) use ($theteam) {
-                            $query->where('away_team_id', '=', $theteam)
+                             $query->where('away_team_id', '=', $theteam)
                             ->orWhere('home_team_id', '=', $theteam);
                          })
                          ->where('team_level', $teamlevel)
-						 ->orderBy('date', 'asc')
+                         ->orderBy('date', 'asc')
                          ->get();
 
         return $match;

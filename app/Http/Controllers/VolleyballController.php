@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use App\Team;
-use App\Time;
-use App\Year;
-use App\Volleyball;
-use App\TeamMeta;
-use Carbon\Carbon;
-use App\Tournament;
-
 use App\CurrentYear;
-
+use App\Team;
+use App\TeamMeta;
+use App\Time;
+use App\Tournament;
+use App\Volleyball;
 use App\VolleyballScores;
-
+use App\Year;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Session;
 
 class VolleyballController extends Controller
 {
@@ -110,15 +106,15 @@ class VolleyballController extends Controller
     public function show($id)
     {
         $match = Volleyball::where('id', $id)
-        				   ->with('away_team')
-		                   ->with('home_team')
-		                   ->with('away_team')
-		                   ->with('game_time')
-		                   ->with('user_created')
-		                   ->with('user_modified')
-		                   ->with('the_year')
-		                   ->with('scores')
-		                   ->first();
+                           ->with('away_team')
+                           ->with('home_team')
+                           ->with('away_team')
+                           ->with('game_time')
+                           ->with('user_created')
+                           ->with('user_modified')
+                           ->with('the_year')
+                           ->with('scores')
+                           ->first();
 
         return view('sports.volleyball.show', compact('match'));
     }
@@ -138,7 +134,7 @@ class VolleyballController extends Controller
         $years = Year::orderBy('year', 'desc')->get();
 
         $match = Volleyball::where('id', $id)->with('away_team')
-                                     		 ->with('home_team')
+                                              ->with('home_team')
                                              ->with('away_team')
                                              ->with('game_time')
                                              ->with('user_created')
@@ -176,18 +172,18 @@ class VolleyballController extends Controller
             'time_id.required'          =>  'Please select a match time.',
         ]);
 
-        $match 					= Volleyball::findOrFail($id);
-        $match->year_id 		= request('year_id');
-        $match->team_level 		= request('team_level');
-        $match->date 			= request('date');
-        $match->scrimmage 		= request('scrimmage');
+        $match = Volleyball::findOrFail($id);
+        $match->year_id = request('year_id');
+        $match->team_level = request('team_level');
+        $match->date = request('date');
+        $match->scrimmage = request('scrimmage');
         $match->tournament_name = request('tournament_name');
-        $match->away_team_id 	= request('away_team_id');
-        $match->home_team_id 	= request('home_team_id');
-        $match->time_id 		= request('time_id');
-        $match->district_game 	= request('district_game');
-        $match->location 		= request('location');
-        $match->modified_by 	= $user_id;
+        $match->away_team_id = request('away_team_id');
+        $match->home_team_id = request('home_team_id');
+        $match->time_id = request('time_id');
+        $match->district_game = request('district_game');
+        $match->location = request('location');
+        $match->modified_by = $user_id;
 
         $match->update();
 
@@ -210,7 +206,7 @@ class VolleyballController extends Controller
         $away_team_id = Volleyball::where('id', $id)->pluck('away_team_id');
 
         $away_team_losses_loop = Volleyball::where('losing_team', '=', $away_team_id)
-                                		   ->where('team_level', '=', 1)
+                                           ->where('team_level', '=', 1)
                                            ->where('year_id', $selectedYear)
                                            ->get();
         $away_losses = $away_team_losses_loop->count();
@@ -240,14 +236,14 @@ class VolleyballController extends Controller
         $scores = VolleyballScores::where('game_id', $id)->get();
 
         $match = Volleyball::where('id', $id)->with('away_team')
-                                     		 ->with('home_team')
-                                     		 ->with('away_team')
-                                     		 ->with('game_time')
-                                     		 ->with('user_created')
-                                     		 ->with('user_modified')
-                                     		 ->with('the_year')
-                                     		 ->with('scores')
-                                     		 ->first();
+                                              ->with('home_team')
+                                              ->with('away_team')
+                                              ->with('game_time')
+                                              ->with('user_created')
+                                              ->with('user_modified')
+                                              ->with('the_year')
+                                              ->with('scores')
+                                              ->first();
 
         return view('sports.volleyball.edit-score', compact('away_losses', 'away_wins', 'home_losses', 'home_wins', 'match', 'scores', 'teams', 'times', 'years'));
     }
@@ -256,13 +252,13 @@ class VolleyballController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $match 							= Volleyball::findOrFail($id);
-        $match->current_game 			= request('current_game');
-        $match->away_team_final_score 	= request('away_team_final_score');
-        $match->home_team_final_score 	= request('home_team_final_score');
-        $match->winning_team 			= request('winning_team');
-        $match->losing_team 			= request('losing_team');
-        $match->modified_by 			= $user_id;
+        $match = Volleyball::findOrFail($id);
+        $match->current_game = request('current_game');
+        $match->away_team_final_score = request('away_team_final_score');
+        $match->home_team_final_score = request('home_team_final_score');
+        $match->winning_team = request('winning_team');
+        $match->losing_team = request('losing_team');
+        $match->modified_by = $user_id;
 
         $match->update();
 
@@ -312,7 +308,7 @@ class VolleyballController extends Controller
         $varsity = Volleyball::with('away_team')
                              ->with('home_team')
                              ->where(function ($query) use ($id) {
-                                $query->where('away_team_id', '=', $id)
+                                 $query->where('away_team_id', '=', $id)
                                     ->orWhere('home_team_id', '=', $id);
                              })
                              ->where('team_level', 1)
@@ -321,11 +317,11 @@ class VolleyballController extends Controller
                              ->get();
 
         $juniorvarsity = Volleyball::with('away_team')
-                               	   ->with('home_team')
+                                      ->with('home_team')
                                    ->where(function ($query) use ($id) {
-                                   		$query->where('away_team_id', '=', $id)
-                                    	->orWhere('home_team_id', '=', $id);
-                               	   })
+                                       $query->where('away_team_id', '=', $id)
+                                        ->orWhere('home_team_id', '=', $id);
+                                   })
                                    ->where('team_level', 2)
                                    ->where('year_id', $selectedyearid)
                                    ->orderBy('date')
@@ -334,7 +330,7 @@ class VolleyballController extends Controller
         $freshman = Volleyball::with('away_team')
                               ->with('home_team')
                               ->where(function ($query) use ($id) {
-                                $query->where('away_team_id', '=', $id)
+                                  $query->where('away_team_id', '=', $id)
                                 ->orWhere('home_team_id', '=', $id);
                               })
                               ->where('team_level', 3)
@@ -370,11 +366,11 @@ class VolleyballController extends Controller
             'home_team_score'   =>  'required|numeric',
         ]);
 
-        $match 					    = VolleyballScores::findOrFail($id);
-        $match->away_team_score 	= request('away_team_score');
-        $match->home_team_score 	= request('home_team_score');
-        $match->game_winner         = request('game_winner');
-        $match->modified_by 		= $user_id;
+        $match = VolleyballScores::findOrFail($id);
+        $match->away_team_score = request('away_team_score');
+        $match->home_team_score = request('home_team_score');
+        $match->game_winner = request('game_winner');
+        $match->modified_by = $user_id;
 
         $match->update();
 
@@ -470,7 +466,7 @@ class VolleyballController extends Controller
                         as tot
                         JOIN teams t ON tot.Team = t.id
                         WHERE school_name = ?
-                        GROUP BY Team, school_name', [$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0],$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0], $selectedteam[0]['id'], $selectedteam[0]['school_name']]);
+                        GROUP BY Team, school_name', [$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0], $selectedteam[0]['id'], $selectedteam[0]['school_name']]);
 
         return $the_standings;
     }

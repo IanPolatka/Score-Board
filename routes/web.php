@@ -23,8 +23,6 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::redirect('home', '/');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Baseball
 ///////////////////////////////////////////////////////////////////////
@@ -46,8 +44,6 @@ Route::post('/baseball-score-create/{id}', 'BaseballController@scoreCreate')->na
 Route::delete('/baseball-score-delete/{id}', 'BaseballController@scoreDelete')->name('baseball-score-delete');
 
 Route::patch('/baseball-inning-update/{id}', 'BaseballController@storeGameHalf');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Boys
@@ -71,8 +67,6 @@ Route::delete('/boys-basketball-score-delete/{id}', 'BasketballBoysController@sc
 
 Route::patch('/boys-basketball-half-update/{id}', 'BasketballBoysController@storeGameHalf');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Basketball Girls
 ///////////////////////////////////////////////////////////////////////
@@ -94,8 +88,6 @@ Route::post('/girls-basketball-score-create/{id}', 'BasketballGirlsController@sc
 Route::delete('/girls-basketball-score-delete/{id}', 'BasketballGirlsController@scoreDelete')->name('basketball-girls-score-delete');
 
 Route::patch('/girls-basketball-half-update/{id}', 'BasketballGirlsController@storeGameHalf');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Boys Soccer
@@ -119,8 +111,6 @@ Route::delete('/boys-soccer-score-delete/{id}', 'SoccerBoysController@scoreDelet
 
 Route::patch('/boys-soccer-half-update/{id}', 'SoccerBoysController@storeGameHalf');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Girls Soccer
 ///////////////////////////////////////////////////////////////////////
@@ -143,8 +133,6 @@ Route::delete('/girls-soccer-score-delete/{id}', 'SoccerGirlsController@scoreDel
 
 Route::patch('/girls-soccer-half-update/{id}', 'SoccerGirlsController@storeGameHalf');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Boys
 ///////////////////////////////////////////////////////////////////////
@@ -161,8 +149,6 @@ Route::get('/boys-bowling/{id}/edit-score', 'BowlingBoysController@editScore')->
 Route::patch('/boys-bowling/{id}/match-update', 'BowlingBoysController@gameUpdate')->name('boys-bowling.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/boys-bowling/2018-2019/{team}', 'BowlingBoysController@teamSchedule')->name('boys-bowling.teamSchedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Bowling Girls
@@ -181,8 +167,6 @@ Route::patch('/girls-bowling/{id}/match-update', 'BowlingGirlsController@gameUpd
 
 Route::get('/girls-bowling/2018-2019/{team}', 'BowlingGirlsController@teamSchedule')->name('girls-bowling.teamSchedule');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Cross Country
 ///////////////////////////////////////////////////////////////////////
@@ -198,8 +182,6 @@ Route::put('/cross-country/{id}/update', 'CrossCountryController@update')->name(
 Route::patch('/cross-country/{id}/match-update', 'CrossCountryController@gameUpdate')->name('cross-country.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/cross-country/{year}/{team}', 'CrossCountryController@teamSchedule')->name('cross-country.teamSchedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Football
@@ -227,8 +209,6 @@ Route::patch('/football-half-update/{id}', 'FootballController@storeGameHalf');
 
 Route::get('/football/{team}/{year}/roster', 'FootballRosterController@index');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Golf Boys
 ///////////////////////////////////////////////////////////////////////
@@ -245,8 +225,6 @@ Route::patch('/boys-golf/{id}/match-update', 'GolfBoysController@gameUpdate')->n
 
 Route::get('/boys-golf/{year}/{team}', 'GolfBoysController@teamSchedule')->name('boysgolf.teamSchedule');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Golf Girls
 ///////////////////////////////////////////////////////////////////////
@@ -262,8 +240,6 @@ Route::put('/girls-golf/{id}/update', 'GolfGirlsController@update')->name('girls
 Route::patch('/girls-golf/{id}/match-update', 'GolfGirlsController@gameUpdate')->name('girlsgolf.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/girls-golf/{year}/{team}', 'GolfGirlsController@teamSchedule')->name('girlsgolf.teamSchedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Softball
@@ -337,8 +313,6 @@ Route::patch('/girls-tennis/{id}/match-update', 'TennisGirlsController@gameUpdat
 
 Route::get('/girls-tennis/2018-2019/{team}', 'TennisGirlsController@teamSchedule')->name('girls-tennis.teamSchedule');
 
-
-
 ///////////////////////////////////////////////////////////////////////
 //  Track
 ///////////////////////////////////////////////////////////////////////
@@ -354,8 +328,6 @@ Route::put('/track-and-field/{id}/update', 'TrackController@update')->name('trac
 Route::patch('/track-and-field/{id}/match-update', 'TrackController@gameUpdate')->name('track.soccer.match.update')->middleware('role:superadministrator|administrator|editor');
 
 Route::get('/track-and-field/2018-2019/{team}', 'TrackController@teamSchedule')->name('track.teamSchedule');
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Volleyball
@@ -378,10 +350,6 @@ Route::post('/volleyball-score-create/{id}', 'VolleyballController@scoreCreate')
 Route::delete('/volleyball-score-delete/{id}', 'VolleyballController@scoreDelete')->name('volleyball-score-delete');
 
 Route::patch('/volleyball-game-update/{id}', 'VolleyballController@storeGameScore');
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////
 //  Wrestling

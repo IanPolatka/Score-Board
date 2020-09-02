@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Session;
-use App\Team;
-use App\Year;
-use App\TeamMeta;
 use App\CurrentYear;
-
+use App\Team;
+use App\TeamMeta;
+use App\Year;
 use Illuminate\Http\Request;
+use Session;
 
 class TeamController extends Controller
 {

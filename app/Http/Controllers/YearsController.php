@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Session;
-
-use App\Year;
-
 use App\CurrentYear;
-
+use App\Year;
+use Auth;
 use Illuminate\Http\Request;
+use Session;
 
 class YearsController extends Controller
 {
@@ -108,7 +105,8 @@ class YearsController extends Controller
         return redirect('/years');
     }
 
-    public function yearList() {
+    public function yearList()
+    {
         $years = Year::orderBy('year')->get();
 
         return $years;

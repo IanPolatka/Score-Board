@@ -74,5 +74,4 @@ class Volleyball extends Model
     {
         return 'volleyball';
     }
-
 }
