@@ -4,7 +4,6 @@ namespace App;
 
 use App\Year;
 use Carbon\Carbon;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Football extends Model
@@ -13,7 +12,7 @@ class Football extends Model
 
     protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum', 'pretty_date', 'status'];
 
-    protected $dates = [ 'date' ];
+    protected $dates = ['date'];
 
     protected $fillable = [
         'year_id',
@@ -114,28 +113,29 @@ class Football extends Model
         return $totalHomeScore;
     }
 
-    public function getPrettyDateAttribute( $value ) {
+    public function getPrettyDateAttribute($value)
+    {
         return $this->date->format('l M jS, Y');
     }
 
-    public function getStatusAttribute( $value ) {
+    public function getStatusAttribute($value)
+    {
         $status = $this->game_status;
 
         $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::ORDINAL);
 
         if ($status === 1) {
-            return "final";
-        } else if ($status === 4) {
-            return "halftime";
-        } else if ($status === 7) {
-            return "OT";
-        } else if ($status > 7) {
-            return $numberFormatter->format($status - 6) . ' OT';
-        } else if ($status === 5 || $status === 6) {
-            return $numberFormatter->format($status - 2) . ' quarter';
+            return 'final';
+        } elseif ($status === 4) {
+            return 'halftime';
+        } elseif ($status === 7) {
+            return 'OT';
+        } elseif ($status > 7) {
+            return $numberFormatter->format($status - 6).' OT';
+        } elseif ($status === 5 || $status === 6) {
+            return $numberFormatter->format($status - 2).' quarter';
         } else {
-            return $numberFormatter->format($status - 1) . ' quarter';
+            return $numberFormatter->format($status - 1).' quarter';
         }
-        
     }
 }

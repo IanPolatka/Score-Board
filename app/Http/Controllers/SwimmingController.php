@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use App\Team;
-use App\Time;
-use App\Year;
 use App\Swimming;
+use App\Team;
 use App\TeamMeta;
-
-use Carbon\Carbon;
-
+use App\Time;
 use App\Tournament;
-
+use App\Year;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Session;
 
 class SwimmingController extends Controller
 {
@@ -45,7 +41,7 @@ class SwimmingController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.swimming.create', compact('teams', 'times', 'years'));
     }
@@ -158,6 +154,18 @@ class SwimmingController extends Controller
 
         return redirect('/swimming/'.$id);
     }
+
+
+
+    public function destroy($id)
+    {
+        $match = Swimming::find($id);
+        $match->delete();
+
+        return redirect('/swimming');
+    }
+
+
 
     public function teamSchedule($team)
     {

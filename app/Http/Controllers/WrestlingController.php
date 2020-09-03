@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
 use App\Team;
-use App\Time;
-use App\Year;
 use App\TeamMeta;
-use App\Wrestling;
-
-use Carbon\Carbon;
-
+use App\Time;
 use App\Tournament;
-
+use App\Wrestling;
+use App\Year;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Session;
 
 class WrestlingController extends Controller
 {
@@ -45,7 +41,7 @@ class WrestlingController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.wrestling.create', compact('teams', 'times', 'years'));
     }

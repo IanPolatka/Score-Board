@@ -49,7 +49,7 @@
 
                 @role(['superadministrator','administrator'])
                     <div class="col align-self-end">
-                        <a href="{{ route('football.create') }}" class="btn btn-primary btn-block">Create Match</a>
+                        <a href="{{ route('football.create') }}" class="btn btn-primary btn-block">Create Game</a>
                     </div>
                 @endrole
 

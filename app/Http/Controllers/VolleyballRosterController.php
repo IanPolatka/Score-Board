@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Team;
-use App\Year;
 use App\VolleyballRoster;
-
+use App\Year;
 use Illuminate\Http\Request;
 
 class VolleyballRosterController extends Controller

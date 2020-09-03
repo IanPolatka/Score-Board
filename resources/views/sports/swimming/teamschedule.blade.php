@@ -94,7 +94,7 @@
 
                     </a>
                 @empty
-                    <a href="#" class="list-group-item list-group-item-action">No Games Listed</a>
+                    <a href="#" class="list-group-item list-group-item-action">No Matches Listed</a>
                 @endforelse
             </div>
 

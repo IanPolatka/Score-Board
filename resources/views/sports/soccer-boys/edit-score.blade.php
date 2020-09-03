@@ -408,7 +408,7 @@
 
                         </div>
 
-                        <div class="col-lg-6 mt-2">
+                        <div class="col-lg-6">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-outline-primary btn-block mt-2" data-toggle="modal" data-target="#twitterModal">

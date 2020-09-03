@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
-use Session;
-use App\Team;
-use App\Time;
-use App\Year;
-use App\TeamMeta;
-use Carbon\Carbon;
-use App\Tournament;
-use App\CurrentYear;
-
 use App\BasketballBoys;
-
-use Illuminate\Http\Request;
-
 use App\BasketballBoysScores;
+use App\CurrentYear;
+use App\Team;
+use App\TeamMeta;
+use App\Time;
+use App\Tournament;
+use App\Year;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Session;
 
 class BasketballBoysController extends Controller
 {
@@ -58,7 +54,7 @@ class BasketballBoysController extends Controller
 
         $times = Time::all();
 
-        $years = Year::orderBy('year')->get();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.basketball-boys.create', compact('teams', 'currentYearId', 'times', 'years'));
     }
