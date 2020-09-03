@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 	
-			<h3 class="title">Edit Match</h3>
+			<h3 class="title">Edit Game</h3>
 
             <div class="card">
 

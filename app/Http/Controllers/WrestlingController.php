@@ -41,7 +41,7 @@ class WrestlingController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.wrestling.create', compact('teams', 'times', 'years'));
     }

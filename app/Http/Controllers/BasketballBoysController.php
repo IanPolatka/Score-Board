@@ -54,7 +54,7 @@ class BasketballBoysController extends Controller
 
         $times = Time::all();
 
-        $years = Year::orderBy('year')->get();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.basketball-boys.create', compact('teams', 'currentYearId', 'times', 'years'));
     }

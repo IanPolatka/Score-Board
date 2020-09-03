@@ -29,7 +29,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 	
-			<h3 class="title">Create Game</h3>
+			<h3 class="title">Create Match</h3>
 
             <div class="card">
 

@@ -418,7 +418,6 @@
                                 <option value="{{$match->away_team_id}}" @if($match->winning_team == $match->away_team_id) selected @endif>{{$match->away_team->school_name}}</option>
                                 <option value="{{$match->home_team_id}}" @if($match->winning_team == $match->home_team_id) selected @endif>{{$match->home_team->school_name}}</option>
                             </select>
-                            <small id="emailHelp" class="form-text text-muted">If the match ended in a tie, don't select a team here.</small>
 
                             <input type="hidden" id="losing_team" name="losing_team" value="">
 
@@ -461,6 +460,11 @@
 @endsection
 
 @section('javascript')
+
+<?php // Twitter Form Modal ?>
+@include('sports.basketball-girls.twitter')
+
+
 <script>
 
     var qrt = "<?php echo $match->game_status; ?>";
@@ -524,8 +528,3 @@ $(document).ready(function(){
 
 </script>
 @stop
-
-
-
-<?php // Twitter Form Modal ?>
-@include('sports.basketball-girls.twitter')

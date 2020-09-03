@@ -41,7 +41,7 @@ class SwimmingController extends Controller
 
         $times = Time::all();
 
-        $years = Year::all();
+        $years = Year::orderBy('year', 'desc')->get();
 
         return view('sports.swimming.create', compact('teams', 'times', 'years'));
     }
@@ -154,6 +154,18 @@ class SwimmingController extends Controller
 
         return redirect('/swimming/'.$id);
     }
+
+
+
+    public function destroy($id)
+    {
+        $match = Swimming::find($id);
+        $match->delete();
+
+        return redirect('/swimming');
+    }
+
+
 
     public function teamSchedule($team)
     {
