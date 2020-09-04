@@ -47,7 +47,7 @@
 
                 </div>
 
-                @role(['superadministrator','administrator'])
+                @role(['superadministrator','administrator', 'editor'])
                     <div class="col align-self-end">
                         <a href="{{ route('cross-country.create') }}" class="btn btn-primary btn-block">Create Event</a>
                     </div>
