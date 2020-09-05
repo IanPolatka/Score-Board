@@ -123,7 +123,9 @@ class Football extends Model
 
         $numberFormatter = new \NumberFormatter('en_US', \NumberFormatter::ORDINAL);
 
-        if ($status === 1) {
+        if ($status === NULL || $status === 0) {
+            return "";
+        } else if ($status === 1) {
             return "final";
         } else if ($status === 4) {
             return "halftime";
