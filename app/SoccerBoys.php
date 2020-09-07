@@ -93,4 +93,8 @@ class SoccerBoys extends Model
 
         return $totalHomeScore;
     }
+    
+    public function getPrettyDateAttribute( $value ) {
+        return $this->date->format('l M jS, Y');
+    }
 }
