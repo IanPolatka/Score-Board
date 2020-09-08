@@ -8,7 +8,9 @@ class Volleyball extends Model
 {
     protected $table = 'volleyball';
 
-    protected $appends = ['sport_name'];
+    protected $appends = ['sport_name', 'pretty_date'];
+    
+    protected $dates = [ 'date' ];
 
     protected $fillable = [
         'year_id',
@@ -73,6 +75,10 @@ class Volleyball extends Model
     public function getSportNameAttribute()
     {
         return 'volleyball';
+    }
+    
+    public function getPrettyDateAttribute( $value ) {
+        return $this->date->format('l M jS, Y');
     }
 
 }
