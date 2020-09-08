@@ -8,7 +8,9 @@ class BasketballBoys extends Model
 {
     protected $table = 'basketball_boys';
 
-    protected $appends = ['sport_name'];
+    protected $appends = ['sport_name', 'pretty_date'];
+    
+    protected $dates = [ 'date' ];
 
     protected $fillable = [
         'year_id',
@@ -95,5 +97,9 @@ class BasketballBoys extends Model
     public function getSportNameAttribute()
     {
         return 'boys-basketball';
+    }
+    
+    public function getPrettyDateAttribute( $value ) {
+        return $this->date->format('l M jS, Y');
     }
 }
