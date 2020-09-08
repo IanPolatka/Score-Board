@@ -447,30 +447,30 @@ class VolleyballController extends Controller
 
                             SELECT
                                 home_team_id Team,
-                                IF(winning_team = ?,1,0) W,
-                                IF(losing_team = ?,1,0) L,
-                                IF(district_game = 1 && winning_team = ?,1,0) DW,
-                                IF(district_game = 1 && losing_team = ?,1,0) DL
+                                IF(home_team_final_score > away_team_final_score,1,0) W,
+                                IF(home_team_final_score < away_team_final_score,1,0) L,
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0) DW,
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0) DL
                                 
                             FROM volleyball
-                            WHERE team_level = 1 AND year_id = ? AND scrimmage = 0
+                            WHERE team_level = 1 AND year_id = ?
                             
                             UNION ALL
                               SELECT
                                 away_team_id,
-                                IF(winning_team = ?,1,0),
-                                IF(losing_team = ?,1,0),
-                                IF(district_game = 1 && winning_team = ?,1,0),
-                                IF(district_game = 1 && losing_team = ?,1,0)
+                                IF(home_team_final_score < away_team_final_score,1,0),
+                                IF(home_team_final_score > away_team_final_score,1,0),
+                                IF(district_game = 1 && home_team_final_score < away_team_final_score,1,0),
+                                IF(district_game = 1 && home_team_final_score > away_team_final_score,1,0)
                                
                             FROM volleyball
-                            WHERE team_level = 1 AND year_id = ? AND scrimmage = 0
+                            WHERE team_level = 1 AND year_id = ?
                               
                         )
                         as tot
                         JOIN teams t ON tot.Team = t.id
                         WHERE school_name = ?
-                        GROUP BY Team, school_name', [$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0],$selectedteam[0]['id'], $selectedteam[0]['id'], $selectedteam[0]['id'], $selectedyearid[0], $selectedteam[0]['id'], $selectedteam[0]['school_name']]);
+                        GROUP BY Team, school_name', [$selectedyearid[0], $selectedyearid[0], $selectedteam[0]['school_name']]);
 
         return $the_standings;
     }
