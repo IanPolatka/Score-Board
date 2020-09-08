@@ -8,7 +8,9 @@ class Baseball extends Model
 {
     protected $table = 'baseball';
 
-    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum'];
+    protected $appends = ['sport_name', 'away_score_sum', 'home_score_sum', 'pretty_date'];
+    
+    protected $dates = [ 'date' ];
 
     protected $fillable = [
         'year_id',
@@ -107,4 +109,9 @@ class Baseball extends Model
 
         return $totalHomeScore;
     }
+    
+    public function getPrettyDateAttribute( $value ) {
+        return $this->date->format('l M jS, Y');
+    }
+    
 }
